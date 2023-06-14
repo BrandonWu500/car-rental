@@ -1,4 +1,10 @@
+import Navbar from "@/components/navbar/Navbar";
+
 const Home = () => {
-  return <div className="text-green-500">Home</div>;
+  return (
+    <>
+      <Navbar />
+    </>
+  );
 };
 export default Home;
