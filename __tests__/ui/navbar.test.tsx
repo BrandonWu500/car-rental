@@ -23,4 +23,17 @@ describe("Navbar", () => {
     expect(passengerText).toBeInTheDocument();
     expect(searchBtn).toBeInTheDocument();
   });
+
+  it("shows a user menu btn along with link to list car for rental", () => {
+    render(<Navbar />);
+
+    const listCarText = screen.getByText(/rent out your car/i);
+    expect(listCarText).toBeInTheDocument();
+
+    const userAvatarImg = screen.getByRole("img", { name: /user avatar/i });
+    expect(userAvatarImg).toBeInTheDocument();
+
+    const userMenuBtn = screen.getByRole("button", { name: /user menu/i });
+    expect(userMenuBtn).toBeInTheDocument();
+  });
 });
