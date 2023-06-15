@@ -5,7 +5,7 @@ const Logo = () => {
   return (
     <Link href="/" className="flex items-center gap-2">
       <AiFillCar size={24} />
-      <span>Car Rental</span>
+      <span className="font-bold text-lg">Car Rental</span>
     </Link>
   );
 };
