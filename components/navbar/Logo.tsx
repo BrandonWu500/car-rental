@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { AiFillCar } from "react-icons/ai";
 
