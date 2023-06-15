@@ -1,6 +1,14 @@
-import '@/styles/global.css'
-import type { AppProps } from 'next/app'
+import type { AppProps } from "next/app";
+import { Nunito } from "next/font/google";
+
+import "@/styles/global.css";
+
+const font = Nunito({ subsets: ["latin"] });
 
 export default function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <main className={font.className}>
+      <Component {...pageProps} />
+    </main>
+  );
 }
