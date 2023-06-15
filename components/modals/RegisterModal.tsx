@@ -15,12 +15,6 @@ const RegisterModal = () => {
       <Input label="Email" id="email" type="email" required />
       <Input label="Name" id="name" required />
       <Input label="Password" id="password" type="password" required />
-      <Input
-        label="Confirm Password"
-        id="confirmPassword"
-        type="password"
-        required
-      />
     </div>
   );
 
