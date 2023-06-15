@@ -20,4 +20,25 @@ describe("RegisterModal", () => {
     const emailInput = screen.getByRole("textbox", { name: /email/i });
     expect(emailInput).toBeInTheDocument();
   });
+
+  it("should have an name input", () => {
+    render(<RegisterModal />);
+
+    const nameInput = screen.getByRole("textbox", { name: /name/i });
+    expect(nameInput).toBeInTheDocument();
+  });
+
+  it("should have an password input", () => {
+    render(<RegisterModal />);
+
+    const passwordInput = screen.getByLabelText("Password");
+    expect(passwordInput).toBeInTheDocument();
+  });
+
+  it("should have a confirm password input", () => {
+    render(<RegisterModal />);
+
+    const confirmPasswordInput = screen.getByLabelText(/confirm password/i);
+    expect(confirmPasswordInput).toBeInTheDocument();
+  });
 });
