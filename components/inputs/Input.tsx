@@ -27,6 +27,7 @@ const Input = ({
         />
       )}
       <input
+        autoComplete="off"
         type={type}
         id={id}
         disabled={disabled}
