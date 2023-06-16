@@ -2,11 +2,6 @@ import RegisterModal from "@/components/modals/RegisterModal";
 import Navbar from "@/components/navbar/Navbar";
 
 const Home = () => {
-  return (
-    <>
-      <RegisterModal />
-      <Navbar />
-    </>
-  );
+  return <></>;
 };
 export default Home;
