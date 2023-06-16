@@ -112,7 +112,7 @@ const LoginModal = () => {
   return (
     <Modal
       disabled={isLoading}
-      isOpen
+      isOpen={loginModal.isOpen}
       title="Login"
       actionLabel="Continue"
       onClose={loginModal.onClose}
