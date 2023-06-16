@@ -1,8 +1,20 @@
 import RegisterModal from "@/components/modals/RegisterModal";
+import UserMenu from "@/components/navbar/UserMenu";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 describe("RegisterModal", () => {
+  beforeAll(async () => {
+    const user = userEvent.setup();
+
+    render(<UserMenu currentUser={null} />);
+
+    const menuToggleBtn = screen.getByRole("button", { name: /user menu/i });
+    await user.click(menuToggleBtn);
+
+    const registerLink = screen.getByText(/sign up/i);
+    await user.click(registerLink);
+  });
   it("displays a heading", () => {
     render(<RegisterModal />);
 
