@@ -53,4 +53,20 @@ describe("RegisterModal", () => {
     const showPasswordBtnAgain = screen.getByRole("button", { name: /show/i });
     expect(showPasswordBtnAgain).toBeInTheDocument();
   });
+
+  it("should have a google signup button", () => {
+    render(<RegisterModal />);
+
+    const googleSignupBtn = screen.getByRole("button", {
+      name: /continue with google/i,
+    });
+    expect(googleSignupBtn).toBeInTheDocument();
+  });
+
+  it("should have a link to login if already signed up", () => {
+    render(<RegisterModal />);
+
+    expect(screen.getByText(/Already have an account\?/i)).toBeInTheDocument();
+    expect(screen.getByText(/Log in/i)).toBeInTheDocument();
+  });
 });
