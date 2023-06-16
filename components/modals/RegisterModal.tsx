@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { signIn } from "next-auth/react";
+import { useForm, FieldValues } from "react-hook-form";
 
 import { useRegisterModal } from "@/hooks/useRegisterModal";
 
@@ -13,6 +14,18 @@ const RegisterModal = () => {
   const registerModal = useRegisterModal();
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FieldValues>({
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+    },
+  });
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
