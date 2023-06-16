@@ -5,6 +5,8 @@ import { useCallback, useState } from "react";
 import MenuItem from "./MenuItem";
 import { useLoginModal } from "@/hooks/useLoginModal";
 import { useRegisterModal } from "@/hooks/useRegisterModal";
+import { signOut } from "next-auth/react";
+import { toast } from "react-hot-toast";
 
 interface UserMenuProps {
   currentUser: User | null;
@@ -18,6 +20,11 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
 
   const toggleOpen = useCallback(() => {
     setIsOpen((value) => !value);
+  }, []);
+
+  const onLogout = useCallback(() => {
+    signOut();
+    toast.success("Logged out!");
   }, []);
 
   return (
@@ -50,8 +57,16 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
         top-12 text-sm"
         >
           <div className="flex flex-col">
-            <MenuItem label="Login" onClick={loginModal.onOpen} />
-            <MenuItem label="Sign up" onClick={registerModal.onOpen} />
+            {currentUser ? (
+              <>
+                <MenuItem label="Logout" onClick={onLogout} />
+              </>
+            ) : (
+              <>
+                <MenuItem label="Login" onClick={loginModal.onOpen} />
+                <MenuItem label="Sign up" onClick={registerModal.onOpen} />
+              </>
+            )}
           </div>
         </div>
       )}
