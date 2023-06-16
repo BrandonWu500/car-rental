@@ -38,6 +38,7 @@ const RegisterModal = () => {
       await axios.post("/api/register", data);
       toast.success("Registered!");
       registerModal.onClose();
+      loginModal.onOpen();
     } catch (error: any) {
       toast.error(error.response.data.message);
     } finally {
