@@ -2,20 +2,21 @@ import { useCallback, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { signIn } from "next-auth/react";
 import { useForm, FieldValues, SubmitHandler } from "react-hook-form";
-import axios from "axios";
 
-import { useRegisterModal } from "@/hooks/useRegisterModal";
+import { useLoginModal } from "@/hooks/useLoginModal";
 
 import Heading from "../Heading";
 import Input from "../inputs/Input";
 import Modal from "./Modal";
 import Button from "../Button";
 import { toast } from "react-hot-toast";
-import { useLoginModal } from "@/hooks/useLoginModal";
+import { useRouter } from "next/router";
+import { useRegisterModal } from "@/hooks/useRegisterModal";
 
-const RegisterModal = () => {
-  const registerModal = useRegisterModal();
+const LoginModal = () => {
+  const router = useRouter();
   const loginModal = useLoginModal();
+  const registerModal = useRegisterModal();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -25,7 +26,6 @@ const RegisterModal = () => {
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
-      name: "",
       email: "",
       password: "",
     },
@@ -35,9 +35,20 @@ const RegisterModal = () => {
     setIsLoading(true);
 
     try {
-      await axios.post("/api/register", data);
-      toast.success("Registered!");
-      registerModal.onClose();
+      const callback = await signIn("credentials", {
+        ...data,
+        redirect: false,
+      });
+
+      if (callback?.ok) {
+        toast.success("Logged in!");
+        router.reload();
+        loginModal.onClose();
+      }
+
+      if (callback?.error) {
+        toast.error(callback.error);
+      }
     } catch (error: any) {
       toast.error(error.response.data.message);
     } finally {
@@ -46,13 +57,13 @@ const RegisterModal = () => {
   };
 
   const onToggle = useCallback(() => {
-    registerModal.onClose();
-    loginModal.onOpen();
-  }, [registerModal, loginModal]);
+    loginModal.onClose();
+    registerModal.onOpen();
+  }, [loginModal, registerModal]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
-      <Heading title="Welcome to Car Rental!" subtitle="Create an account" />
+      <Heading title="Welcome back!" subtitle="Login to your account" />
       <Input
         label="Email"
         id="email"
@@ -60,13 +71,7 @@ const RegisterModal = () => {
         required
         register={register}
         errors={errors}
-      />
-      <Input
-        label="Name"
-        id="name"
-        required
-        register={register}
-        errors={errors}
+        disabled={isLoading}
       />
       <Input
         label="Password"
@@ -75,6 +80,7 @@ const RegisterModal = () => {
         required
         register={register}
         errors={errors}
+        disabled={isLoading}
       />
     </div>
   );
@@ -92,12 +98,12 @@ const RegisterModal = () => {
         className="text-neutral-500 text-center
       mt-4 font-light"
       >
-        <p>Already have an account?</p>
+        <p>First time using Car Rental?</p>
         <span
           onClick={onToggle}
           className="text-neutral-800 cursor-pointer hover:underline"
         >
-          Log in
+          Create an account
         </span>
       </div>
     </div>
@@ -107,13 +113,13 @@ const RegisterModal = () => {
     <Modal
       disabled={isLoading}
       isOpen
-      title="Register"
+      title="Login"
       actionLabel="Continue"
-      onClose={registerModal.onClose}
+      onClose={loginModal.onClose}
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}
       footer={footerContent}
     />
   );
 };
-export default RegisterModal;
+export default LoginModal;
