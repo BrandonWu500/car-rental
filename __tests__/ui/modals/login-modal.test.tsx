@@ -1,9 +1,9 @@
-import RegisterModal from "@/components/modals/RegisterModal";
+import LoginModal from "@/components/modals/LoginModal";
 import UserMenu from "@/components/navbar/UserMenu";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-describe("RegisterModal", () => {
+describe("LoginModal", () => {
   beforeAll(async () => {
     const user = userEvent.setup();
 
@@ -12,37 +12,31 @@ describe("RegisterModal", () => {
     const menuToggleBtn = screen.getByRole("button", { name: /user menu/i });
     await user.click(menuToggleBtn);
 
-    const registerLink = screen.getByText(/sign up/i);
-    await user.click(registerLink);
+    const loginLink = screen.getByText(/login/i);
+    await user.click(loginLink);
   });
+
   it("displays a heading", () => {
-    render(<RegisterModal />);
+    render(<LoginModal />);
 
     const title = screen.getByRole("heading", {
-      name: /Welcome to Car Rental!/i,
+      name: /Welcome back!/i,
     });
-    const subtitle = screen.getByText(/Create an account/i);
+    const subtitle = screen.getByText(/Login to your account/i);
 
     expect(title).toBeInTheDocument();
     expect(subtitle).toBeInTheDocument();
   });
 
   it("should have an email input", () => {
-    render(<RegisterModal />);
+    render(<LoginModal />);
 
     const emailInput = screen.getByRole("textbox", { name: /email/i });
     expect(emailInput).toBeInTheDocument();
   });
 
-  it("should have a name input", () => {
-    render(<RegisterModal />);
-
-    const nameInput = screen.getByRole("textbox", { name: /name/i });
-    expect(nameInput).toBeInTheDocument();
-  });
-
   it("should have a password input", () => {
-    render(<RegisterModal />);
+    render(<LoginModal />);
 
     const passwordInput = screen.getByLabelText("Password");
     expect(passwordInput).toBeInTheDocument();
@@ -50,7 +44,7 @@ describe("RegisterModal", () => {
 
   it("should have a show/hide password button", async () => {
     const user = userEvent.setup();
-    render(<RegisterModal />);
+    render(<LoginModal />);
 
     const showPasswordBtn = screen.getByRole("button", { name: /show/i });
     expect(showPasswordBtn).toBeInTheDocument();
@@ -66,19 +60,21 @@ describe("RegisterModal", () => {
     expect(showPasswordBtnAgain).toBeInTheDocument();
   });
 
-  it("should have a google signup button", () => {
-    render(<RegisterModal />);
+  it("should have a google signin button", () => {
+    render(<LoginModal />);
 
-    const googleSignupBtn = screen.getByRole("button", {
+    const googleSigninBtn = screen.getByRole("button", {
       name: /continue with google/i,
     });
-    expect(googleSignupBtn).toBeInTheDocument();
+    expect(googleSigninBtn).toBeInTheDocument();
   });
 
-  it("should have a link to login if already signed up", () => {
-    render(<RegisterModal />);
+  it("should have a link to register if user is new", () => {
+    render(<LoginModal />);
 
-    expect(screen.getByText(/Already have an account\?/i)).toBeInTheDocument();
-    expect(screen.getByText(/Log in/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/First time using Car Rental\?/i)
+    ).toBeInTheDocument();
+    expect(screen.getByText(/Create an account/i)).toBeInTheDocument();
   });
 });
