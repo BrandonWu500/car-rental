@@ -1,12 +1,21 @@
 import LoginModal from "@/components/modals/LoginModal";
+import UserMenu from "@/components/navbar/UserMenu";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-jest.mock("next/router", () => ({
-  useRouter: jest.fn(),
-}));
-
 describe("LoginModal", () => {
+  beforeAll(async () => {
+    const user = userEvent.setup();
+
+    render(<UserMenu currentUser={null} />);
+
+    const menuToggleBtn = screen.getByRole("button", { name: /user menu/i });
+    await user.click(menuToggleBtn);
+
+    const loginLink = screen.getByText(/login/i);
+    await user.click(loginLink);
+  });
+
   it("displays a heading", () => {
     render(<LoginModal />);
 
