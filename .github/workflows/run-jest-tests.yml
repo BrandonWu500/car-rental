@@ -19,7 +19,7 @@ jobs:
           node-version: 16
 
       - name: Install all dependencies
-        run: npm install
+        run: npm ci
 
       - name: Run Jest Tests
         run: npm run test:ci
