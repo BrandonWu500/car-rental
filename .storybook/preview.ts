@@ -1,13 +1,10 @@
 import type { Preview } from '@storybook/react';
 
-<<<<<<< HEAD
 import { withThemeByClassName } from '@storybook/addon-styling';
 
 /* TODO: update import to your tailwind styles file */
 import '../styles/global.css';
 
-=======
->>>>>>> 72bd019 (chore: setup storybook for next.js)
 const preview: Preview = {
   parameters: {
     actions: { argTypesRegex: '^on[A-Z].*' },
@@ -18,7 +15,6 @@ const preview: Preview = {
       },
     },
   },
-<<<<<<< HEAD
 
   decorators: [
     // Adds theme switching support.
@@ -31,8 +27,6 @@ const preview: Preview = {
       defaultTheme: 'light',
     }),
   ],
-=======
->>>>>>> 72bd019 (chore: setup storybook for next.js)
 };
 
 export default preview;
