@@ -6,6 +6,11 @@ import { FcGoogle } from 'react-icons/fc';
 const meta: Meta<typeof Button> = {
   component: Button,
   tags: ['autodocs'],
+  argTypes: {
+    fullWidth: {
+      type: 'boolean',
+    },
+  },
 };
 
 export default meta;
@@ -18,7 +23,7 @@ export const Base: Story = {
 export const GoogleSignIn: Story = {
   args: {
     icon: FcGoogle,
-    outline: true,
     label: 'Continue with Google',
+    intent: 'secondary',
   },
 };
