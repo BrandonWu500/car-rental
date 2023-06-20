@@ -1,17 +1,17 @@
-import { useCallback, useState } from "react";
-import { FcGoogle } from "react-icons/fc";
-import { signIn } from "next-auth/react";
-import { useForm, FieldValues, SubmitHandler } from "react-hook-form";
+import { useCallback, useState } from 'react';
+import { FcGoogle } from 'react-icons/fc';
+import { signIn } from 'next-auth/react';
+import { useForm, FieldValues, SubmitHandler } from 'react-hook-form';
 
-import { useLoginModal } from "@/hooks/useLoginModal";
+import { useLoginModal } from '@/hooks/useLoginModal';
 
-import Heading from "../Heading";
-import Input from "../inputs/Input";
-import Modal from "./Modal";
-import Button from "../Button";
-import { toast } from "react-hot-toast";
-import { useRouter } from "next/router";
-import { useRegisterModal } from "@/hooks/useRegisterModal";
+import Heading from '../Heading';
+import Input from '../inputs/Input';
+import Modal from './Modal';
+import Button from '../Button';
+import { toast } from 'react-hot-toast';
+import { useRouter } from 'next/router';
+import { useRegisterModal } from '@/hooks/useRegisterModal';
 
 const LoginModal = () => {
   const router = useRouter();
@@ -26,8 +26,8 @@ const LoginModal = () => {
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
   });
 
@@ -35,13 +35,13 @@ const LoginModal = () => {
     setIsLoading(true);
 
     try {
-      const callback = await signIn("credentials", {
+      const callback = await signIn('credentials', {
         ...data,
         redirect: false,
       });
 
       if (callback?.ok) {
-        toast.success("Logged in!");
+        toast.success('Logged in!');
         router.reload();
         loginModal.onClose();
       }
@@ -89,10 +89,10 @@ const LoginModal = () => {
     <div className="flex flex-col gap-4 mt-3">
       <hr />
       <Button
-        outline
+        intent="secondary"
         label="Continue with Google"
         icon={FcGoogle}
-        onClick={() => signIn("google")}
+        onClick={() => signIn('google')}
       />
       <div
         className="text-neutral-500 text-center
