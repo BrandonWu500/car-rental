@@ -51,10 +51,15 @@
     "@storybook/test-runner": "^0.10.0",
 =======
     "@storybook/blocks": "^7.0.22",
+    "@storybook/jest": "^0.1.0",
     "@storybook/nextjs": "^7.0.22",
     "@storybook/react": "^7.0.22",
     "@storybook/react-webpack5": "^7.0.22",
+<<<<<<< HEAD
 >>>>>>> 72bd019 (chore: setup storybook for next.js)
+=======
+    "@storybook/test-runner": "^0.10.0",
+>>>>>>> baf6b9a (chore: setup storybook tests)
     "@storybook/testing-library": "^0.0.14-next.2",
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "14.0.0",
