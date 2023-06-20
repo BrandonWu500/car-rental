@@ -5,6 +5,7 @@ const config: StorybookConfig = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
+<<<<<<< HEAD
     '@storybook/addon-styling',
     {
       name: '@storybook/addon-styling',
@@ -14,6 +15,8 @@ const config: StorybookConfig = {
         },
       },
     },
+=======
+>>>>>>> 72bd019 (chore: setup storybook for next.js)
   ],
   framework: {
     name: '@storybook/nextjs',
