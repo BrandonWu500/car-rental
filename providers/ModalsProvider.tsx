@@ -1,3 +1,4 @@
+import CreateListingModal from '@/components/modals/CreateListingModal';
 import LoginModal from '@/components/modals/LoginModal';
 import RegisterModal from '@/components/modals/RegisterModal';
 
@@ -6,6 +7,7 @@ const ModalsProvider = () => {
     <>
       <RegisterModal />
       <LoginModal />
+      <CreateListingModal />
     </>
   );
 };
