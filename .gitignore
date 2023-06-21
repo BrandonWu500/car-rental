@@ -37,3 +37,4 @@ next-env.d.ts
 .swc
 .env
 ignore.txt
+.eslintcache
