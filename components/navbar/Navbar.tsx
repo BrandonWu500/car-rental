@@ -1,8 +1,9 @@
+import { useCurrentUser } from '@/hooks/useCurrentUser';
 import Container from '../Container';
+import Categories from '../categories/Categories';
 import Logo from './Logo';
 import Search from './Search';
 import UserMenu from './UserMenu';
-import { useCurrentUser } from '@/hooks/useCurrentUser';
 
 const Navbar = () => {
   const { data: currentUser } = useCurrentUser();
@@ -18,6 +19,7 @@ const Navbar = () => {
           </div>
         </Container>
       </div>
+      <Categories />
     </div>
   );
 };
