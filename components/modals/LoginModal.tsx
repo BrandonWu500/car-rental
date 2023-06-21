@@ -86,7 +86,7 @@ const LoginModal = () => {
   );
 
   const footerContent = (
-    <div className="flex flex-col gap-4 mt-3">
+    <div className="mt-3 flex flex-col gap-4">
       <hr />
       <Button
         intent="secondary"
@@ -95,13 +95,13 @@ const LoginModal = () => {
         onClick={() => signIn('google')}
       />
       <div
-        className="text-neutral-500 text-center
-      mt-4 font-light"
+        className="mt-4 text-center
+      font-light text-neutral-500"
       >
         <p>First time using Car Rental?</p>
         <span
           onClick={onToggle}
-          className="text-neutral-800 cursor-pointer hover:underline"
+          className="cursor-pointer text-neutral-800 hover:underline"
         >
           Create an account
         </span>

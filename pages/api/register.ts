@@ -1,15 +1,15 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import bcrypt from "bcrypt";
-import isEmail from "validator/lib/isEmail";
+import { NextApiRequest, NextApiResponse } from 'next';
+import bcrypt from 'bcrypt';
+import isEmail from 'validator/lib/isEmail';
 
-import { prisma } from "./../../libs/prismadb";
+import { prisma } from './../../libs/prismadb';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {
-    if (req.method !== "POST") {
+    if (req.method !== 'POST') {
       return res.status(405).end();
     }
 
@@ -18,11 +18,11 @@ export default async function handler(
     if (!email || !name || !password) {
       return res
         .status(400)
-        .json({ message: "Please fill out the required fields" });
+        .json({ message: 'Please fill out the required fields' });
     }
 
     if (!isEmail(email)) {
-      return res.status(400).json({ message: "Invalid email" });
+      return res.status(400).json({ message: 'Invalid email' });
     }
 
     const existingUser = await prisma.user.findUnique({
@@ -32,7 +32,7 @@ export default async function handler(
     });
 
     if (existingUser) {
-      return res.status(422).json({ message: "Email taken" });
+      return res.status(422).json({ message: 'Email taken' });
     }
 
     const hashedPassword = await bcrypt.hash(password, 12);
@@ -42,7 +42,7 @@ export default async function handler(
         email,
         name,
         hashedPassword,
-        image: "",
+        image: '',
         emailVerified: new Date(),
       },
     });
