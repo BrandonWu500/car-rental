@@ -1,12 +1,15 @@
-import { AiOutlineMenu } from 'react-icons/ai';
-import Avatar from '../Avatar';
 import { User } from '@prisma/client';
+import { signOut } from 'next-auth/react';
 import { useCallback, useState } from 'react';
-import MenuItem from './MenuItem';
+import { toast } from 'react-hot-toast';
+import { AiOutlineMenu } from 'react-icons/ai';
+
 import { useLoginModal } from '@/hooks/useLoginModal';
 import { useRegisterModal } from '@/hooks/useRegisterModal';
-import { signOut } from 'next-auth/react';
-import { toast } from 'react-hot-toast';
+
+import { useCreateListingModal } from '@/hooks/useCreateListingModal';
+import Avatar from '../Avatar';
+import MenuItem from './MenuItem';
 
 interface UserMenuProps {
   currentUser: User | null;
@@ -15,6 +18,7 @@ interface UserMenuProps {
 const UserMenu = ({ currentUser }: UserMenuProps) => {
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
+  const createListingModal = useCreateListingModal();
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -27,10 +31,15 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
     toast.success('Logged out!');
   }, []);
 
+  const onCreateListing = useCallback(() => {
+    createListingModal.onOpen();
+  }, [createListingModal]);
+
   return (
     <div className="relative">
       <div className="flex items-center gap-3">
         <div
+          onClick={onCreateListing}
           className="hidden cursor-pointer rounded-full px-4
         py-3 text-sm font-semibold transition
         hover:bg-neutral-100 md:block"
