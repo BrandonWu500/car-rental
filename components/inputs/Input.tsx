@@ -29,7 +29,7 @@ const Input = ({
   const togglePasswordShow = useCallback(() => {
     inputType === 'password' ? setInputType('text') : setInputType('password');
     setShowPassword((value) => !value);
-  }, []);
+  }, [inputType]);
 
   return (
     <div className="relative w-full">
