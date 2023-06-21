@@ -3,6 +3,7 @@ import { VariantProps, cva } from 'cva';
 const categoryBoxStyles = cva(
   `flex cursor-pointer flex-col items-center justify-center
 gap-2 border-b-2 p-3 transition hover:text-neutral-800
+max-w-md
 `,
   {
     variants: {
