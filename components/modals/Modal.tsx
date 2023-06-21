@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useState } from "react";
-import { IoMdClose } from "react-icons/io";
-import Button from "../Button";
+import { useCallback, useEffect, useState } from 'react';
+import { IoMdClose } from 'react-icons/io';
+import Button from '../Button';
 
 interface ModalProps {
   isOpen: boolean;
@@ -62,36 +62,36 @@ const Modal = ({
 
   return (
     <div
-      className="flex justify-center items-center
-  overflow-hidden overflow-y-auto fixed inset-0
-  z-50 outline-none focus:outline-none bg-neutral-800/70"
+      className="fixed inset-0 z-50
+  flex items-center justify-center overflow-hidden
+  overflow-y-auto bg-neutral-800/70 outline-none focus:outline-none"
     >
       <div
-        className="relative w-full md:w-2/3 lg:w-1/2 xl:w-2/5
-    my-6 mx-auto h-full md:h-auto"
+        className="relative mx-auto my-6 h-full w-full
+    md:h-auto md:w-2/3 lg:w-1/2 xl:w-2/5"
       >
         {/* CONTENT */}
         <div
-          className={`translate duration-300 h-full
-        ${showModal ? "translate-y-0" : "translate-y-full"}
-        ${showModal ? "opacity-100" : "opacity-0"}
+          className={`translate h-full duration-300
+        ${showModal ? 'translate-y-0' : 'translate-y-full'}
+        ${showModal ? 'opacity-100' : 'opacity-0'}
         `}
         >
           <div
-            className="translate h-full md:h-auto border-0
-          rounded-lg shadow-lg relative flex flex-col w-full
-          bg-white outline-none focus:outline-none"
+            className="translate relative flex h-full
+          w-full flex-col rounded-lg border-0 bg-white shadow-lg
+          outline-none focus:outline-none md:h-auto"
           >
             {/* HEADER */}
             <div
-              className="flex items-center justify-center
-            p-6 rounded-t relative border-b-[1px]"
+              className="relative flex items-center
+            justify-center rounded-t border-b-[1px] p-6"
             >
               <button
                 onClick={handleClose}
                 aria-label="close"
-                className="p-1 border-0 hover:opacity-70
-              transition absolute left-9"
+                className="absolute left-9 border-0
+              p-1 transition hover:opacity-70"
               >
                 <IoMdClose size={18} />
               </button>
@@ -99,11 +99,11 @@ const Modal = ({
             </div>
 
             {/* BODY */}
-            <div className="relative p-6 flex-auto">{body}</div>
+            <div className="relative flex-auto p-6">{body}</div>
 
             {/* FOOTER */}
             <div className="flex flex-col gap-2 p-6">
-              <div className="flex items-center gap-4 w-full">
+              <div className="flex w-full items-center gap-4">
                 {secondaryAction && secondaryActionLabel && (
                   <Button
                     disabled={disabled}

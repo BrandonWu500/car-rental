@@ -7,6 +7,7 @@
     "lint": "next lint",
     "test-storybook": "test-storybook --watch",
     "test-storybook:ci": "test-storybook",
+    "prettier": "prettier --write .",
     "prepare": "husky install",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
@@ -69,6 +70,7 @@
     "next-router-mock": "^0.9.6",
     "postcss": "^8.4.24",
     "prettier": "^2.8.8",
+    "prettier-plugin-tailwindcss": "^0.3.0",
     "prisma": "^4.15.0",
     "prop-types": "^15.8.1",
     "storybook": "^7.0.22",

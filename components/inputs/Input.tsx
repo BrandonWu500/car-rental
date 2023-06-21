@@ -1,6 +1,6 @@
-import { useCallback, useState } from "react";
-import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
-import { BiDollar } from "react-icons/bi";
+import { useCallback, useState } from 'react';
+import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
+import { BiDollar } from 'react-icons/bi';
 
 interface InputProps {
   id: string;
@@ -16,7 +16,7 @@ interface InputProps {
 const Input = ({
   id,
   label,
-  type = "text",
+  type = 'text',
   disabled,
   formatPrice,
   required,
@@ -27,17 +27,17 @@ const Input = ({
   const [inputType, setInputType] = useState(type);
 
   const togglePasswordShow = useCallback(() => {
-    inputType === "password" ? setInputType("text") : setInputType("password");
+    inputType === 'password' ? setInputType('text') : setInputType('password');
     setShowPassword((value) => !value);
   }, []);
 
   return (
-    <div className="w-full relative">
+    <div className="relative w-full">
       {formatPrice && (
         <BiDollar
           size={24}
-          className={`text-neutral-700
-    absolute top-5 left-2`}
+          className={`absolute
+    left-2 top-5 text-neutral-700`}
         />
       )}
       <input
@@ -47,31 +47,31 @@ const Input = ({
         disabled={disabled}
         placeholder=" "
         {...register(id, { required })}
-        className={`peer w-full p-4 pt-8 font-light bg-white border-2
-      rounded-md outline-none transition disabled:opacity-70
-      disabled:cursor-not-allowed
-      ${formatPrice ? "pl-9" : "pl-4"}
-      ${errors[id] ? "border-rose-500" : "border-neutral-300"}
-      ${errors[id] ? "focus:border-rose-500" : "focus:border-black"}
+        className={`peer w-full rounded-md border-2 bg-white p-4 pt-8
+      font-light outline-none transition disabled:cursor-not-allowed
+      disabled:opacity-70
+      ${formatPrice ? 'pl-9' : 'pl-4'}
+      ${errors[id] ? 'border-rose-500' : 'border-neutral-300'}
+      ${errors[id] ? 'focus:border-rose-500' : 'focus:border-black'}
       `}
       />
       <label
         htmlFor={id}
-        className={`absolute text-md duration-150 transform
-      -translate-y-3 top-5 z-10 origin-[0] text-neutral-500
-      ${formatPrice ? "left-9" : "left-4"}
-      peer-placeholder-shown:scale-100
+        className={`text-md absolute top-5 z-10
+      origin-[0] -translate-y-3 transform text-neutral-500 duration-150
+      ${formatPrice ? 'left-9' : 'left-4'}
       peer-placeholder-shown:translate-y-0
-      peer-focus:scale-75
+      peer-placeholder-shown:scale-100
       peer-focus:-translate-y-4
-      ${errors[id] ? "text-rose-500" : "text-zinc-400"}
+      peer-focus:scale-75
+      ${errors[id] ? 'text-rose-500' : 'text-zinc-400'}
       `}
       >
         {label}
       </label>
-      {type === "password" && (
-        <button onClick={togglePasswordShow} className="absolute top-6 right-5">
-          {!showPassword ? "SHOW" : "HIDE"}
+      {type === 'password' && (
+        <button onClick={togglePasswordShow} className="absolute right-5 top-6">
+          {!showPassword ? 'SHOW' : 'HIDE'}
         </button>
       )}
     </div>

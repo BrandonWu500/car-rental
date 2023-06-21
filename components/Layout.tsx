@@ -1,6 +1,6 @@
-import ModalsProvider from "@/providers/ModalsProvider";
-import Navbar from "./navbar/Navbar";
-import ToasterProvider from "@/providers/ToasterProvider";
+import ModalsProvider from '@/providers/ModalsProvider';
+import Navbar from './navbar/Navbar';
+import ToasterProvider from '@/providers/ToasterProvider';
 
 interface LayoutProps {
   children: React.ReactNode;
