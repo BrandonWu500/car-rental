@@ -1,4 +1,7 @@
 import { VariantProps, cva } from 'cva';
+import { useRouter } from 'next/router';
+import queryString from 'query-string';
+import { useCallback } from 'react';
 
 const categoryBoxStyles = cva(
   `flex cursor-pointer flex-col items-center justify-center
@@ -23,8 +26,39 @@ interface CategoryBoxProps extends VariantProps<typeof categoryBoxStyles> {
 }
 
 const CategoryBox = ({ label, selected }: CategoryBoxProps) => {
+  const router = useRouter();
+  const { query } = router;
+
+  const handleClick = useCallback(() => {
+    let currentQuery = {};
+
+    if (query) {
+      currentQuery = queryString.parse(query.toString());
+    }
+
+    const updatedQuery: any = {
+      ...currentQuery,
+      category: label,
+    };
+
+    // remove selection if user clicks same category again
+    if (query.category === label) {
+      delete updatedQuery.category;
+    }
+
+    const url = queryString.stringifyUrl(
+      {
+        url: '/',
+        query: updatedQuery,
+      },
+      { skipNull: true }
+    );
+
+    router.push(url);
+  }, [label, router, query]);
+
   return (
-    <div className={categoryBoxStyles({ selected })}>
+    <div onClick={handleClick} className={categoryBoxStyles({ selected })}>
       <div className="text-sm font-medium">{label}</div>
     </div>
   );
