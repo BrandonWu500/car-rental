@@ -9,6 +9,7 @@ import { useCreateListingModal } from '@/hooks/useCreateListingModal';
 import { CATEGORIES } from '@/constants';
 import Heading from '../Heading';
 import CategoryInput from '../inputs/CategoryInput';
+import CountrySelect from '../inputs/CountrySelect';
 import Modal from './Modal';
 
 enum STEPS {
@@ -37,10 +38,12 @@ const CreateListingModal = () => {
   } = useForm<FieldValues>({
     defaultValues: {
       category: '',
+      location: null,
     },
   });
 
   const category = watch('category');
+  const location = watch('location');
 
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -94,7 +97,7 @@ const CreateListingModal = () => {
     return 'Back';
   }, [step]);
 
-  const bodyContent = (
+  let bodyContent = (
     <div className="flex flex-col gap-4">
       <Heading
         title="Which of these best describes your car?"
@@ -117,6 +120,21 @@ const CreateListingModal = () => {
     </div>
   );
 
+  if (step === STEPS.LOCATION) {
+    bodyContent = (
+      <div className="flex flex-col gap-4">
+        <Heading
+          title="Where is your car located?"
+          subtitle="Help renters find you"
+        />
+        <CountrySelect
+          value={location}
+          onChange={(value) => setCustomValue('location', value)}
+        />
+      </div>
+    );
+  }
+
   const footerContent = <div className="mt-3 flex flex-col gap-4"></div>;
 
   return (
@@ -125,6 +143,8 @@ const CreateListingModal = () => {
       isOpen={createListingModal.isOpen}
       title="Rent out your car!"
       actionLabel={actionLabel}
+      secondaryActionLabel={secondaryActionLabel}
+      secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
       onClose={createListingModal.onClose}
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}
