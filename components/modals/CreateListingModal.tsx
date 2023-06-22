@@ -41,12 +41,14 @@ const CreateListingModal = () => {
       category: '',
       location: null,
       passengerCount: 1,
+      imageSrc: '',
     },
   });
 
   const category = watch('category');
   const location = watch('location');
   const passengerCount = watch('passengerCount');
+  const imageSrc = watch('imageSrc');
 
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -148,6 +150,17 @@ const CreateListingModal = () => {
         <Counter
           value={passengerCount}
           onChange={(value) => setCustomValue('passengerCount', value)}
+        />
+      </div>
+    );
+  }
+
+  if (step === STEPS.IMAGE) {
+    bodyContent = (
+      <div className="flex flex-col gap-4">
+        <Heading
+          title="Add a photo of your car"
+          subtitle="Show renters what your car looks like!"
         />
       </div>
     );
