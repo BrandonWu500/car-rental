@@ -32,8 +32,11 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
   }, []);
 
   const onCreateListing = useCallback(() => {
+    if (!currentUser) {
+      return loginModal.onOpen();
+    }
     createListingModal.onOpen();
-  }, [createListingModal]);
+  }, [loginModal, createListingModal, currentUser]);
 
   return (
     <div className="relative">
