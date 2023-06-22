@@ -37,10 +37,12 @@ const CreateListingModal = () => {
   } = useForm<FieldValues>({
     defaultValues: {
       category: '',
+      location: null,
     },
   });
 
   const category = watch('category');
+  const location = watch('location');
 
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -94,7 +96,7 @@ const CreateListingModal = () => {
     return 'Back';
   }, [step]);
 
-  const bodyContent = (
+  let bodyContent = (
     <div className="flex flex-col gap-4">
       <Heading
         title="Which of these best describes your car?"
@@ -116,6 +118,17 @@ const CreateListingModal = () => {
       </div>
     </div>
   );
+
+  if (step === STEPS.LOCATION) {
+    bodyContent = (
+      <div className="flex flex-col gap-4">
+        <Heading
+          title="Where is your car located?"
+          subtitle="Help renters find you"
+        />
+      </div>
+    );
+  }
 
   const footerContent = <div className="mt-3 flex flex-col gap-4"></div>;
 
