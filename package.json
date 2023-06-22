@@ -38,6 +38,7 @@
     "react-icons": "^4.9.0",
     "swr": "^2.1.5",
     "validator": "^13.9.0",
+    "world-countries": "^4.0.0",
     "zustand": "^4.3.8"
   },
   "devDependencies": {
