@@ -23,6 +23,7 @@
 #### Development
 
 - Next.js (with pages router)
+- TypeScript
 - Prisma
 - MongoDB
 - NextAuth
