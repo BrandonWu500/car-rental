@@ -5,6 +5,7 @@
 - [Description](#description)
 - [Technologies](#technologies)
 - [How to Use](#how-to-use)
+- [References](#references)
 - [Author Info](#author-info)
 
 ---
@@ -31,6 +32,10 @@
 
 - Storybook
 
+#### Project Managment Tools
+
+- Jira
+
 [Back To The Top](#car-rental-web-app)
 
 ---
@@ -46,6 +51,14 @@ After cloning the repository, run:
 3. `npm run dev`
 
 Once the project is running, you can view it in the browser with the url http://localhost:3000
+
+---
+
+## References
+
+Web app design inspired by Code With Antonio: https://youtu.be/c_-b_isI4vg
+
+Link to his project: https://github.com/AntonioErdeljac/next13-airbnb-clone
 
 [Back To The Top](#car-rental-web-app)
 
