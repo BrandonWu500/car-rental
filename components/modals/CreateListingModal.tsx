@@ -9,6 +9,7 @@ import { useCreateListingModal } from '@/hooks/useCreateListingModal';
 import { CATEGORIES } from '@/constants';
 import Heading from '../Heading';
 import CategoryInput from '../inputs/CategoryInput';
+import CountrySelect from '../inputs/CountrySelect';
 import Modal from './Modal';
 
 enum STEPS {
@@ -125,6 +126,10 @@ const CreateListingModal = () => {
         <Heading
           title="Where is your car located?"
           subtitle="Help renters find you"
+        />
+        <CountrySelect
+          value={location}
+          onChange={(value) => setCustomValue('location', value)}
         />
       </div>
     );
