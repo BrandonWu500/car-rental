@@ -1,5 +1,8 @@
+import axios from 'axios';
+import { useRouter } from 'next/router';
 import { useMemo, useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 
 import { useCreateListingModal } from '@/hooks/useCreateListingModal';
 
@@ -15,6 +18,7 @@ enum STEPS {
 }
 
 const CreateListingModal = () => {
+  const router = useRouter();
   const createListingModal = useCreateListingModal();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -23,10 +27,25 @@ const CreateListingModal = () => {
   const {
     register,
     handleSubmit,
+    watch,
+    setValue,
+    reset,
     formState: { errors },
   } = useForm<FieldValues>({
-    defaultValues: {},
+    defaultValues: {
+      category: '',
+    },
   });
+
+  const category = watch('category');
+
+  const setCustomValue = (id: string, value: any) => {
+    setValue(id, value, {
+      shouldDirty: true,
+      shouldTouch: true,
+      shouldValidate: true,
+    });
+  };
 
   const onBack = () => {
     setStep((value) => value - 1);
@@ -37,12 +56,23 @@ const CreateListingModal = () => {
   };
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    // setIsLoading(true);
-    // try {
-    // } catch (error: any) {
-    // } finally {
-    //   setIsLoading(false);
-    // }
+    if (step !== STEPS.PRICE) {
+      return onNext();
+    }
+
+    setIsLoading(true);
+    try {
+      await axios.post('/api/listings', data);
+      toast.success('Listing created!');
+      router.reload();
+      reset();
+      setStep(STEPS.CATEGORY);
+      createListingModal.onClose();
+    } catch (error: any) {
+      toast.error('Something went wrong.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const actionLabel = useMemo(() => {
@@ -51,6 +81,14 @@ const CreateListingModal = () => {
     }
 
     return 'Next';
+  }, [step]);
+
+  const secondaryActionLabel = useMemo(() => {
+    if (step === STEPS.CATEGORY) {
+      return undefined;
+    }
+
+    return 'Back';
   }, [step]);
 
   const bodyContent = <div className="flex flex-col gap-4"></div>;
