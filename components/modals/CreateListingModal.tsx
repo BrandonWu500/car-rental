@@ -142,7 +142,7 @@ const CreateListingModal = () => {
     bodyContent = (
       <div className="flex flex-col gap-4">
         <Heading
-          title="How many passengers can fit in your car comfortably?"
+          title="How many people can fit in your car comfortably?"
           subtitle="Include the driver in your count!"
         />
         <Counter
