@@ -6,6 +6,8 @@ import { toast } from 'react-hot-toast';
 
 import { useCreateListingModal } from '@/hooks/useCreateListingModal';
 
+import { CATEGORIES } from '@/constants';
+import Heading from '../Heading';
 import Modal from './Modal';
 
 enum STEPS {
@@ -91,7 +93,22 @@ const CreateListingModal = () => {
     return 'Back';
   }, [step]);
 
-  const bodyContent = <div className="flex flex-col gap-4"></div>;
+  const bodyContent = (
+    <div className="flex flex-col gap-4">
+      <Heading
+        title="Which of these best describes your car?"
+        subtitle="Pick a category"
+      />
+      <div
+        className="grid max-h-[50vh] grid-cols-1 gap-3
+      overflow-y-auto md:grid-cols-2"
+      >
+        {CATEGORIES.map((item) => (
+          <div key={item.label} className="col-span-1"></div>
+        ))}
+      </div>
+    </div>
+  );
 
   const footerContent = <div className="mt-3 flex flex-col gap-4"></div>;
 
@@ -103,6 +120,7 @@ const CreateListingModal = () => {
       actionLabel={actionLabel}
       onClose={createListingModal.onClose}
       onSubmit={handleSubmit(onSubmit)}
+      body={bodyContent}
     />
   );
 };
