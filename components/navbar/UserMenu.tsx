@@ -32,8 +32,11 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
   }, []);
 
   const onCreateListing = useCallback(() => {
+    if (!currentUser) {
+      return loginModal.onOpen();
+    }
     createListingModal.onOpen();
-  }, [createListingModal]);
+  }, [loginModal, createListingModal, currentUser]);
 
   return (
     <div className="relative">
@@ -68,6 +71,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
           <div className="flex flex-col">
             {currentUser ? (
               <>
+                <MenuItem label="Rent out your car" onClick={onCreateListing} />
                 <MenuItem label="Logout" onClick={onLogout} />
               </>
             ) : (
