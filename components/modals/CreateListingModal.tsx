@@ -9,6 +9,7 @@ import { useCreateListingModal } from '@/hooks/useCreateListingModal';
 import { CATEGORIES } from '@/constants';
 import Heading from '../Heading';
 import CategoryInput from '../inputs/CategoryInput';
+import Counter from '../inputs/Counter';
 import CountrySelect from '../inputs/CountrySelect';
 import Modal from './Modal';
 
@@ -143,6 +144,10 @@ const CreateListingModal = () => {
         <Heading
           title="How many passengers can fit in your car comfortably?"
           subtitle="Include the driver in your count!"
+        />
+        <Counter
+          value={passengerCount}
+          onChange={(value) => setCustomValue('passengerCount', value)}
         />
       </div>
     );
