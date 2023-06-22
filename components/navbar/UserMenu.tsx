@@ -71,6 +71,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
           <div className="flex flex-col">
             {currentUser ? (
               <>
+                <MenuItem label="Rent out your car" onClick={onCreateListing} />
                 <MenuItem label="Logout" onClick={onLogout} />
               </>
             ) : (
