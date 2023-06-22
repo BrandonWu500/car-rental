@@ -39,11 +39,13 @@ const CreateListingModal = () => {
     defaultValues: {
       category: '',
       location: null,
+      passengerCount: 1,
     },
   });
 
   const category = watch('category');
   const location = watch('location');
+  const passengerCount = watch('passengerCount');
 
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -130,6 +132,17 @@ const CreateListingModal = () => {
         <CountrySelect
           value={location}
           onChange={(value) => setCustomValue('location', value)}
+        />
+      </div>
+    );
+  }
+
+  if (step === STEPS.PASSENGERS) {
+    bodyContent = (
+      <div className="flex flex-col gap-4">
+        <Heading
+          title="How many passengers can fit in your car comfortably?"
+          subtitle="Include the driver in your count!"
         />
       </div>
     );
