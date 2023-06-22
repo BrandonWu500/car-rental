@@ -143,6 +143,8 @@ const CreateListingModal = () => {
       isOpen={createListingModal.isOpen}
       title="Rent out your car!"
       actionLabel={actionLabel}
+      secondaryActionLabel={secondaryActionLabel}
+      secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
       onClose={createListingModal.onClose}
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}
