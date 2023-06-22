@@ -8,6 +8,7 @@ import { useCreateListingModal } from '@/hooks/useCreateListingModal';
 
 import { CATEGORIES } from '@/constants';
 import Heading from '../Heading';
+import CategoryInput from '../inputs/CategoryInput';
 import Modal from './Modal';
 
 enum STEPS {
@@ -104,7 +105,13 @@ const CreateListingModal = () => {
       overflow-y-auto md:grid-cols-2"
       >
         {CATEGORIES.map((item) => (
-          <div key={item.label} className="col-span-1"></div>
+          <div key={item.label} className="col-span-1">
+            <CategoryInput
+              onClick={(category) => setCustomValue('category', category)}
+              selected={category === item.label}
+              label={item.label}
+            />
+          </div>
         ))}
       </div>
     </div>
