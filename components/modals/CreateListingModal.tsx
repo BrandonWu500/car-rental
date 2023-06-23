@@ -163,6 +163,10 @@ const CreateListingModal = () => {
           title="Add a photo of your car"
           subtitle="Show renters what your car looks like!"
         />
+        <p>
+          Please Note: There may be a brief delay before the image preview shows
+          below once you have uploaded the file.
+        </p>
         <ImageUpload
           onChange={(value) => setCustomValue('imageSrc', value)}
           value={imageSrc}
