@@ -1,5 +1,6 @@
 import Container from '@/components/Container';
 import EmptyState from '@/components/EmptyState';
+import ListingCard from '@/components/listings/ListingCard';
 
 import { prisma } from '@/libs/prismadb';
 import { TypeSafeListing } from '@/types';
@@ -36,7 +37,7 @@ const Home = ({ listings }: HomeProps) => {
     2xl:grid-cols-6"
       >
         {listings?.map((listing) => (
-          <div key={listing.id}>{listing.make}</div>
+          <ListingCard key={listing.id} listing={listing} />
         ))}
       </div>
     </Container>
