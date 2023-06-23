@@ -11,6 +11,7 @@ import Heading from '../Heading';
 import CategoryInput from '../inputs/CategoryInput';
 import Counter from '../inputs/Counter';
 import CountrySelect from '../inputs/CountrySelect';
+import ImageUpload from '../inputs/ImageUpload';
 import Modal from './Modal';
 
 enum STEPS {
@@ -161,6 +162,10 @@ const CreateListingModal = () => {
         <Heading
           title="Add a photo of your car"
           subtitle="Show renters what your car looks like!"
+        />
+        <ImageUpload
+          onChange={(value) => setCustomValue('imageSrc', value)}
+          value={imageSrc}
         />
       </div>
     );
