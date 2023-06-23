@@ -48,6 +48,7 @@ const CreateListingModal = () => {
       model: '',
       trim: '',
       info: '',
+      price: 1,
     },
   });
 
@@ -195,6 +196,7 @@ const CreateListingModal = () => {
           errors={errors}
           required
         />
+
         <Input
           id="model"
           label="Model"
@@ -218,6 +220,27 @@ const CreateListingModal = () => {
           register={register}
           errors={errors}
           textarea
+        />
+      </div>
+    );
+  }
+
+  if (step === STEPS.PRICE) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Now, set your price"
+          subtitle="How much will you charge per hour or 100 miles (whichever comes first)?"
+        />
+        <Input
+          id="price"
+          label="Price"
+          formatPrice
+          type="number"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
         />
       </div>
     );

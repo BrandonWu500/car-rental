@@ -39,7 +39,7 @@ const Input = ({
         <BiDollar
           size={24}
           className={`absolute
-    left-2 top-5 text-neutral-700`}
+    left-2 top-8 text-neutral-700`}
         />
       )}
       {textarea ? (
