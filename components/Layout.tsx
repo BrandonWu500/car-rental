@@ -1,6 +1,6 @@
 import ModalsProvider from '@/providers/ModalsProvider';
-import Navbar from './navbar/Navbar';
 import ToasterProvider from '@/providers/ToasterProvider';
+import Navbar from './navbar/Navbar';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -12,7 +12,7 @@ const Layout = ({ children }: LayoutProps) => {
       <ModalsProvider />
       <ToasterProvider />
       <Navbar />
-      {children}
+      <main className="pb-20 pt-28">{children}</main>
     </>
   );
 };
