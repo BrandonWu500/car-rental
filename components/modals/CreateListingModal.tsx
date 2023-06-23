@@ -11,6 +11,7 @@ import Heading from '../Heading';
 import CategoryInput from '../inputs/CategoryInput';
 import Counter from '../inputs/Counter';
 import CountrySelect from '../inputs/CountrySelect';
+import ImageUpload from '../inputs/ImageUpload';
 import Modal from './Modal';
 
 enum STEPS {
@@ -41,12 +42,14 @@ const CreateListingModal = () => {
       category: '',
       location: null,
       passengerCount: 1,
+      imageSrc: '',
     },
   });
 
   const category = watch('category');
   const location = watch('location');
   const passengerCount = watch('passengerCount');
+  const imageSrc = watch('imageSrc');
 
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -101,7 +104,7 @@ const CreateListingModal = () => {
   }, [step]);
 
   let bodyContent = (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-8">
       <Heading
         title="Which of these best describes your car?"
         subtitle="Pick a category"
@@ -125,7 +128,7 @@ const CreateListingModal = () => {
 
   if (step === STEPS.LOCATION) {
     bodyContent = (
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-8">
         <Heading
           title="Where is your car located?"
           subtitle="Help renters find you"
@@ -140,7 +143,7 @@ const CreateListingModal = () => {
 
   if (step === STEPS.PASSENGERS) {
     bodyContent = (
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-8">
         <Heading
           title="How many people can fit in your car comfortably?"
           subtitle="Include the driver in your count!"
@@ -148,6 +151,25 @@ const CreateListingModal = () => {
         <Counter
           value={passengerCount}
           onChange={(value) => setCustomValue('passengerCount', value)}
+        />
+      </div>
+    );
+  }
+
+  if (step === STEPS.IMAGE) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Add a photo of your car"
+          subtitle="Show renters what your car looks like!"
+        />
+        <p>
+          Please Note: There may be a brief delay before the image preview shows
+          below once you have uploaded the file.
+        </p>
+        <ImageUpload
+          onChange={(value) => setCustomValue('imageSrc', value)}
+          value={imageSrc}
         />
       </div>
     );
