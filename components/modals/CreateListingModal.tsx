@@ -104,7 +104,7 @@ const CreateListingModal = () => {
   }, [step]);
 
   let bodyContent = (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-8">
       <Heading
         title="Which of these best describes your car?"
         subtitle="Pick a category"
@@ -128,7 +128,7 @@ const CreateListingModal = () => {
 
   if (step === STEPS.LOCATION) {
     bodyContent = (
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-8">
         <Heading
           title="Where is your car located?"
           subtitle="Help renters find you"
@@ -143,7 +143,7 @@ const CreateListingModal = () => {
 
   if (step === STEPS.PASSENGERS) {
     bodyContent = (
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-8">
         <Heading
           title="How many people can fit in your car comfortably?"
           subtitle="Include the driver in your count!"
@@ -158,7 +158,7 @@ const CreateListingModal = () => {
 
   if (step === STEPS.IMAGE) {
     bodyContent = (
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-8">
         <Heading
           title="Add a photo of your car"
           subtitle="Show renters what your car looks like!"
