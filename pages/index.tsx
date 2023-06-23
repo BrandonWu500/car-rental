@@ -1,4 +1,5 @@
 import Container from '@/components/Container';
+import EmptyState from '@/components/EmptyState';
 
 import { prisma } from '@/libs/prismadb';
 import { TypeSafeListing } from '@/types';
@@ -23,6 +24,10 @@ interface HomeProps {
 }
 
 const Home = ({ listings }: HomeProps) => {
+  if (!listings.length) {
+    <EmptyState showReset />;
+  }
+
   return (
     <Container>
       <div
