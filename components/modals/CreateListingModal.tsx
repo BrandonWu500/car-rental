@@ -12,6 +12,7 @@ import CategoryInput from '../inputs/CategoryInput';
 import Counter from '../inputs/Counter';
 import CountrySelect from '../inputs/CountrySelect';
 import ImageUpload from '../inputs/ImageUpload';
+import Input from '../inputs/Input';
 import Modal from './Modal';
 
 enum STEPS {
@@ -43,6 +44,10 @@ const CreateListingModal = () => {
       location: null,
       passengerCount: 1,
       imageSrc: '',
+      make: '',
+      model: '',
+      trim: '',
+      info: '',
     },
   });
 
@@ -170,6 +175,49 @@ const CreateListingModal = () => {
         <ImageUpload
           onChange={(value) => setCustomValue('imageSrc', value)}
           value={imageSrc}
+        />
+      </div>
+    );
+  }
+
+  if (step === STEPS.INFO) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Tell us more about your car"
+          subtitle="What would be important for renters to know?"
+        />
+        <Input
+          id="make"
+          label="Make"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+        <Input
+          id="model"
+          label="Model"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+        <Input
+          id="trim"
+          label="Trim"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+        <Input
+          id="info"
+          label="Other Info"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          textarea
         />
       </div>
     );
