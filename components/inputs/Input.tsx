@@ -9,6 +9,7 @@ interface InputProps {
   disabled?: boolean;
   formatPrice?: boolean;
   required?: boolean;
+  textarea?: boolean;
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
 }
@@ -20,6 +21,7 @@ const Input = ({
   disabled,
   formatPrice,
   required,
+  textarea,
   register,
   errors,
 }: InputProps) => {
@@ -40,25 +42,41 @@ const Input = ({
     left-2 top-5 text-neutral-700`}
         />
       )}
-      <input
-        autoComplete="off"
-        type={inputType}
-        id={id}
-        disabled={disabled}
-        placeholder=" "
-        {...register(id, { required })}
-        className={`peer w-full rounded-md border-2 bg-white p-4 pt-8
+      {textarea ? (
+        <textarea
+          autoComplete="off"
+          id={id}
+          disabled={disabled}
+          placeholder=" "
+          {...register(id, { required })}
+          className={`peer w-full rounded-md border-2 bg-white p-4 pt-8
+    font-light outline-none transition disabled:cursor-not-allowed
+    disabled:opacity-70
+    ${formatPrice ? 'pl-9' : 'pl-4'}
+    ${errors[id] ? 'border-rose-500' : 'border-neutral-300'}
+    ${errors[id] ? 'focus:border-rose-500' : 'focus:border-black'}`}
+        ></textarea>
+      ) : (
+        <input
+          autoComplete="off"
+          type={inputType}
+          id={id}
+          disabled={disabled}
+          placeholder=" "
+          {...register(id, { required })}
+          className={`peer w-full rounded-md border-2 bg-white p-4 pt-8
       font-light outline-none transition disabled:cursor-not-allowed
       disabled:opacity-70
       ${formatPrice ? 'pl-9' : 'pl-4'}
       ${errors[id] ? 'border-rose-500' : 'border-neutral-300'}
       ${errors[id] ? 'focus:border-rose-500' : 'focus:border-black'}
       `}
-      />
+        />
+      )}
       <label
         htmlFor={id}
         className={`text-md absolute top-5 z-10
-      origin-[0] -translate-y-3 transform text-neutral-500 duration-150
+      origin-[0] -translate-y-3 transform  duration-150
       ${formatPrice ? 'left-9' : 'left-4'}
       peer-placeholder-shown:translate-y-0
       peer-placeholder-shown:scale-100

@@ -217,6 +217,7 @@ const CreateListingModal = () => {
           disabled={isLoading}
           register={register}
           errors={errors}
+          textarea
         />
       </div>
     );
