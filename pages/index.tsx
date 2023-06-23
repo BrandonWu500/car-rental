@@ -26,7 +26,7 @@ interface HomeProps {
 
 const Home = ({ listings }: HomeProps) => {
   if (!listings.length) {
-    <EmptyState showReset />;
+    return <EmptyState showReset />;
   }
 
   return (
