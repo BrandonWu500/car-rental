@@ -7,7 +7,7 @@ interface AvatarProps {
 const Avatar = ({ src }: AvatarProps) => {
   return (
     <Image
-      src={src ?? '/blank-profile-picture.png'}
+      src={src || '/blank-profile-picture.png'}
       alt="user avatar"
       className="rounded-full"
       width={30}
