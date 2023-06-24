@@ -1,19 +1,17 @@
-import { User } from '@prisma/client';
 import axios from 'axios';
-import { useRouter } from 'next/router';
 import { useCallback, useMemo } from 'react';
 import { toast } from 'react-hot-toast';
+import { useCurrentUser } from './useCurrentUser';
 import { useLoginModal } from './useLoginModal';
 
 interface IUseFavorite {
   listingId: string;
-  currentUser: User | null;
 }
 
-export const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
-  const router = useRouter();
-
+export const useFavorite = ({ listingId }: IUseFavorite) => {
   const loginModal = useLoginModal();
+
+  const { data: currentUser, mutate } = useCurrentUser();
 
   const hasFavorited = useMemo(() => {
     const list = currentUser?.favoriteIds || [];
@@ -39,13 +37,16 @@ export const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
         }
 
         const res = await req();
-        router.reload();
-        toast.success(res.data.message);
+        const updatedFavoriteIds = res.data?.favoriteIds;
+        mutate({
+          ...currentUser,
+          favoriteIds: updatedFavoriteIds,
+        });
       } catch (error) {
-        toast.error('Something wewnt wrong.');
+        toast.error('Something went wrong.');
       }
     },
-    [currentUser, hasFavorited, loginModal, router, listingId]
+    [currentUser, hasFavorited, loginModal, listingId, mutate]
   );
 
   return {
