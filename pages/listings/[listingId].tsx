@@ -7,25 +7,38 @@ interface ListingPageProps {
   listing: TypeSafeListing;
 }
 
-export const getStaticProps: GetStaticProps = async (
-  ctx: GetStaticPropsContext
-) => {
-  const listingId = ctx.params;
+interface IParams {
+  params: { listingId: string };
+}
 
-  if (typeof listingId !== 'string') return { notFound: true };
+export const getStaticProps = async ({ params }: IParams) => {
+  const { listingId } = params;
 
   const listing = await prisma.listing.findUnique({
     where: {
       id: listingId,
     },
+    include: {
+      user: true,
+    },
   });
 
   if (!listing) return { notFound: true };
 
+  const typeSafeListing = {
+    ...listing,
+    createdAt: listing.createdAt.toString(),
+    user: {
+      ...listing.user,
+      createdAt: listing.user.createdAt.toString(),
+      updatedAt: listing.user.updatedAt.toString(),
+      emailVerified: listing.user.emailVerified?.toString() || null,
+    },
+  };
+
   return {
     props: {
-      ...listing,
-      createdAt: listing.createdAt.toString(),
+      listing: typeSafeListing,
     },
   };
 };
