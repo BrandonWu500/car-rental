@@ -1,18 +1,23 @@
 import { useCountries } from '@/hooks/useCountries';
 import { TypeSafeListing } from '@/types';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 interface ListingCardProps {
   listing: TypeSafeListing;
 }
 
 const ListingCard = ({ listing }: ListingCardProps) => {
+  const router = useRouter();
   const { getByValue } = useCountries();
 
   const location = getByValue(listing.locationValue);
 
   return (
-    <div className="group col-span-1 cursor-pointer">
+    <div
+      onClick={() => router.push(`/listings/${listing.id}`)}
+      className="group col-span-1 cursor-pointer"
+    >
       <div className="flex w-full flex-col gap-2">
         <div className="relative mb-2 aspect-square w-full max-w-[400px] overflow-hidden rounded-xl">
           <Image
