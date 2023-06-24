@@ -1,10 +1,11 @@
-import { User } from '@prisma/client';
+import { TypeSafeUser } from '@/types';
+
 import Avatar from '../Avatar';
 
 interface ListingInfoProps {
   info: string;
   passengerCount: number;
-  user: User;
+  user: TypeSafeUser;
   category: string;
 }
 

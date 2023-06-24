@@ -2,11 +2,14 @@ import { GetStaticPaths } from 'next';
 
 import Container from '@/components/Container';
 import ListingHead from '@/components/listings/ListingHead';
+import ListingInfo from '@/components/listings/ListingInfo';
 import { prisma } from '@/libs/prismadb';
-import { TypeSafeListing } from '@/types';
+import { TypeSafeListing, TypeSafeUser } from '@/types';
 
 interface ListingPageProps {
-  listing: TypeSafeListing;
+  listing: TypeSafeListing & {
+    user: TypeSafeUser;
+  };
 }
 
 interface IParams {
