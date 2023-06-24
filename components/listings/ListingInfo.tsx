@@ -24,6 +24,10 @@ const ListingInfo = ({
         </div>
         <p>Max {passengerCount} people</p>
       </div>
+      <hr />
+      <p className="text-lg font-semibold">{category}</p>
+      <hr />
+      <p className="text-lg font-light text-neutral-500">{info}</p>
     </div>
   );
 };
