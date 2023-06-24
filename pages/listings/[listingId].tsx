@@ -1,5 +1,7 @@
-import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
+import { GetStaticPaths } from 'next';
 
+import Container from '@/components/Container';
+import ListingHead from '@/components/listings/ListingHead';
 import { prisma } from '@/libs/prismadb';
 import { TypeSafeListing } from '@/types';
 
@@ -57,6 +59,20 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 const ListingPage = ({ listing }: ListingPageProps) => {
-  return <div>ListingPage</div>;
+  return (
+    <Container>
+      <div className="mx-auto max-w-screen-lg">
+        <div className="flex flex-col gap-6">
+          <ListingHead
+            make={listing.make}
+            model={listing.model}
+            trim={listing.trim}
+            locationValue={listing.locationValue}
+            imageSrc={listing.imageSrc}
+          />
+        </div>
+      </div>
+    </Container>
+  );
 };
 export default ListingPage;
