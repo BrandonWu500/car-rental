@@ -25,7 +25,7 @@ export default async function handler(
 
       favoriteIds.push(listingId);
 
-      await prisma.user.update({
+      const user = await prisma.user.update({
         where: {
           id: currentUser.id,
         },
@@ -34,7 +34,7 @@ export default async function handler(
         },
       });
 
-      return res.json({ message: 'Liked!' });
+      return res.json(user);
     }
 
     if (req.method === 'DELETE') {
@@ -48,7 +48,7 @@ export default async function handler(
 
       favoriteIds = favoriteIds.filter((id) => id !== listingId);
 
-      await prisma.user.update({
+      const user = await prisma.user.update({
         where: {
           id: currentUser.id,
         },
@@ -57,7 +57,7 @@ export default async function handler(
         },
       });
 
-      return res.json({ message: 'Unliked!' });
+      return res.json(user);
     }
 
     return res.status(405).end();
