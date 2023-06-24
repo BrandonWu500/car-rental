@@ -47,7 +47,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const listings = await prisma.listing.findMany();
 
   const paths = listings.map((listing) => ({
-    params: { id: listing.id },
+    params: { listingId: listing.id },
   }));
 
   return {
