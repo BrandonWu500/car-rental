@@ -73,6 +73,17 @@ const ListingPage = ({ listing }: ListingPageProps) => {
             locationValue={listing.locationValue}
             imageSrc={listing.imageSrc}
           />
+          <div
+            className="mt-6 grid grid-cols-1
+          md:grid-cols-7 md:gap-10"
+          >
+            <ListingInfo
+              user={listing.user}
+              category={listing.category}
+              info={listing.info}
+              passengerCount={listing.passengerCount}
+            />
+          </div>
         </div>
       </div>
     </Container>
