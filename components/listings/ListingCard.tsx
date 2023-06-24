@@ -1,7 +1,10 @@
-import { useCountries } from '@/hooks/useCountries';
-import { TypeSafeListing } from '@/types';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+
+import { useCountries } from '@/hooks/useCountries';
+import { TypeSafeListing } from '@/types';
+
+import FavoriteButton from '../FavoriteButton';
 
 interface ListingCardProps {
   listing: TypeSafeListing;
@@ -26,6 +29,9 @@ const ListingCard = ({ listing }: ListingCardProps) => {
             src={listing.imageSrc}
             alt="Listing"
           />
+          <div className="absolute right-3 top-3">
+            <FavoriteButton listingId={listing.id} />
+          </div>
         </div>
         <h3 className="text-xl font-bold">
           {listing.make} {listing.model}
