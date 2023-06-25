@@ -1,10 +1,11 @@
-import { User } from '@prisma/client';
+import { SafeTypeUser } from '@/types';
+
 import Avatar from '../Avatar';
 
 interface ListingInfoProps {
   info: string;
   passengerCount: number;
-  user: User;
+  user: SafeTypeUser;
   category: string;
 }
 
@@ -23,6 +24,10 @@ const ListingInfo = ({
         </div>
         <p>Max {passengerCount} people</p>
       </div>
+      <hr />
+      <p className="text-lg font-semibold">{category}</p>
+      <hr />
+      <p className="text-lg font-light text-neutral-500">{info}</p>
     </div>
   );
 };
