@@ -2,11 +2,14 @@ import { GetStaticPaths } from 'next';
 
 import Container from '@/components/Container';
 import ListingHead from '@/components/listings/ListingHead';
+import ListingInfo from '@/components/listings/ListingInfo';
 import { prisma } from '@/libs/prismadb';
-import { SafeTypeListing } from '@/types';
+import { SafeTypeListing, SafeTypeUser } from '@/types';
 
 interface ListingPageProps {
-  listing: SafeTypeListing;
+  listing: SafeTypeListing & {
+    user: SafeTypeUser;
+  };
 }
 
 interface IParams {
@@ -27,7 +30,7 @@ export const getStaticProps = async ({ params }: IParams) => {
 
   if (!listing) return { notFound: true };
 
-  const typeSafeListing = {
+  const safeTypeListing = {
     ...listing,
     createdAt: listing.createdAt.toString(),
     user: {
@@ -40,7 +43,7 @@ export const getStaticProps = async ({ params }: IParams) => {
 
   return {
     props: {
-      listing: typeSafeListing,
+      listing: safeTypeListing,
     },
   };
 };
@@ -70,6 +73,22 @@ const ListingPage = ({ listing }: ListingPageProps) => {
             locationValue={listing.locationValue}
             imageSrc={listing.imageSrc}
           />
+          <div
+            className="mt-6 grid grid-cols-1
+          md:grid-cols-7 md:gap-10"
+          >
+            <ListingInfo
+              user={listing.user}
+              category={listing.category}
+              info={listing.info}
+              passengerCount={listing.passengerCount}
+            />
+            <div className="order-first mb-10 md:order-last md:col-span-3">
+              <p>
+                $ {listing.price} / hr {`(or 100 miles, whichever comes first)`}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </Container>
