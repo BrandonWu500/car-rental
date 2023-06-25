@@ -1,11 +1,11 @@
-import { TypeSafeUser } from '@/types';
+import { SafeTypeUser } from '@/types';
 
 import Avatar from '../Avatar';
 
 interface ListingInfoProps {
   info: string;
   passengerCount: number;
-  user: TypeSafeUser;
+  user: SafeTypeUser;
   category: string;
 }
 

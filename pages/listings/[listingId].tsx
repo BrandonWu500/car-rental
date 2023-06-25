@@ -4,11 +4,11 @@ import Container from '@/components/Container';
 import ListingHead from '@/components/listings/ListingHead';
 import ListingInfo from '@/components/listings/ListingInfo';
 import { prisma } from '@/libs/prismadb';
-import { TypeSafeListing, TypeSafeUser } from '@/types';
+import { SafeTypeListing, SafeTypeUser } from '@/types';
 
 interface ListingPageProps {
-  listing: TypeSafeListing & {
-    user: TypeSafeUser;
+  listing: SafeTypeListing & {
+    user: SafeTypeUser;
   };
 }
 
@@ -30,7 +30,7 @@ export const getStaticProps = async ({ params }: IParams) => {
 
   if (!listing) return { notFound: true };
 
-  const typeSafeListing = {
+  const safeTypeListing = {
     ...listing,
     createdAt: listing.createdAt.toString(),
     user: {
@@ -43,7 +43,7 @@ export const getStaticProps = async ({ params }: IParams) => {
 
   return {
     props: {
-      listing: typeSafeListing,
+      listing: safeTypeListing,
     },
   };
 };
