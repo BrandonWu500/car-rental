@@ -1,4 +1,5 @@
 import { Range } from 'react-date-range';
+import Button from '../Button';
 import DatePicker from '../inputs/DatePicker';
 
 interface ListingReservationProps {
@@ -37,6 +38,10 @@ const ListingReservation = ({
         disabledDates={disabledDates}
         onChange={(value) => onChangeDate(value.selection)}
       />
+      <hr />
+      <div className="p-4">
+        <Button disabled={disabled} label="Reserve" onClick={onSubmit} />
+      </div>
     </div>
   );
 };
