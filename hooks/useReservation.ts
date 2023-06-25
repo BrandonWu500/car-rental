@@ -25,7 +25,8 @@ export const useReservation = ({ listing }: IUseReservation) => {
 
   useEffect(() => {
     if (dateRange.startDate && dateRange.endDate) {
-      const dayCount = differenceInDays(dateRange.endDate, dateRange.startDate);
+      const dayCount =
+        differenceInDays(dateRange.endDate, dateRange.startDate) + 1;
 
       if (dayCount && listing.price) {
         setTotalPrice(dayCount * listing.price);
