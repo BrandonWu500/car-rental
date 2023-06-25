@@ -3,7 +3,7 @@ import EmptyState from '@/components/EmptyState';
 import ListingCard from '@/components/listings/ListingCard';
 
 import { prisma } from '@/libs/prismadb';
-import { TypeSafeListing } from '@/types';
+import { SafeTypeListing } from '@/types';
 import { GetStaticProps } from 'next';
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -21,7 +21,7 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 interface HomeProps {
-  listings: TypeSafeListing[];
+  listings: SafeTypeListing[];
 }
 
 const Home = ({ listings }: HomeProps) => {

@@ -2,12 +2,12 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 import { useCountries } from '@/hooks/useCountries';
-import { TypeSafeListing } from '@/types';
+import { SafeTypeListing } from '@/types';
 
 import FavoriteButton from '../FavoriteButton';
 
 interface ListingCardProps {
-  listing: TypeSafeListing;
+  listing: SafeTypeListing;
 }
 
 const ListingCard = ({ listing }: ListingCardProps) => {
