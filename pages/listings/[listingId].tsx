@@ -72,6 +72,7 @@ const ListingPage = ({ listing }: ListingPageProps) => {
             trim={listing.trim}
             locationValue={listing.locationValue}
             imageSrc={listing.imageSrc}
+            id={listing.id}
           />
           <div
             className="mt-6 grid grid-cols-1
