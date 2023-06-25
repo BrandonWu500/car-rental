@@ -1,4 +1,5 @@
 import { Range } from 'react-date-range';
+import DatePicker from '../inputs/DatePicker';
 
 interface ListingReservationProps {
   price: number;
@@ -30,6 +31,12 @@ const ListingReservation = ({
           / hr or 100 miles {`(whichever comes first)`}
         </p>
       </div>
+      <hr />
+      <DatePicker
+        value={dateRange}
+        disabledDates={disabledDates}
+        onChange={(value) => onChangeDate(value.selection)}
+      />
     </div>
   );
 };
