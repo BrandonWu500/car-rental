@@ -24,3 +24,9 @@ export const CATEGORIES = [
     label: 'Luxury',
   },
 ];
+
+export const INITIAL_DATE_RANGE = {
+  startDate: new Date(),
+  endDate: new Date(),
+  key: 'selection',
+};
