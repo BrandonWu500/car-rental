@@ -1,5 +1,6 @@
 import { useCountries } from '@/hooks/useCountries';
 import Image from 'next/image';
+import FavoriteButton from '../FavoriteButton';
 import Heading from '../Heading';
 
 interface ListingHeadProps {
@@ -8,6 +9,7 @@ interface ListingHeadProps {
   trim: string;
   locationValue: string;
   imageSrc: string;
+  id: string;
 }
 
 const ListingHead = ({
@@ -16,6 +18,7 @@ const ListingHead = ({
   trim,
   locationValue,
   imageSrc,
+  id,
 }: ListingHeadProps) => {
   const { getByValue } = useCountries();
 
@@ -28,6 +31,9 @@ const ListingHead = ({
       <Heading title={title} subtitle={subtitle} />
       <div className="relative mt-4 h-[60vh] w-full overflow-hidden rounded-xl">
         <Image src={imageSrc} fill className="object-cover" alt="Car" />
+        <div className="absolute right-5 top-5">
+          <FavoriteButton listingId={id} />
+        </div>
       </div>
     </>
   );
