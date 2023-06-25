@@ -42,6 +42,14 @@ const ListingReservation = ({
       <div className="p-4">
         <Button disabled={disabled} label="Reserve" onClick={onSubmit} />
       </div>
+      <hr />
+      <div
+        className="flex items-center justify-between p-4 text-lg
+      font-semibold"
+      >
+        <h4>Total</h4>
+        <p>$ {totalPrice}</p>
+      </div>
     </div>
   );
 };
