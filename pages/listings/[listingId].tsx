@@ -83,6 +83,11 @@ const ListingPage = ({ listing }: ListingPageProps) => {
               info={listing.info}
               passengerCount={listing.passengerCount}
             />
+            <div className="order-first mb-10 md:order-last md:col-span-3">
+              <p>
+                $ {listing.price} / hr {`(or 100 miles, whichever comes first)`}
+              </p>
+            </div>
           </div>
         </div>
       </div>
