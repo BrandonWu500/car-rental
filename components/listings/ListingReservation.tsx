@@ -28,9 +28,7 @@ const ListingReservation = ({
     >
       <div className="flex items-center gap-1 p-4">
         <p className="text-2xl font-semibold">$ {price}</p>
-        <p className="font-light text-neutral-600">
-          / hr or 100 miles {`(whichever comes first)`}
-        </p>
+        <p className="font-light text-neutral-600">/ day</p>
       </div>
       <hr />
       <DatePicker

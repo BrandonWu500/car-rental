@@ -230,7 +230,7 @@ const CreateListingModal = () => {
       <div className="flex flex-col gap-8">
         <Heading
           title="Now, set your price"
-          subtitle="How much will you charge per hour or 100 miles (whichever comes first)?"
+          subtitle="How much will you charge per day?"
         />
         <Input
           id="price"
