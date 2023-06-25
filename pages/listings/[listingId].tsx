@@ -3,8 +3,12 @@ import { GetStaticPaths } from 'next';
 import Container from '@/components/Container';
 import ListingHead from '@/components/listings/ListingHead';
 import ListingInfo from '@/components/listings/ListingInfo';
+import ListingReservation from '@/components/listings/ListingReservation';
+import { INITIAL_DATE_RANGE } from '@/constants';
 import { prisma } from '@/libs/prismadb';
 import { SafeTypeListing, SafeTypeUser } from '@/types';
+import { useMemo, useState } from 'react';
+import { Range } from 'react-date-range';
 
 interface ListingPageProps {
   listing: SafeTypeListing & {
@@ -62,6 +66,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 const ListingPage = ({ listing }: ListingPageProps) => {
+  const [totalPrice, setTotalPrice] = useState(listing.price);
+  const [dateRange, setDateRange] = useState<Range>(INITIAL_DATE_RANGE);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const disabledDates = useMemo(() => {
+    let dates: Date[] = [];
+    return dates;
+  }, []);
   return (
     <Container>
       <div className="mx-auto max-w-screen-lg">
@@ -85,9 +97,15 @@ const ListingPage = ({ listing }: ListingPageProps) => {
               passengerCount={listing.passengerCount}
             />
             <div className="order-first mb-10 md:order-last md:col-span-3">
-              <p>
-                $ {listing.price} / hr {`(or 100 miles, whichever comes first)`}
-              </p>
+              <ListingReservation
+                price={listing.price}
+                totalPrice={totalPrice}
+                onChangeDate={(value) => setDateRange(value)}
+                dateRange={dateRange}
+                onSubmit={() => {}}
+                disabled={isLoading}
+                disabledDates={disabledDates}
+              />
             </div>
           </div>
         </div>
