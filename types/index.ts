@@ -7,11 +7,11 @@ export type CountrySelectValue = {
   value: string;
 };
 
-export type TypeSafeListing = Omit<Listing, 'createdAt'> & {
+export type SafeTypeListing = Omit<Listing, 'createdAt'> & {
   createdAt: string;
 };
 
-export type TypeSafeUser = Omit<
+export type SafeTypeUser = Omit<
   User,
   'createdAt' | 'updatedAt' | 'emailVerified'
 > & {

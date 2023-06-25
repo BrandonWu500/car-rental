@@ -3,10 +3,10 @@ import { GetStaticPaths } from 'next';
 import Container from '@/components/Container';
 import ListingHead from '@/components/listings/ListingHead';
 import { prisma } from '@/libs/prismadb';
-import { TypeSafeListing } from '@/types';
+import { SafeTypeListing } from '@/types';
 
 interface ListingPageProps {
-  listing: TypeSafeListing;
+  listing: SafeTypeListing;
 }
 
 interface IParams {
