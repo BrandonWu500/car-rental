@@ -1,7 +1,10 @@
+import { useReservations } from '@/hooks/useReservations';
+import { useEffect, useState } from 'react';
 import { DateRange, Range, RangeKeyDict } from 'react-date-range';
 
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
+import { ClipLoader } from 'react-spinners';
 
 interface DatePickerProps {
   value: Range;
@@ -10,17 +13,43 @@ interface DatePickerProps {
 }
 
 const DatePicker = ({ value, onChange, disabledDates }: DatePickerProps) => {
+  const { isValidating } = useReservations();
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (isValidating) {
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+    }
+  }, [isValidating]);
+
   return (
-    <DateRange
-      rangeColors={['#262626']}
-      ranges={[value]}
-      date={new Date()}
-      onChange={onChange}
-      direction="vertical"
-      showDateDisplay={false}
-      minDate={new Date()}
-      disabledDates={disabledDates}
-    />
+    <div className="relative">
+      <div className="my-2 flex w-full justify-around">
+        <p>Start</p>
+        <p>End</p>
+      </div>
+      {loading && (
+        <div
+          className="absolute inset-0 z-10 m-auto
+        flex flex-col items-center justify-center gap-5 bg-white"
+        >
+          <ClipLoader size={100} />
+          {/* <p className="text-xl">Revalidating...</p> */}
+        </div>
+      )}
+      <DateRange
+        rangeColors={['#262626']}
+        ranges={[value]}
+        date={new Date()}
+        onChange={onChange}
+        direction="vertical"
+        minDate={new Date()}
+        disabledDates={disabledDates}
+      />
+    </div>
   );
 };
 export default DatePicker;

@@ -7,10 +7,12 @@ export const useReservations = () => {
     data: reservations,
     error,
     isLoading,
+    isValidating,
     mutate,
   } = useSWR('/api/reservations', fetcher, {
     revalidateOnMount: true,
     revalidateOnReconnect: true,
+    revalidateOnFocus: true,
   });
 
   let disabledDates: Date[] = [];
@@ -30,6 +32,7 @@ export const useReservations = () => {
     reservations,
     error,
     isLoading,
+    isValidating,
     mutate,
     disabledDates,
   };
