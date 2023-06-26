@@ -1,13 +1,14 @@
 import { User } from '@prisma/client';
 import { signOut } from 'next-auth/react';
+import { useRouter } from 'next/router';
 import { useCallback, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { AiOutlineMenu } from 'react-icons/ai';
 
+import { useCreateListingModal } from '@/hooks/useCreateListingModal';
 import { useLoginModal } from '@/hooks/useLoginModal';
 import { useRegisterModal } from '@/hooks/useRegisterModal';
 
-import { useCreateListingModal } from '@/hooks/useCreateListingModal';
 import Avatar from '../Avatar';
 import MenuItem from './MenuItem';
 
@@ -19,6 +20,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
   const createListingModal = useCreateListingModal();
+  const router = useRouter();
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -72,6 +74,10 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
             {currentUser ? (
               <>
                 <MenuItem label="Rent out your car" onClick={onCreateListing} />
+                <MenuItem
+                  label="My trips"
+                  onClick={() => router.push('/trips')}
+                />
                 <MenuItem label="Logout" onClick={onLogout} />
               </>
             ) : (
