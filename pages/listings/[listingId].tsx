@@ -5,9 +5,9 @@ import ListingHead from '@/components/listings/ListingHead';
 import ListingInfo from '@/components/listings/ListingInfo';
 import ListingReservation from '@/components/listings/ListingReservation';
 import { useReservation } from '@/hooks/useReservation';
+import { useReservations } from '@/hooks/useReservations';
 import { prisma } from '@/libs/prismadb';
 import { SafeTypeListing, SafeTypeUser } from '@/types';
-import { useMemo } from 'react';
 
 interface ListingPageProps {
   listing: SafeTypeListing & {
@@ -48,6 +48,7 @@ export const getStaticProps = async ({ params }: IParams) => {
     props: {
       listing: safeTypeListing,
     },
+    revalidate: 5,
   };
 };
 
@@ -69,11 +70,12 @@ const ListingPage = ({ listing }: ListingPageProps) => {
     useReservation({
       listing,
     });
+  const {
+    reservations,
+    isLoading: loadingReservations,
+    disabledDates,
+  } = useReservations();
 
-  const disabledDates = useMemo(() => {
-    let dates: Date[] = [];
-    return dates;
-  }, []);
   return (
     <Container>
       <div className="mx-auto max-w-screen-lg">
@@ -103,7 +105,7 @@ const ListingPage = ({ listing }: ListingPageProps) => {
                 onChangeDate={(value) => setDateRange(value)}
                 dateRange={dateRange}
                 onSubmit={createReservation}
-                disabled={isLoading}
+                disabled={isLoading || loadingReservations}
                 disabledDates={disabledDates}
               />
             </div>
