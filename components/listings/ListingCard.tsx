@@ -31,7 +31,7 @@ const ListingCard = ({ listing, reservation }: ListingCardProps) => {
 
     const diffInDays = differenceInDays(end, start);
 
-    return diffInDays > 1
+    return diffInDays >= 1
       ? `${format(start, 'PP')} - ${format(end, 'PP')} `
       : `${format(start, 'PP')}`;
   }, [reservation]);
