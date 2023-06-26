@@ -4,8 +4,10 @@ import { useRouter } from 'next/router';
 import { useCountries } from '@/hooks/useCountries';
 import { SafeTypeListing, SafeTypeReservation } from '@/types';
 
+import { useDeleteReservation } from '@/hooks/useDeleteReservation';
 import { differenceInDays, format } from 'date-fns';
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
+import Button from '../Button';
 import FavoriteButton from '../FavoriteButton';
 
 interface ListingCardProps {
@@ -16,6 +18,7 @@ interface ListingCardProps {
 const ListingCard = ({ listing, reservation }: ListingCardProps) => {
   const router = useRouter();
   const { getByValue } = useCountries();
+  const { isLoading, onDelete } = useDeleteReservation();
 
   const location = getByValue(listing.locationValue);
 
@@ -31,10 +34,21 @@ const ListingCard = ({ listing, reservation }: ListingCardProps) => {
 
     const diffInDays = differenceInDays(end, start);
 
-    return diffInDays > 1
+    return diffInDays >= 1
       ? `${format(start, 'PP')} - ${format(end, 'PP')} `
       : `${format(start, 'PP')}`;
   }, [reservation]);
+
+  const handleCancel = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.stopPropagation();
+
+      if (isLoading || !reservation) return;
+
+      onDelete(reservation.id);
+    },
+    [isLoading, reservation, onDelete]
+  );
 
   return (
     <div
@@ -69,6 +83,15 @@ const ListingCard = ({ listing, reservation }: ListingCardProps) => {
           <p className="font-semibold">$ {price} </p>
           {!reservation && <p className="font-light">/ day</p>}
         </div>
+
+        {reservation && (
+          <Button
+            disabled={isLoading}
+            size="small"
+            label="Cancel Reservation"
+            onClick={handleCancel}
+          />
+        )}
       </div>
     </div>
   );
