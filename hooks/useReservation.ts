@@ -50,14 +50,14 @@ export const useReservation = ({ listing }: IUseReservation) => {
       });
 
       toast.success('Listing reserved!');
-      // setDateRange(INITIAL_DATE_RANGE);
-      // router.push('/trips');
+      setDateRange(INITIAL_DATE_RANGE);
+      router.push('/trips');
     } catch (error) {
       toast.error('Something went wrong.');
     } finally {
       setIsLoading(false);
     }
-  }, [totalPrice, currentUser, loginModal, listing, dateRange]);
+  }, [totalPrice, currentUser, loginModal, listing, dateRange, router]);
 
   return { createReservation, totalPrice, isLoading, dateRange, setDateRange };
 };
