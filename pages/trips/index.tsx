@@ -1,6 +1,10 @@
+import Container from '@/components/Container';
 import EmptyState from '@/components/EmptyState';
+import Heading from '@/components/Heading';
+import ListingCard from '@/components/listings/ListingCard';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
 import { useTrips } from '@/hooks/useTrips';
+import { SafeTypeReservation } from '@/types';
 import { ClipLoader } from 'react-spinners';
 
 const TripsPage = () => {
@@ -32,6 +36,24 @@ const TripsPage = () => {
       />
     );
   }
-  return <div>TripsPage</div>;
+  return (
+    <Container>
+      <Heading title="Trips" subtitle="Upcoming and past trips" />
+
+      <div
+        className="mt-10 grid grid-cols-1 gap-8
+    sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5
+    2xl:grid-cols-6"
+      >
+        {trips.map((trip: SafeTypeReservation) => (
+          <ListingCard
+            key={trip.id}
+            listing={trip.listing}
+            reservation={trip}
+          />
+        ))}
+      </div>
+    </Container>
+  );
 };
 export default TripsPage;
