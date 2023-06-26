@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { differenceInDays } from 'date-fns';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { Range } from 'react-date-range';
@@ -6,15 +7,10 @@ import { toast } from 'react-hot-toast';
 
 import { INITIAL_DATE_RANGE } from '@/constants';
 import { SafeTypeListing } from '@/types';
-import { differenceInDays } from 'date-fns';
 import { useCurrentUser } from './useCurrentUser';
 import { useLoginModal } from './useLoginModal';
 
-interface IUseReservation {
-  listing: SafeTypeListing;
-}
-
-export const useReservation = ({ listing }: IUseReservation) => {
+export const useCreateReservation = (listing: SafeTypeListing) => {
   const loginModal = useLoginModal();
   const { data: currentUser } = useCurrentUser();
   const router = useRouter();

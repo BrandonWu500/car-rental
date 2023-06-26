@@ -4,7 +4,7 @@ import Container from '@/components/Container';
 import ListingHead from '@/components/listings/ListingHead';
 import ListingInfo from '@/components/listings/ListingInfo';
 import ListingReservation from '@/components/listings/ListingReservation';
-import { useReservation } from '@/hooks/useReservation';
+import { useCreateReservation } from '@/hooks/useCreateReservation';
 import { useReservations } from '@/hooks/useReservations';
 import { prisma } from '@/libs/prismadb';
 import { SafeTypeListing, SafeTypeUser } from '@/types';
@@ -67,9 +67,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 const ListingPage = ({ listing }: ListingPageProps) => {
   const { createReservation, isLoading, dateRange, totalPrice, setDateRange } =
-    useReservation({
-      listing,
-    });
+    useCreateReservation(listing);
   const {
     reservations,
     isLoading: loadingReservations,
