@@ -48,6 +48,7 @@ export const getStaticProps = async ({ params }: IParams) => {
     props: {
       listing: safeTypeListing,
     },
+    revalidate: 5,
   };
 };
 
