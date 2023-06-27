@@ -15,6 +15,37 @@ const meta: Meta<typeof LocationSelect> = {
 export default meta;
 type Story = StoryObj<typeof LocationSelect>;
 
+export const EmptyState: Story = {
+  args: {
+    value: '',
+    onChange: () => {},
+    type: LOCATION_TYPE.STATE,
+  },
+};
+
+export const SelectedState: Story = {
+  args: {
+    value: 'MA',
+    onChange: () => {},
+    type: LOCATION_TYPE.STATE,
+  },
+};
+
+export const SelectStateTest: Story = {
+  args: {
+    type: LOCATION_TYPE.STATE,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByPlaceholderText('State');
+    await userEvent.click(input);
+    await userEvent.type(input, 'ma');
+    const option = await canvas.findByText('MA');
+    await userEvent.click(option);
+    await expect(option).toBeInTheDocument();
+  },
+};
+
 export const EmptyCity: Story = {
   args: {
     value: '',
