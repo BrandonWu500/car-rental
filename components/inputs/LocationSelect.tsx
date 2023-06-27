@@ -1,21 +1,37 @@
 import { useLocations } from '@/hooks/useLocations';
 import { LOCATION_TYPE } from '@/types';
 import { Combobox, Transition } from '@headlessui/react';
-import { Fragment, useState } from 'react';
+import { Fragment, useMemo, useState } from 'react';
 import { AiOutlineCheck } from 'react-icons/ai';
 import { HiChevronUpDown } from 'react-icons/hi2';
 
 interface LocationSelectProps {
+  value: string;
+  onChange: (value: string) => void;
   type: LOCATION_TYPE;
   stateCode?: string;
 }
 
-const LocationSelect = ({ type, stateCode = '' }: LocationSelectProps) => {
-  const locations = useLocations(type, stateCode);
-  const [selected, setSelected] = useState(locations[0]);
-  const [query, setQuery] = useState('');
+const LocationSelect = ({
+  value,
+  onChange,
+  type,
+  stateCode = 'MA',
+}: LocationSelectProps) => {
+  const { getStates, getCitiesByState } = useLocations();
 
-  console.log(locations);
+  const inputPlaceholder = useMemo(
+    () => (type === LOCATION_TYPE.STATE ? 'State' : 'City'),
+    [type]
+  );
+
+  const locations = useMemo(
+    () =>
+      type === LOCATION_TYPE.STATE ? getStates() : getCitiesByState(stateCode),
+    [type, stateCode, getStates, getCitiesByState]
+  );
+
+  const [query, setQuery] = useState('');
 
   const filteredLocations =
     query === ''
@@ -29,13 +45,14 @@ const LocationSelect = ({ type, stateCode = '' }: LocationSelectProps) => {
 
   return (
     <div className="w-72">
-      <Combobox value={selected} onChange={setSelected}>
+      <Combobox value={value} onChange={onChange}>
         <div className="relative mt-1">
           <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
             <Combobox.Input
               className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
               displayValue={(location: any) => location}
               onChange={(event) => setQuery(event.target.value)}
+              placeholder={inputPlaceholder}
             />
             <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
               <HiChevronUpDown
