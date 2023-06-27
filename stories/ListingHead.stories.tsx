@@ -16,6 +16,8 @@ export const Base: Story = {
     make: 'Tesla',
     model: 'Model Y',
     trim: 'Performance AWD',
+    state: 'MA',
+    city: 'Boston',
     imageSrc:
       'https://res.cloudinary.com/dqrdsleqt/image/upload/v1687539316/s4oddctnhknuljcns8oe.jpg',
   },
