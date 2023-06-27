@@ -17,7 +17,9 @@ const MockListingCard = {
   imageSrc:
     'https://res.cloudinary.com/dqrdsleqt/image/upload/v1687539316/s4oddctnhknuljcns8oe.jpg',
   info: 'Color: White',
-  locationValue: 'US',
+  // locationValue: 'US',
+  state: 'MA',
+  city: 'Boston',
   make: 'Tesla',
   model: 'Model Y',
   passengerCount: 4,

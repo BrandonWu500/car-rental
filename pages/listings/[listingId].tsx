@@ -82,7 +82,7 @@ const ListingPage = ({ listing }: ListingPageProps) => {
             make={listing.make}
             model={listing.model}
             trim={listing.trim}
-            locationValue={listing.locationValue}
+            // locationValue={listing.locationValue}
             imageSrc={listing.imageSrc}
             id={listing.id}
           />
