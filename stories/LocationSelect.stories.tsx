@@ -37,7 +37,9 @@ export const SelectStateTest: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const input = canvas.getByPlaceholderText('State');
+    const input = canvas.getByRole('combobox', {
+      name: /us state or territory/i,
+    });
     await userEvent.click(input);
     await userEvent.type(input, 'ma');
     const option = await canvas.findByText('MA');
@@ -56,7 +58,7 @@ export const EmptyCity: Story = {
 
 export const SelectedCity: Story = {
   args: {
-    value: 'Lexington, MA',
+    value: 'Boston',
     onChange: () => {},
     type: LOCATION_TYPE.CITY,
   },
@@ -68,10 +70,10 @@ export const SelectCityTest: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const input = canvas.getByPlaceholderText('City');
+    const input = canvas.getByRole('combobox', { name: /city/i });
     await userEvent.click(input);
     await userEvent.type(input, 'Concord');
-    const option = await canvas.findByText(/West Concord, MA/i);
+    const option = await canvas.findByText(/West Concord/i);
     await userEvent.click(option);
     await expect(option).toBeInTheDocument();
   },
@@ -84,10 +86,10 @@ export const DiffStateCodeTest: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const input = canvas.getByPlaceholderText('City');
+    const input = canvas.getByRole('combobox', { name: /city/i });
     await userEvent.click(input);
     await userEvent.type(input, 'San Francisco');
-    const option = await canvas.findByText('San Francisco, CA');
+    const option = await canvas.findByText('San Francisco');
     await userEvent.click(option);
     await expect(option).toBeInTheDocument();
   },

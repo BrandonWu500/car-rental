@@ -19,7 +19,8 @@ export default async function handler(
 
     const {
       category,
-      location,
+      state,
+      city,
       passengerCount,
       imageSrc,
       make,
@@ -32,7 +33,8 @@ export default async function handler(
     const listing = await prisma.listing.create({
       data: {
         category,
-        locationValue: location.value,
+        state,
+        city,
         passengerCount,
         imageSrc,
         make,

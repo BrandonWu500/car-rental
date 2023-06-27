@@ -20,7 +20,7 @@ const ListingCard = ({ listing, reservation }: ListingCardProps) => {
   const { getByValue } = useCountries();
   const { isLoading, onDelete } = useDeleteReservation();
 
-  const location = getByValue(listing.locationValue);
+  // const location = getByValue(listing.locationValue);
 
   const price = useMemo(() => {
     return reservation ? reservation.totalPrice : listing.price;
@@ -72,7 +72,7 @@ const ListingCard = ({ listing, reservation }: ListingCardProps) => {
         </h3>
         <p className="text-lg font-semibold">{listing.trim}</p>
         <p className="text-lg font-semibold">
-          {location?.region}, {location?.label}
+          {/* {location?.region}, {location?.label} */}
         </p>
 
         <p className="font-light text-neutral-500">

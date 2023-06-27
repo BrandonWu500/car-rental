@@ -4,20 +4,22 @@ import { useMemo, useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 
-import { useCreateListingModal } from '@/hooks/useCreateListingModal';
-
 import { CATEGORIES } from '@/constants';
+import { useCreateListingModal } from '@/hooks/useCreateListingModal';
+import { LOCATION_TYPE } from '@/types';
+
 import Heading from '../Heading';
 import CategoryInput from '../inputs/CategoryInput';
 import Counter from '../inputs/Counter';
-import CountrySelect from '../inputs/CountrySelect';
 import ImageUpload from '../inputs/ImageUpload';
 import Input from '../inputs/Input';
+import LocationSelect from '../inputs/LocationSelect';
 import Modal from './Modal';
 
 enum STEPS {
   CATEGORY,
-  LOCATION,
+  STATE,
+  CITY,
   PASSENGERS,
   IMAGE,
   INFO,
@@ -41,7 +43,8 @@ const CreateListingModal = () => {
   } = useForm<FieldValues>({
     defaultValues: {
       category: '',
-      location: null,
+      state: '',
+      city: '',
       passengerCount: 1,
       imageSrc: '',
       make: '',
@@ -53,7 +56,8 @@ const CreateListingModal = () => {
   });
 
   const category = watch('category');
-  const location = watch('location');
+  const state = watch('state');
+  const city = watch('city');
   const passengerCount = watch('passengerCount');
   const imageSrc = watch('imageSrc');
 
@@ -132,16 +136,34 @@ const CreateListingModal = () => {
     </div>
   );
 
-  if (step === STEPS.LOCATION) {
+  if (step === STEPS.STATE) {
     bodyContent = (
       <div className="flex flex-col gap-8">
         <Heading
           title="Where is your car located?"
           subtitle="Help renters find you"
         />
-        <CountrySelect
-          value={location}
-          onChange={(value) => setCustomValue('location', value)}
+        <LocationSelect
+          type={LOCATION_TYPE.STATE}
+          value={state}
+          onChange={(value) => setCustomValue('state', value)}
+        />
+      </div>
+    );
+  }
+
+  if (step === STEPS.CITY) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Where is your car located?"
+          subtitle="Help renters find you"
+        />
+        <LocationSelect
+          type={LOCATION_TYPE.CITY}
+          stateCode={state}
+          value={city}
+          onChange={(value) => setCustomValue('city', value)}
         />
       </div>
     );

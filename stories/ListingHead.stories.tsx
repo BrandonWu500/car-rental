@@ -12,7 +12,7 @@ type Story = StoryObj<typeof ListingHead>;
 
 export const Base: Story = {
   args: {
-    locationValue: 'US',
+    // locationValue: 'US',
     make: 'Tesla',
     model: 'Model Y',
     trim: 'Performance AWD',

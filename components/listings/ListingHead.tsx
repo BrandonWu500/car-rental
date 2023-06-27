@@ -7,7 +7,7 @@ interface ListingHeadProps {
   make: string;
   model: string;
   trim: string;
-  locationValue: string;
+  // locationValue: string;
   imageSrc: string;
   id: string;
 }
@@ -16,19 +16,19 @@ const ListingHead = ({
   make,
   model,
   trim,
-  locationValue,
+  // locationValue,
   imageSrc,
   id,
 }: ListingHeadProps) => {
   const { getByValue } = useCountries();
 
-  const location = getByValue(locationValue);
+  // const location = getByValue(locationValue);
   const title = `${make} ${model} - ${trim}`;
-  const subtitle = `${location?.region}, ${location?.label}`;
+  // const subtitle = `${location?.region}, ${location?.label}`;
 
   return (
     <>
-      <Heading title={title} subtitle={subtitle} />
+      <Heading title={title} subtitle={''} />
       <div className="relative mt-4 h-[60vh] w-full overflow-hidden rounded-xl">
         <Image src={imageSrc} fill className="object-cover" alt="Car" />
         <div className="absolute right-5 top-5">
