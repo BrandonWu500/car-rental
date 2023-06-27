@@ -29,3 +29,8 @@ export type SafeTypeReservation = Omit<
   endDate: string;
   listing: SafeTypeListing;
 };
+
+export enum LOCATION_TYPE {
+  STATE,
+  CITY,
+}
