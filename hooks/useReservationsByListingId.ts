@@ -10,7 +10,7 @@ export const useReservationsByListingId = (listingId: string) => {
     isLoading,
     isValidating,
     mutate,
-  } = useSWR(`/api/reservations/${listingId}`, fetcher, {
+  } = useSWR(`/api/listings/${listingId}`, fetcher, {
     revalidateOnMount: true,
     revalidateOnReconnect: true,
     revalidateOnFocus: true,
