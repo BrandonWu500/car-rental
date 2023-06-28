@@ -5,7 +5,7 @@ import ListingHead from '@/components/listings/ListingHead';
 import ListingInfo from '@/components/listings/ListingInfo';
 import ListingReservation from '@/components/listings/ListingReservation';
 import { useCreateReservation } from '@/hooks/useCreateReservation';
-import { useReservations } from '@/hooks/useReservations';
+import { useReservationsByListingId } from '@/hooks/useReservationsByListingId';
 import { prisma } from '@/libs/prismadb';
 import { SafeTypeListing, SafeTypeUser } from '@/types';
 
@@ -72,7 +72,7 @@ const ListingPage = ({ listing }: ListingPageProps) => {
     reservations,
     isLoading: loadingReservations,
     disabledDates,
-  } = useReservations();
+  } = useReservationsByListingId(listing.id);
 
   return (
     <Container>
@@ -106,6 +106,7 @@ const ListingPage = ({ listing }: ListingPageProps) => {
                 onSubmit={createReservation}
                 disabled={isLoading || loadingReservations}
                 disabledDates={disabledDates}
+                listingId={listing.id}
               />
             </div>
           </div>
