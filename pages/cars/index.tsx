@@ -4,12 +4,14 @@ import Heading from '@/components/Heading';
 import ListingCard from '@/components/listings/ListingCard';
 import { useCars } from '@/hooks/useCars';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
+import { useUnlistCar } from '@/hooks/useUnlistCar';
 import { SafeTypeCar } from '@/types';
 import { ClipLoader } from 'react-spinners';
 
 const CarsPage = () => {
   const { data: currentUser, isLoading: loadingUser } = useCurrentUser();
   const { cars, isLoading: loadingCars } = useCars(currentUser?.id);
+  const { isLoading, onDelete } = useUnlistCar();
 
   if (loadingCars || loadingUser) {
     return (
@@ -50,6 +52,10 @@ const CarsPage = () => {
             key={car.id}
             reservation={car.reservation}
             listing={car}
+            actionId={car.id}
+            actionLabel="Unlist Car"
+            onAction={onDelete}
+            disabled={isLoading}
           />
         ))}
       </div>

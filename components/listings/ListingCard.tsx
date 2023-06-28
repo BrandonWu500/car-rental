@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 
 import { SafeTypeListing, SafeTypeReservation } from '@/types';
 
-import { useDeleteReservation } from '@/hooks/useDeleteReservation';
 import { differenceInDays, format } from 'date-fns';
 import { useCallback, useMemo } from 'react';
 import Button from '../Button';
@@ -12,11 +11,21 @@ import FavoriteButton from '../FavoriteButton';
 interface ListingCardProps {
   listing: SafeTypeListing;
   reservation?: SafeTypeReservation;
+  onAction?: (id: string) => void;
+  actionId?: string;
+  actionLabel?: string;
+  disabled?: boolean;
 }
 
-const ListingCard = ({ listing, reservation }: ListingCardProps) => {
+const ListingCard = ({
+  listing,
+  reservation,
+  onAction,
+  actionId,
+  actionLabel,
+  disabled,
+}: ListingCardProps) => {
   const router = useRouter();
-  const { isLoading, onDelete } = useDeleteReservation();
 
   const price = useMemo(() => {
     return reservation ? reservation.totalPrice : listing.price;
@@ -39,11 +48,11 @@ const ListingCard = ({ listing, reservation }: ListingCardProps) => {
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.stopPropagation();
 
-      if (isLoading || !reservation) return;
+      if (disabled || !actionId) return;
 
-      onDelete(reservation.id);
+      onAction?.(actionId);
     },
-    [isLoading, reservation, onDelete]
+    [disabled, actionId, onAction]
   );
 
   return (
@@ -80,11 +89,11 @@ const ListingCard = ({ listing, reservation }: ListingCardProps) => {
           {!reservation && <p className="font-light">/ day</p>}
         </div>
 
-        {reservation && (
+        {onAction && actionLabel && (
           <Button
-            disabled={isLoading}
+            disabled={disabled}
             size="small"
-            label="Cancel Reservation"
+            label={actionLabel}
             onClick={handleCancel}
           />
         )}
