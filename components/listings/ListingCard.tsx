@@ -50,7 +50,7 @@ const ListingCard = ({
       : `${format(start, 'PP')}`;
   }, [reservation]);
 
-  const handleCancel = useCallback(
+  const handleAction = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.stopPropagation();
 
@@ -59,6 +59,17 @@ const ListingCard = ({
       onAction?.(actionId);
     },
     [disabled, actionId, onAction]
+  );
+
+  const handleSecondaryAction = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.stopPropagation();
+
+      if (disabled || !secondaryActionId) return;
+
+      onSecondaryAction?.(secondaryActionId);
+    },
+    [disabled, secondaryActionId, onSecondaryAction]
   );
 
   return (
@@ -100,7 +111,7 @@ const ListingCard = ({
             disabled={disabled}
             size="small"
             label={actionLabel}
-            onClick={handleCancel}
+            onClick={handleAction}
           />
         )}
         {onSecondaryAction && secondaryActionLabel && (
@@ -109,7 +120,7 @@ const ListingCard = ({
             size="small"
             intent="secondary"
             label={secondaryActionLabel}
-            onClick={() => router.push(`/cars/${secondaryActionId}`)}
+            onClick={handleSecondaryAction}
           />
         )}
       </div>
