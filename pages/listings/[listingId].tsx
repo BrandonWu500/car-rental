@@ -106,6 +106,7 @@ const ListingPage = ({ listing }: ListingPageProps) => {
                 onSubmit={createReservation}
                 disabled={isLoading || loadingReservations}
                 disabledDates={disabledDates}
+                listingId={listing.id}
               />
             </div>
           </div>

@@ -10,6 +10,7 @@ interface ListingReservationProps {
   onSubmit: () => void;
   disabled?: boolean;
   disabledDates: Date[];
+  listingId: string;
 }
 
 const ListingReservation = ({
@@ -20,6 +21,7 @@ const ListingReservation = ({
   onSubmit,
   disabled,
   disabledDates,
+  listingId,
 }: ListingReservationProps) => {
   return (
     <div
@@ -32,9 +34,10 @@ const ListingReservation = ({
       </div>
       <hr />
       <DatePicker
+        onChange={(value) => onChangeDate(value.selection)}
         value={dateRange}
         disabledDates={disabledDates}
-        onChange={(value) => onChangeDate(value.selection)}
+        listingId={listingId}
       />
       <hr />
       <div className="p-4">

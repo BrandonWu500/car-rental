@@ -1,4 +1,4 @@
-import { useReservations } from '@/hooks/useReservations';
+import { useReservationsByListingId } from '@/hooks/useReservationsByListingId';
 import { useEffect, useState } from 'react';
 import { DateRange, Range, RangeKeyDict } from 'react-date-range';
 
@@ -10,10 +10,16 @@ interface DatePickerProps {
   value: Range;
   onChange: (value: RangeKeyDict) => void;
   disabledDates?: Date[];
+  listingId: string;
 }
 
-const DatePicker = ({ value, onChange, disabledDates }: DatePickerProps) => {
-  const { isValidating } = useReservations();
+const DatePicker = ({
+  value,
+  onChange,
+  disabledDates,
+  listingId,
+}: DatePickerProps) => {
+  const { isValidating } = useReservationsByListingId(listingId);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
