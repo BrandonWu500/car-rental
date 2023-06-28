@@ -11,6 +11,11 @@ export type SafeTypeListing = Omit<Listing, 'createdAt'> & {
   createdAt: string;
 };
 
+export type SafeTypeCar = Omit<Listing, 'createdAt'> & {
+  createdAt: string;
+  reservation: SafeTypeReservation;
+};
+
 export type SafeTypeUser = Omit<
   User,
   'createdAt' | 'updatedAt' | 'emailVerified'
