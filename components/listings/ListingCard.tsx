@@ -14,6 +14,9 @@ interface ListingCardProps {
   onAction?: (id: string) => void;
   actionId?: string;
   actionLabel?: string;
+  onSecondaryAction?: (id: string) => void;
+  secondaryActionId?: string;
+  secondaryActionLabel?: string;
   disabled?: boolean;
 }
 
@@ -23,6 +26,9 @@ const ListingCard = ({
   onAction,
   actionId,
   actionLabel,
+  onSecondaryAction,
+  secondaryActionId,
+  secondaryActionLabel,
   disabled,
 }: ListingCardProps) => {
   const router = useRouter();
@@ -95,6 +101,15 @@ const ListingCard = ({
             size="small"
             label={actionLabel}
             onClick={handleCancel}
+          />
+        )}
+        {onSecondaryAction && secondaryActionLabel && (
+          <Button
+            disabled={disabled}
+            size="small"
+            intent="secondary"
+            label={secondaryActionLabel}
+            onClick={() => router.push(`/cars/${secondaryActionId}`)}
           />
         )}
       </div>
