@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 
 import { SafeTypeListing, SafeTypeReservation } from '@/types';
 
-import { useDeleteReservation } from '@/hooks/useDeleteReservation';
 import { differenceInDays, format } from 'date-fns';
 import { useCallback, useMemo } from 'react';
 import Button from '../Button';
@@ -27,7 +26,6 @@ const ListingCard = ({
   disabled,
 }: ListingCardProps) => {
   const router = useRouter();
-  const { isLoading, onDelete } = useDeleteReservation();
 
   const price = useMemo(() => {
     return reservation ? reservation.totalPrice : listing.price;

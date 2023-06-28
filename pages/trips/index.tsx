@@ -3,6 +3,7 @@ import EmptyState from '@/components/EmptyState';
 import Heading from '@/components/Heading';
 import ListingCard from '@/components/listings/ListingCard';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
+import { useDeleteReservation } from '@/hooks/useDeleteReservation';
 import { useTrips } from '@/hooks/useTrips';
 import { SafeTypeReservation } from '@/types';
 import { ClipLoader } from 'react-spinners';
@@ -10,6 +11,7 @@ import { ClipLoader } from 'react-spinners';
 const TripsPage = () => {
   const { data: currentUser, isLoading: loadingUser } = useCurrentUser();
   const { trips, isLoading: loadingTrips } = useTrips(currentUser?.id);
+  const { isLoading, onDelete } = useDeleteReservation();
 
   if (loadingTrips || loadingUser) {
     return (
@@ -50,6 +52,10 @@ const TripsPage = () => {
             key={trip.id}
             listing={trip.listing}
             reservation={trip}
+            actionId={trip.id}
+            actionLabel="Cancel Reservation"
+            onAction={onDelete}
+            disabled={isLoading}
           />
         ))}
       </div>
