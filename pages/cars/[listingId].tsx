@@ -25,11 +25,19 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     res as NextApiResponse
   );
 
-  if (!currentUser || !listingId || typeof listingId !== 'string')
+  if (!listingId || typeof listingId !== 'string')
     return {
       redirect: {
         permanent: false,
-        destination: '/',
+        destination: '/400',
+      },
+    };
+
+  if (!currentUser)
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/401',
       },
     };
 
@@ -37,11 +45,20 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     where: { id: listingId },
   });
 
-  if (!listing || listing.userId !== currentUser.id)
+  if (!listing) {
     return {
       redirect: {
         permanent: false,
-        destination: '/',
+        destination: '/500',
+      },
+    };
+  }
+
+  if (listing.userId !== currentUser.id)
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/403',
       },
     };
 
