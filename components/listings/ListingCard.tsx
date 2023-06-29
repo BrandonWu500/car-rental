@@ -14,6 +14,9 @@ interface ListingCardProps {
   onAction?: (id: string) => void;
   actionId?: string;
   actionLabel?: string;
+  onSecondaryAction?: (id: string) => void;
+  secondaryActionId?: string;
+  secondaryActionLabel?: string;
   disabled?: boolean;
 }
 
@@ -23,6 +26,9 @@ const ListingCard = ({
   onAction,
   actionId,
   actionLabel,
+  onSecondaryAction,
+  secondaryActionId,
+  secondaryActionLabel,
   disabled,
 }: ListingCardProps) => {
   const router = useRouter();
@@ -44,7 +50,7 @@ const ListingCard = ({
       : `${format(start, 'PP')}`;
   }, [reservation]);
 
-  const handleCancel = useCallback(
+  const handleAction = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.stopPropagation();
 
@@ -53,6 +59,17 @@ const ListingCard = ({
       onAction?.(actionId);
     },
     [disabled, actionId, onAction]
+  );
+
+  const handleSecondaryAction = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.stopPropagation();
+
+      if (disabled || !secondaryActionId) return;
+
+      onSecondaryAction?.(secondaryActionId);
+    },
+    [disabled, secondaryActionId, onSecondaryAction]
   );
 
   return (
@@ -94,7 +111,16 @@ const ListingCard = ({
             disabled={disabled}
             size="small"
             label={actionLabel}
-            onClick={handleCancel}
+            onClick={handleAction}
+          />
+        )}
+        {onSecondaryAction && secondaryActionLabel && (
+          <Button
+            disabled={disabled}
+            size="small"
+            intent="secondary"
+            label={secondaryActionLabel}
+            onClick={handleSecondaryAction}
           />
         )}
       </div>

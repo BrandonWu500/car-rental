@@ -6,12 +6,14 @@ import { useCars } from '@/hooks/useCars';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
 import { useUnlistCar } from '@/hooks/useUnlistCar';
 import { SafeTypeCar } from '@/types';
+import { useRouter } from 'next/router';
 import { ClipLoader } from 'react-spinners';
 
 const CarsPage = () => {
   const { data: currentUser, isLoading: loadingUser } = useCurrentUser();
   const { cars, isLoading: loadingCars } = useCars(currentUser?.id);
   const { isLoading, onDelete } = useUnlistCar();
+  const router = useRouter();
 
   if (loadingCars || loadingUser) {
     return (
@@ -56,6 +58,11 @@ const CarsPage = () => {
             actionLabel="Unlist Car"
             onAction={onDelete}
             disabled={isLoading}
+            secondaryActionId={car.id}
+            secondaryActionLabel="View reservations"
+            onSecondaryAction={() => {
+              router.push(`/cars/${car.id}`);
+            }}
           />
         ))}
       </div>
