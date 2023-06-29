@@ -10,7 +10,11 @@ import {
 import { useRouter } from 'next/router';
 import { ClipLoader } from 'react-spinners';
 
+import EmptyState from '@/components/EmptyState';
+import ListingCard from '@/components/listings/ListingCard';
+import { useDeleteReservation } from '@/hooks/useDeleteReservation';
 import { prisma } from '@/libs/prismadb';
+import { SafeTypeReservation } from '@/types';
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const { query, req, res } = ctx;
@@ -50,11 +54,11 @@ const CarReservationsPage = () => {
   const router = useRouter();
   const { listingId } = router.query;
 
-  const { reservations, isLoading } = useReservationsByListingId(
-    listingId as string
-  );
+  const { reservations, isLoading: loadingReservations } =
+    useReservationsByListingId(listingId as string);
+  const { isLoading, onDelete } = useDeleteReservation();
 
-  if (!reservations || isLoading) {
+  if (!reservations || loadingReservations) {
     return (
       <div className="flex h-screen w-screen -translate-y-20 items-center justify-center">
         <ClipLoader size={250} />
@@ -62,9 +66,45 @@ const CarReservationsPage = () => {
     );
   }
 
+  if (reservations?.length === 0) {
+    return (
+      <EmptyState
+        title="No reservations found"
+        subtitle={`Looks like you have no reservations on your car yet.`}
+      />
+    );
+  }
+
   return (
     <Container>
       <Heading title="Reservations" subtitle="Made on your car" />
+      <div
+        className="
+          mt-10
+          grid 
+          grid-cols-1 
+          gap-8 
+          sm:grid-cols-2 
+          md:grid-cols-3
+          lg:grid-cols-4
+          xl:grid-cols-5
+          2xl:grid-cols-6
+        "
+      >
+        {reservations.map((reservation: SafeTypeReservation) => (
+          <ListingCard
+            key={reservation.id}
+            listing={reservation.listing}
+            reservation={reservation}
+            actionId={reservation.id}
+            onAction={onDelete}
+            disabled={isLoading}
+            actionLabel={`Cancel ${
+              reservation.user?.name ?? 'user'
+            }'s reservation`}
+          />
+        ))}
+      </div>
     </Container>
   );
 };
