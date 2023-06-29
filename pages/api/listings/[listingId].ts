@@ -19,6 +19,13 @@ export default async function handler(
 
       const listingReservations = await prisma.reservation.findMany({
         where: { listingId },
+        include: {
+          listing: true,
+          user: true,
+        },
+        orderBy: {
+          createdAt: 'desc',
+        },
       });
 
       return res.status(200).json(listingReservations);
