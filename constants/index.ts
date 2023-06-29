@@ -23,6 +23,9 @@ export const CATEGORIES = [
   {
     label: 'Luxury',
   },
+  {
+    label: 'Sports Cars',
+  },
 ];
 
 export const INITIAL_DATE_RANGE = {
