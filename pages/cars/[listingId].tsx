@@ -54,9 +54,13 @@ const CarReservationsPage = () => {
   const router = useRouter();
   const { listingId } = router.query;
 
-  const { reservations, isLoading: loadingReservations } =
-    useReservationsByListingId(listingId as string);
-  const { isLoading, onDelete } = useDeleteReservation();
+  const {
+    reservations,
+    isLoading: loadingReservations,
+    mutate,
+  } = useReservationsByListingId(listingId as string);
+
+  const { isLoading, onDelete } = useDeleteReservation(reservations, mutate);
 
   if (!reservations || loadingReservations) {
     return (
