@@ -10,8 +10,8 @@ import { ClipLoader } from 'react-spinners';
 
 const TripsPage = () => {
   const { data: currentUser, isLoading: loadingUser } = useCurrentUser();
-  const { trips, isLoading: loadingTrips } = useTrips(currentUser?.id);
-  const { isLoading, onDelete } = useDeleteReservation();
+  const { trips, isLoading: loadingTrips, mutate } = useTrips(currentUser?.id);
+  const { isLoading, onDelete } = useDeleteReservation(trips, mutate);
 
   if (loadingTrips || loadingUser) {
     return (
