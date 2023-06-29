@@ -33,6 +33,7 @@ export type SafeTypeReservation = Omit<
   startDate: string;
   endDate: string;
   listing: SafeTypeListing;
+  user?: SafeTypeUser;
 };
 
 export enum LOCATION_TYPE {
