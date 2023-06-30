@@ -7,6 +7,7 @@ import { useSearchModal } from '@/hooks/useSearchModal';
 import { LOCATION_TYPE } from '@/types';
 
 import Heading from '../Heading';
+import Counter from '../inputs/Counter';
 import LocationSelect from '../inputs/LocationSelect';
 import Modal from './Modal';
 
@@ -54,7 +55,7 @@ const SearchModal = () => {
   }, [step]);
 
   const secondaryActionLabel = useMemo(() => {
-    if (step === STEPS.INFO) {
+    if (step === STEPS.STATE) {
       return undefined;
     }
 
@@ -106,6 +107,21 @@ const SearchModal = () => {
           onChange={(value) => setDateRange(value.selection)}
           direction="vertical"
           minDate={new Date()}
+        />
+      </div>
+    );
+  }
+
+  if (step === STEPS.INFO) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="How many passengers will you have?"
+          subtitle="Include the driver in your count!"
+        />
+        <Counter
+          onChange={(value) => setPassengerCount(value)}
+          value={passengerCount}
         />
       </div>
     );
