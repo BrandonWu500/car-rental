@@ -4,6 +4,11 @@ import {
   NextApiResponse,
 } from 'next';
 
+import Container from '@/components/Container';
+import EmptyState from '@/components/EmptyState';
+import Heading from '@/components/Heading';
+import Grid from '@/components/layout/Grid';
+import ListingCard from '@/components/listings/ListingCard';
 import { prisma } from '@/libs/prismadb';
 import { serverAuth } from '@/libs/serverAuth';
 import { SafeTypeListing } from '@/types';
@@ -48,5 +53,25 @@ interface FavoritesPageProps {
   favorites: SafeTypeListing[];
 }
 
-const FavoritesPage = ({ favorites }: FavoritesPageProps) => {};
+const FavoritesPage = ({ favorites }: FavoritesPageProps) => {
+  if (favorites.length === 0) {
+    return (
+      <EmptyState
+        title="No favorites found"
+        subtitle="Looks like you have no favorite cars."
+      />
+    );
+  }
+
+  return (
+    <Container>
+      <Heading title="Favorites" subtitle="List of cars you favorited!" />
+      <Grid>
+        {favorites.map((favorite: SafeTypeListing) => (
+          <ListingCard key={favorite.id} listing={favorite} />
+        ))}
+      </Grid>
+    </Container>
+  );
+};
 export default FavoritesPage;
