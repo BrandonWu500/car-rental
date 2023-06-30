@@ -11,6 +11,7 @@ import { useRouter } from 'next/router';
 import { ClipLoader } from 'react-spinners';
 
 import EmptyState from '@/components/EmptyState';
+import Grid from '@/components/layout/Grid';
 import ListingCard from '@/components/listings/ListingCard';
 import { useDeleteReservation } from '@/hooks/useDeleteReservation';
 import { prisma } from '@/libs/prismadb';
@@ -99,19 +100,7 @@ const CarReservationsPage = () => {
   return (
     <Container>
       <Heading title="Reservations" subtitle="Made on your car" />
-      <div
-        className="
-          mt-10
-          grid 
-          grid-cols-1 
-          gap-8 
-          sm:grid-cols-2 
-          md:grid-cols-3
-          lg:grid-cols-4
-          xl:grid-cols-5
-          2xl:grid-cols-6
-        "
-      >
+      <Grid>
         {reservations.map((reservation: SafeTypeReservation) => (
           <ListingCard
             key={reservation.id}
@@ -125,7 +114,7 @@ const CarReservationsPage = () => {
             }'s reservation`}
           />
         ))}
-      </div>
+      </Grid>
     </Container>
   );
 };
