@@ -1,4 +1,6 @@
+import { formatISO } from 'date-fns';
 import { useRouter } from 'next/router';
+import queryString from 'query-string';
 import { useCallback, useMemo, useState } from 'react';
 import { DateRange, Range } from 'react-date-range';
 
@@ -44,7 +46,44 @@ const SearchModal = () => {
     if (step !== STEPS.INFO) {
       return onNext();
     }
-  }, [step, onNext]);
+
+    let currentQuery = router.query;
+
+    const updatedQuery: any = {
+      ...currentQuery,
+      state,
+      city,
+      passengerCount,
+    };
+
+    if (dateRange.startDate) {
+      updatedQuery.startDate = formatISO(dateRange.startDate);
+    }
+    if (dateRange.endDate) {
+      updatedQuery.endDate = formatISO(dateRange.endDate);
+    }
+
+    const url = queryString.stringifyUrl(
+      {
+        url: '/',
+        query: updatedQuery,
+      },
+      { skipNull: true }
+    );
+
+    setStep(STEPS.STATE);
+    searchModal.onClose();
+    router.push(url);
+  }, [
+    step,
+    onNext,
+    router,
+    searchModal,
+    dateRange,
+    city,
+    state,
+    passengerCount,
+  ]);
 
   const actionLabel = useMemo(() => {
     if (step === STEPS.INFO) {
