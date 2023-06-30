@@ -1,13 +1,17 @@
 import { useRouter } from 'next/router';
 import { useCallback, useMemo, useState } from 'react';
+import { DateRange, Range } from 'react-date-range';
 
 import { INITIAL_DATE_RANGE } from '@/constants';
 import { useSearchModal } from '@/hooks/useSearchModal';
 import { LOCATION_TYPE } from '@/types';
-import { Range } from 'react-date-range';
+
 import Heading from '../Heading';
 import LocationSelect from '../inputs/LocationSelect';
 import Modal from './Modal';
+
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css';
 
 enum STEPS {
   STATE,
@@ -94,6 +98,14 @@ const SearchModal = () => {
         <Heading
           title="When do you need your car?"
           subtitle="Make sure everyone is free!"
+        />
+        <DateRange
+          rangeColors={['#262626']}
+          ranges={[dateRange]}
+          date={new Date()}
+          onChange={(value) => setDateRange(value.selection)}
+          direction="vertical"
+          minDate={new Date()}
         />
       </div>
     );
