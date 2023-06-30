@@ -1,6 +1,7 @@
 import Container from '@/components/Container';
 import EmptyState from '@/components/EmptyState';
 import Heading from '@/components/Heading';
+import Grid from '@/components/layout/Grid';
 import ListingCard from '@/components/listings/ListingCard';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
 import { useDeleteReservation } from '@/hooks/useDeleteReservation';
@@ -42,11 +43,7 @@ const TripsPage = () => {
     <Container>
       <Heading title="Trips" subtitle="Upcoming and past trips" />
 
-      <div
-        className="mt-10 grid grid-cols-1 gap-8
-    sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5
-    2xl:grid-cols-6"
-      >
+      <Grid>
         {trips.map((trip: SafeTypeReservation) => (
           <ListingCard
             key={trip.id}
@@ -58,7 +55,7 @@ const TripsPage = () => {
             disabled={isLoading}
           />
         ))}
-      </div>
+      </Grid>
     </Container>
   );
 };
