@@ -47,7 +47,7 @@ const SearchModal = () => {
       return onNext();
     }
 
-    let currentQuery = router.query;
+    const currentQuery = router.query;
 
     const updatedQuery: any = {
       ...currentQuery,
