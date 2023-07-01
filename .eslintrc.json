@@ -4,8 +4,11 @@
     "next/core-web-vitals",
     "eslint:recommended",
     "plugin:storybook/recommended",
-    "plugin:cypress/recommended"
+    "plugin:cypress/recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
   "globals": {
     "React": "readonly"
   },

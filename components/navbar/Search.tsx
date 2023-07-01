@@ -24,7 +24,7 @@ const Search = () => {
       const start = new Date(startDate as string);
       const end = new Date(endDate as string);
 
-      let diff = differenceInDays(end, start) + 1;
+      const diff = differenceInDays(end, start) + 1;
 
       return diff === 1 ? `${diff} day` : `${diff} days`;
     }
