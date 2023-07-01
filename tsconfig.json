@@ -18,7 +18,11 @@
     "paths": {
       "@/*": ["./*"]
     },
-    "types": ["cypress", "@testing-library/cypress"]
+    "types": [
+      "cypress",
+      "@testing-library/cypress",
+      "@testing-library/jest-dom"
+    ]
   },
   "include": [
     "next-env.d.ts",
