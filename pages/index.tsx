@@ -4,19 +4,64 @@ import ListingCard from '@/components/listings/ListingCard';
 
 import { prisma } from '@/libs/prismadb';
 import { SafeTypeListing } from '@/types';
-import { GetStaticProps } from 'next';
+import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 
-export const getStaticProps: GetStaticProps = async () => {
-  const listings = await prisma.listing.findMany();
+export const getServerSideProps: GetServerSideProps = async (
+  ctx: GetServerSidePropsContext
+) => {
+  const { passengerCount, state, city, startDate, endDate, category } =
+    ctx.query;
 
-  const typeSafeListings = listings.map((listing) => ({
+  // prisma query
+  const query: any = {};
+
+  if (passengerCount) {
+    query.passengerCount = {
+      gte: +passengerCount,
+    };
+  }
+
+  if (state && city) {
+    query.state = state;
+    query.city = city;
+  }
+
+  if (category) {
+    query.category = category;
+  }
+
+  if (startDate && endDate) {
+    // filters out listings with reservations already made
+    // that conflict with date range in query
+    query.NOT = {
+      reservations: {
+        some: {
+          OR: [
+            // car will not be available at start of trip
+            { startDate: { lte: startDate }, endDate: { gte: startDate } },
+
+            // car will not be available at end of trip
+            { startDate: { lte: endDate }, endDate: { gte: endDate } },
+          ],
+        },
+      },
+    };
+  }
+
+  const listings = await prisma.listing.findMany({
+    where: query,
+    orderBy: {
+      createdAt: 'desc',
+    },
+  });
+
+  const safeTypeListings = listings.map((listing) => ({
     ...listing,
     createdAt: listing.createdAt.toISOString(),
   }));
 
   return {
-    props: { listings: typeSafeListings },
-    revalidate: 5,
+    props: { listings: safeTypeListings },
   };
 };
 
