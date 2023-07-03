@@ -39,3 +39,4 @@ next-env.d.ts
 ignore.txt
 .eslintcache
 cypress/videos
+cypress/screenshots
