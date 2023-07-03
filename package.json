@@ -32,6 +32,7 @@
     "country-state-city": "^3.1.4",
     "cva": "npm:class-variance-authority@^0.6.0",
     "date-fns": "^2.30.0",
+    "env-cmd": "^10.1.0",
     "next": "latest",
     "next-auth": "^4.22.1",
     "next-cloudinary": "^4.13.0",
