@@ -38,6 +38,8 @@ it('runs auth flow for user sign up, login, and logout', () => {
   cy.findByRole('button', { name: /user menu/i }).click();
   cy.findByText(/logout/i).click();
 
+  cy.getCookie('next-auth.session-token').should('be.null');
+
   cy.findByRole('button', { name: /user menu/i }).click();
   cy.findByText(/sign up/i).should('exist');
 });
