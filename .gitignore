@@ -36,5 +36,8 @@ next-env.d.ts
 
 .swc
 .env
+.env.test
 ignore.txt
 .eslintcache
+cypress/videos
+cypress/screenshots
