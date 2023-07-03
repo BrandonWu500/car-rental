@@ -37,3 +37,7 @@
 // }
 
 import '@testing-library/cypress/add-commands';
+
+Cypress.Commands.add('resetDB', () => {
+  cy.task('db:reset');
+});
