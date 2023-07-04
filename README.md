@@ -32,6 +32,7 @@
 #### Testing
 
 - Storybook
+- Cypress
 
 #### Project Managment Tools
 
