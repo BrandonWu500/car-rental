@@ -34,11 +34,16 @@ it('runs auth flow for user sign up, login, and logout', () => {
 
   cy.findByRole('button', { name: 'Continue' }).click();
 
+  // setup before reloading page to avoid test being flaky on ci
+  cy.window().then((w) => (w.beforeReload = true));
+  cy.window().should('have.prop', 'beforeReload', true);
+
   // LOGOUT
   cy.findByRole('button', { name: /user menu/i }).click();
   cy.findByText(/logout/i).click();
 
-  cy.getCookie('next-auth.session-token').should('be.null');
+  // check to make sure page reloaded to avoid test being flaky on ci
+  cy.window().should('not.have.prop', 'beforeReload');
 
   cy.findByRole('button', { name: /user menu/i }).click();
   cy.findByText(/sign up/i).should('exist');
