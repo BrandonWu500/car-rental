@@ -16,7 +16,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "cypress:open": "env-cmd -f .env.test cypress open",
-    "cypress:start": "npx browserslist@latest --update-db && start-server-and-test 'npm run start:test' 3000 'npm run cypress:open'",
+    "cypress:start": "npm run build:test && start-server-and-test 'npm run start:test' 3000 'npm run cypress:open'",
     "cypress:run": "npm run build:test && start-server-and-test 'npm run start:test' 3000 'env-cmd -f .env.test cypress run'"
   },
   "lint-staged": {

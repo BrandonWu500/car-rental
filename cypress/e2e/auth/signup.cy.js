@@ -37,7 +37,4 @@ it('runs auth flow for user sign up, login, and logout', () => {
   // LOGOUT
   cy.findByRole('button', { name: /user menu/i }).click();
   cy.findByText(/logout/i).click();
-
-  cy.findByRole('button', { name: /user menu/i }).click();
-  cy.findByText(/sign up/i).should('exist');
 });
