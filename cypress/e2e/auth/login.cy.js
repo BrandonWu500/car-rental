@@ -31,6 +31,7 @@ describe('Login', () => {
 
     cy.visit('/');
 
+    // OPEN LOGIN
     cy.findByRole('button', { name: /user menu/i }).click();
 
     cy.findByText(/login/i).click();
@@ -58,5 +59,34 @@ describe('Login', () => {
     cy.findByRole('button', { name: 'Continue' }).click();
 
     cy.findByText(/Invalid Credentials/i);
+  });
+
+  it('should focus the missing required input', () => {
+    cy.task('db:reset');
+
+    cy.visit('/');
+
+    // OPEN LOGIN
+    cy.findByRole('button', { name: /user menu/i }).click();
+
+    cy.findByText(/login/i).click();
+
+    cy.findByRole('heading', { name: 'Login' }).should('exist');
+
+    // MISSING EMAIL
+    cy.findByRole('button', { name: 'Continue' }).click();
+
+    cy.findByLabelText(/email/i).should('have.focus');
+    cy.findByLabelText(/email/i).clear();
+    cy.findByLabelText(/email/i).type('john@test.com');
+
+    // MISSING PASSWORD
+    cy.findByRole('button', { name: 'Continue' }).click();
+
+    cy.findByLabelText(/password/i).should('have.focus');
+    cy.findByLabelText(/password/i).type('123456');
+
+    // SUCCESSFUL LOGIN
+    cy.findByRole('button', { name: 'Continue' }).click();
   });
 });
