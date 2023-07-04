@@ -41,3 +41,22 @@ import '@testing-library/cypress/add-commands';
 Cypress.Commands.add('resetDB', () => {
   cy.task('db:reset');
 });
+
+Cypress.Commands.add('login', () => {
+  cy.visit('/');
+
+  // LOG IN WITH TEST USER
+  cy.findByRole('button', { name: /user menu/i }).click();
+
+  cy.findByText(/login/i).click();
+
+  cy.findByRole('heading', { name: 'Login' }).should('exist');
+
+  cy.findByLabelText(/email/i).clear();
+  cy.findByLabelText(/email/i).type('john@test.com');
+
+  cy.findByLabelText(/password/i).clear();
+  cy.findByLabelText(/password/i).type('123456');
+
+  cy.findByRole('button', { name: 'Continue' }).click();
+});
