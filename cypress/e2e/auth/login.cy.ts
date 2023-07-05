@@ -87,3 +87,5 @@ describe('Login', () => {
     cy.findByRole('button', { name: 'Continue' }).click();
   });
 });
+
+export {};

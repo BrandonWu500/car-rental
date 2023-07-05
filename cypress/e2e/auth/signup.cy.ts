@@ -89,3 +89,5 @@ describe('Signup', () => {
     cy.findByText(/Invalid email/i).should('exist');
   });
 });
+
+export {};
