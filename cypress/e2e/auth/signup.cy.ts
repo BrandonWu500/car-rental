@@ -1,9 +1,10 @@
 /// <reference types="Cypress" />
 
 describe('Signup', () => {
+  beforeEach(() => {
+    cy.resetDB();
+  });
   it('runs auth flow for user sign up, login, and logout', () => {
-    cy.task('db:reset');
-
     cy.visit('/');
 
     // SIGN UP
@@ -41,8 +42,6 @@ describe('Signup', () => {
   });
 
   it('should show an error message if email already taken', () => {
-    cy.task('db:reset');
-
     cy.visit('/');
 
     // SIGN UP WITH USER THAT DB WAS SEEDED WITH
@@ -67,8 +66,6 @@ describe('Signup', () => {
   });
 
   it('should show an error message if email is invalid', () => {
-    cy.task('db:reset');
-
     cy.visit('/');
 
     // SIGN UP WITH INVALID EMAIL
