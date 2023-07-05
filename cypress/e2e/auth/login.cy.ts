@@ -1,9 +1,10 @@
 /// <reference types="Cypress" />
 
 describe('Login', () => {
+  beforeEach(() => {
+    cy.resetDB();
+  });
   it('should log in the user with valid credentials', () => {
-    cy.task('db:reset');
-
     cy.visit('/');
 
     // LOG IN WITH TEST USER
@@ -27,8 +28,6 @@ describe('Login', () => {
   });
 
   it('should show an error message with invalid credentials', () => {
-    cy.task('db:reset');
-
     cy.visit('/');
 
     // OPEN LOGIN
@@ -62,8 +61,6 @@ describe('Login', () => {
   });
 
   it('should focus the missing required input', () => {
-    cy.task('db:reset');
-
     cy.visit('/');
 
     // OPEN LOGIN
@@ -90,3 +87,5 @@ describe('Login', () => {
     cy.findByRole('button', { name: 'Continue' }).click();
   });
 });
+
+export {};

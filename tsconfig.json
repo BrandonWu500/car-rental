@@ -24,12 +24,6 @@
       "@testing-library/jest-dom"
     ]
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "types.d.ts",
-    "cypress/e2e/home.cy.js"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "types.d.ts"],
   "exclude": ["node_modules"]
 }
