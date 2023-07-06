@@ -17,6 +17,17 @@ describe('Create Listing Modal', () => {
 
     cy.findByRole('heading', { name: 'Rent out your car!' }).should('exist');
   });
+
+  it('should open login modal when "rent out your car" is clicked and user is not logged in', () => {
+    cy.visit('/');
+
+    cy.findByText(/rent out your car/i).click();
+
+    cy.findByRole('heading', { name: 'Login' }).should('exist');
+    cy.findByRole('heading', { name: 'Rent out your car!' }).should(
+      'not.exist'
+    );
+  });
 });
 
 export {};
