@@ -28,6 +28,39 @@ describe('Create Listing Modal', () => {
       'not.exist'
     );
   });
+
+  it.only('should create a listing if the user correctly completes each step of the modal', () => {
+    cy.login();
+
+    // first fetch returns null, so need to wait for 2nd fetch
+    cy.wait('@getCurrentUser');
+    cy.wait('@getCurrentUser');
+
+    cy.findByText(/rent out your car/i).click();
+
+    cy.findByRole('heading', { name: 'Rent out your car!' }).should('exist');
+
+    cy.findByTestId('modal').within(() => {
+      cy.findByText(/electric/i).click();
+    });
+    cy.findByRole('button', { name: /next/i }).click();
+
+    cy.findByRole('combobox').type('MA');
+    cy.findByRole('button', { name: /next/i }).click();
+
+    cy.findByRole('combobox').type('Boston');
+    cy.findByRole('button', { name: /next/i }).click();
+
+    for (let i = 0; i < 4; i++) {
+      cy.findByRole('button', { name: /add/i }).click();
+    }
+
+    // test reduce button
+    cy.findByRole('button', { name: /reduce/i }).click();
+    cy.findByRole('button', { name: /add/i }).click();
+
+    cy.findByRole('button', { name: /next/i }).click();
+  });
 });
 
 export {};
