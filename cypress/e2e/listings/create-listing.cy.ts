@@ -64,7 +64,17 @@ describe('Create Listing Modal', () => {
 
     cy.findByRole('button', { name: /next/i }).click();
 
-    // IMAGE UPLOAD STEP
+    // SKIP IMAGE UPLOAD STEP
+    // b/c uses next-cloudinary widget
+    // which doesn't seem to work with cypress
+    cy.findByRole('button', { name: /next/i }).click();
+
+    // INFO STEP
+    cy.findByRole('textbox', { name: /make/i }).type('Tesla');
+    cy.findByRole('textbox', { name: /model/i }).type('Model Y');
+    cy.findByRole('textbox', { name: /trim/i }).type('Performance AWD');
+    cy.findByRole('textbox', { name: /other info/i }).type('Color: White');
+    cy.findByRole('button', { name: /next/i }).click();
   });
 });
 
