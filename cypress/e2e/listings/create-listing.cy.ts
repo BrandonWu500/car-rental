@@ -39,9 +39,12 @@ describe('Create Listing Modal', () => {
 
     cy.findByRole('heading', { name: 'Rent out your car!' }).should('exist');
 
+    // CATEGORY STEP
     cy.findByTestId('modal').within(() => {
       cy.findByText(/electric/i).click();
     });
+
+    // LOCATION STEPS
     cy.findByRole('button', { name: /next/i }).click();
 
     cy.findByRole('combobox').type('MA');
@@ -50,6 +53,7 @@ describe('Create Listing Modal', () => {
     cy.findByRole('combobox').type('Boston');
     cy.findByRole('button', { name: /next/i }).click();
 
+    // PASSENGER COUNT STEPS
     for (let i = 0; i < 4; i++) {
       cy.findByRole('button', { name: /add/i }).click();
     }
@@ -59,6 +63,8 @@ describe('Create Listing Modal', () => {
     cy.findByRole('button', { name: /add/i }).click();
 
     cy.findByRole('button', { name: /next/i }).click();
+
+    // IMAGE UPLOAD STEP
   });
 });
 
