@@ -29,7 +29,7 @@ describe('Create Listing Modal', () => {
     );
   });
 
-  it.only('should create a listing if the user correctly completes each step of the modal', () => {
+  it('should create a listing if the user correctly completes each step of the modal', () => {
     cy.login();
 
     // first fetch returns null, so need to wait for 2nd fetch
