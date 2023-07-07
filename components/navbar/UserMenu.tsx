@@ -73,7 +73,6 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
           <div className="flex flex-col">
             {currentUser ? (
               <>
-                <MenuItem label="Rent out your car" onClick={onCreateListing} />
                 <MenuItem
                   label="My trips"
                   onClick={() => router.push('/trips')}
