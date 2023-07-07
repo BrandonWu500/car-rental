@@ -2,10 +2,13 @@
 
 const waitFor = () => {
   cy.wait('@getCurrentUser').then((interception) => {
-    if (!interception.response?.body) {
-      waitFor();
+    if (interception.response?.body && interception.response?.body.id) {
+      return;
     }
-    return;
+
+    console.log(interception.response?.body);
+
+    waitFor();
   });
 };
 
