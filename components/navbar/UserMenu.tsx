@@ -70,7 +70,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
         w-[40vw] overflow-hidden rounded-xl bg-white text-sm
         shadow-md md:w-3/4"
         >
-          <div className="flex flex-col">
+          <div className="flex flex-col" data-testid="user-menu-links">
             {currentUser ? (
               <>
                 <MenuItem label="Rent out your car" onClick={onCreateListing} />
