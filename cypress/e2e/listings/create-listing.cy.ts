@@ -1,14 +1,5 @@
 /// <reference types="Cypress" />
 
-const waitFor = () => {
-  cy.wait('@getCurrentUser').then((interception) => {
-    if (!interception.response?.body) {
-      waitFor();
-    }
-    return;
-  });
-};
-
 describe('Create Listing Modal', () => {
   beforeEach(() => {
     cy.resetDB();
@@ -18,7 +9,9 @@ describe('Create Listing Modal', () => {
   it('should open when "rent out your car" is clicked', () => {
     cy.login();
 
-    waitFor();
+    // first fetch returns null, so need to wait for 2nd fetch
+    cy.wait('@getCurrentUser');
+    cy.wait('@getCurrentUser');
 
     cy.findByText(/rent out your car/i).click();
 
@@ -39,7 +32,9 @@ describe('Create Listing Modal', () => {
   it('should create a listing if the user correctly completes each step of the modal', () => {
     cy.login();
 
-    waitFor();
+    // first fetch returns null, so need to wait for 2nd fetch
+    cy.wait('@getCurrentUser');
+    cy.wait('@getCurrentUser');
 
     cy.findByRole('button', { name: /user menu/i }).click();
 
