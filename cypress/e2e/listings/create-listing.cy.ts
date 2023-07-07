@@ -36,7 +36,11 @@ describe('Create Listing Modal', () => {
     cy.wait('@getCurrentUser');
     cy.wait('@getCurrentUser');
 
-    cy.findByText(/rent out your car/i).click();
+    cy.findByRole('button', { name: /user menu/i }).click();
+
+    cy.findByTestId('user-menu-links').within(() => {
+      cy.findByText(/rent out your car/i).click();
+    });
 
     cy.findByRole('heading', { name: 'Rent out your car!' }).should('exist');
 
