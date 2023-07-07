@@ -65,6 +65,7 @@ const Modal = ({
       className="fixed inset-0 z-50
   flex items-center justify-center overflow-hidden
   overflow-y-auto bg-neutral-800/70 outline-none focus:outline-none"
+      data-testid="modal"
     >
       <div
         className="relative mx-auto my-6 h-full w-full
