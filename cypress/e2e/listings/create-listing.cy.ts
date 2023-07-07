@@ -75,6 +75,11 @@ describe('Create Listing Modal', () => {
     cy.findByRole('textbox', { name: /trim/i }).type('Performance AWD');
     cy.findByRole('textbox', { name: /other info/i }).type('Color: White');
     cy.findByRole('button', { name: /next/i }).click();
+
+    // PRICE STEP
+    cy.findByRole('textbox', { name: /price/i }).clear();
+    cy.findByRole('textbox', { name: /price/i }).type('150');
+    cy.findByRole('button', { name: /create/i }).click();
   });
 });
 
