@@ -69,6 +69,12 @@ describe('Create Listing Modal', () => {
     // SKIP IMAGE UPLOAD STEP
     // b/c uses next-cloudinary widget
     // which doesn't seem to work with cypress
+
+    // INSTEAD ADD IMAGE FILE TO REQUEST
+    cy.intercept('POST', '/api/listings', (req) => {
+      req.body['imageSrc'] =
+        'https://res.cloudinary.com/dqrdsleqt/image/upload/v1688224999/mtgbrxdghdf49d4vfyfo.jpg';
+    }).as('createListing');
     cy.findByRole('button', { name: /next/i }).click();
 
     // INFO STEP
