@@ -18,4 +18,5 @@ const createTestUser = async (name: string, password: string) => {
 export const resetDB = async () => {
   await deleteAll();
   await createTestUser('john', '123456');
+  await createTestUser('jane', '123456');
 };
