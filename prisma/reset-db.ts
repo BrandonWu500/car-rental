@@ -3,6 +3,8 @@ import { prisma } from './../libs/prismadb';
 
 const deleteAll = async () => {
   await prisma.user.deleteMany();
+  await prisma.listing.deleteMany();
+  await prisma.reservation.deleteMany();
 };
 
 const createTestUser = async (name: string, password: string) => {
