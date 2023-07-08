@@ -88,6 +88,14 @@ describe('Create Listing Modal', () => {
     cy.findByRole('textbox', { name: /price/i }).clear();
     cy.findByRole('textbox', { name: /price/i }).type('150');
     cy.findByRole('button', { name: /create/i }).click();
+
+    // CLICK ON NEW LISTING CARD
+    cy.findByText(/tesla model y/i).click();
+
+    // FIND TITLE ON LISTING PAGE
+    cy.findByRole('heading', {
+      name: /tesla model y - performance awd/i,
+    }).should('exist');
   });
 });
 
