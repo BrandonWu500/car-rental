@@ -40,9 +40,15 @@ const createTestListing = async (userId: string) => {
 };
 
 export const resetDB = async () => {
-  await deleteAll();
-  const user1 = await createTestUser('john', '123456');
-  await createTestUser('jane', '123456');
+  try {
+    await deleteAll();
 
-  await createTestListing(user1.id);
+    const user1 = await createTestUser('john', '123456');
+    await createTestUser('jane', '123456');
+
+    await createTestListing(user1.id);
+  } catch (error) {
+    console.error('Failed to seed DB');
+    console.error(error);
+  }
 };
