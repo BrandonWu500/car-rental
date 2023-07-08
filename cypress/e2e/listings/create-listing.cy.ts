@@ -39,17 +39,23 @@ describe('Create Listing Modal', () => {
 
     cy.findByRole('heading', { name: 'Rent out your car!' }).should('exist');
 
+    // CATEGORY STEP
     cy.findByTestId('modal').within(() => {
       cy.findByText(/electric/i).click();
     });
+
+    // LOCATION STEPS
     cy.findByRole('button', { name: /next/i }).click();
 
     cy.findByRole('combobox').type('MA');
+    cy.findByRole('combobox').type('{enter}');
     cy.findByRole('button', { name: /next/i }).click();
 
     cy.findByRole('combobox').type('Boston');
+    cy.findByRole('combobox').type('{enter}');
     cy.findByRole('button', { name: /next/i }).click();
 
+    // PASSENGER COUNT STEPS
     for (let i = 0; i < 4; i++) {
       cy.findByRole('button', { name: /add/i }).click();
     }
@@ -59,6 +65,37 @@ describe('Create Listing Modal', () => {
     cy.findByRole('button', { name: /add/i }).click();
 
     cy.findByRole('button', { name: /next/i }).click();
+
+    // SKIP IMAGE UPLOAD STEP
+    // b/c uses next-cloudinary widget
+    // which doesn't seem to work with cypress
+
+    // INSTEAD ADD IMAGE FILE TO REQUEST
+    cy.intercept('POST', '/api/listings', (req) => {
+      req.body['imageSrc'] =
+        'https://res.cloudinary.com/dqrdsleqt/image/upload/v1688224999/mtgbrxdghdf49d4vfyfo.jpg';
+    }).as('createListing');
+    cy.findByRole('button', { name: /next/i }).click();
+
+    // INFO STEP
+    cy.findByRole('textbox', { name: /make/i }).type('Tesla');
+    cy.findByRole('textbox', { name: /model/i }).type('Model Y');
+    cy.findByRole('textbox', { name: /trim/i }).type('Performance AWD');
+    cy.findByRole('textbox', { name: /other info/i }).type('Color: White');
+    cy.findByRole('button', { name: /next/i }).click();
+
+    // PRICE STEP
+    cy.findByRole('textbox', { name: /price/i }).clear();
+    cy.findByRole('textbox', { name: /price/i }).type('150');
+    cy.findByRole('button', { name: /create/i }).click();
+
+    // CLICK ON NEW LISTING CARD
+    cy.findByText(/tesla model y/i).click();
+
+    // FIND TITLE ON LISTING PAGE
+    cy.findByRole('heading', {
+      name: /tesla model y - performance awd/i,
+    }).should('exist');
   });
 });
 
