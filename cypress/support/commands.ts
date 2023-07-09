@@ -31,7 +31,8 @@ declare global {
     interface Chainable {
       resetDB(): Chainable<void>;
       seed(): Chainable<void>;
-      login(): Chainable<void>;
+      // eslint-disable-next-line no-unused-vars
+      login(email: string, password: string): Chainable<void>;
     }
   }
 }
@@ -46,7 +47,7 @@ Cypress.Commands.add('seed', () => {
   cy.task('seed');
 });
 
-Cypress.Commands.add('login', () => {
+Cypress.Commands.add('login', (email, password) => {
   cy.visit('/');
 
   // LOG IN WITH TEST USER
@@ -57,10 +58,10 @@ Cypress.Commands.add('login', () => {
   cy.findByRole('heading', { name: 'Login' }).should('exist');
 
   cy.findByLabelText(/email/i).clear();
-  cy.findByLabelText(/email/i).type('john@test.com');
+  cy.findByLabelText(/email/i).type(email);
 
   cy.findByLabelText(/password/i).clear();
-  cy.findByLabelText(/password/i).type('123456');
+  cy.findByLabelText(/password/i).type(password);
 
   cy.findByRole('button', { name: 'Continue' }).click();
 });

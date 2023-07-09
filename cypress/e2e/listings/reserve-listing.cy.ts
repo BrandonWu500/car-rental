@@ -25,7 +25,7 @@ describe('Reserve listing user flow', () => {
   });
 
   it('should create a same-day reservation if user clicks reserve button without selecting date range', () => {
-    cy.login();
+    cy.login('john@test.com', '123456');
 
     // CLICK ON LISTING CARD
     cy.findByText(/honda civic/i).click();
@@ -50,7 +50,7 @@ describe('Reserve listing user flow', () => {
   });
 
   it('should create a reservation if user selects a valid date range', () => {
-    cy.login();
+    cy.login('john@test.com', '123456');
 
     // CLICK ON LISTING CARD
     cy.findByText(/honda civic/i).click();
