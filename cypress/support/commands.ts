@@ -33,6 +33,7 @@ declare global {
       seed(): Chainable<void>;
       // eslint-disable-next-line no-unused-vars
       login(email: string, password: string): Chainable<void>;
+      logout(): Chainable<void>;
     }
   }
 }
@@ -64,4 +65,11 @@ Cypress.Commands.add('login', (email, password) => {
   cy.findByLabelText(/password/i).type(password);
 
   cy.findByRole('button', { name: 'Continue' }).click();
+});
+
+Cypress.Commands.add('logout', () => {
+  cy.findByRole('button', { name: /user menu/i }).click();
+  cy.findByTestId('user-menu-links').within(() => {
+    cy.findByText(/logout/i).click();
+  });
 });
