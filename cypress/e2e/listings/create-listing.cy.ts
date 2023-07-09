@@ -8,8 +8,6 @@ describe('Create Listing Modal', () => {
   it('should open when "rent out your car" is clicked', () => {
     cy.login('john@test.com', '123456');
 
-    cy.findByTestId('logged-in');
-
     cy.findByText(/rent out your car/i).click();
 
     cy.findByRole('heading', { name: 'Rent out your car!' }).should('exist');
@@ -28,8 +26,6 @@ describe('Create Listing Modal', () => {
 
   it('should create a listing if the user correctly completes each step of the modal', () => {
     cy.login('john@test.com', '123456');
-
-    cy.findByTestId('logged-in');
 
     cy.findByRole('button', { name: /user menu/i }).click();
 
