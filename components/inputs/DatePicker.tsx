@@ -47,6 +47,7 @@ const DatePicker = ({
         </div>
       )}
       <DateRange
+        ariaLabels={{ nextButton: 'next month', prevButton: 'previous month' }}
         rangeColors={['#262626']}
         ranges={[value]}
         date={new Date()}

@@ -30,6 +30,7 @@ declare global {
   namespace Cypress {
     interface Chainable {
       resetDB(): Chainable<void>;
+      seed(): Chainable<void>;
       login(): Chainable<void>;
     }
   }
@@ -39,6 +40,10 @@ import '@testing-library/cypress/add-commands';
 
 Cypress.Commands.add('resetDB', () => {
   cy.task('db:reset');
+});
+
+Cypress.Commands.add('seed', () => {
+  cy.task('seed');
 });
 
 Cypress.Commands.add('login', () => {
