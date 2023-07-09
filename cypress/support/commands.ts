@@ -74,4 +74,6 @@ Cypress.Commands.add('logout', () => {
   cy.findByTestId('user-menu-links').within(() => {
     cy.findByText(/logout/i).click();
   });
+
+  cy.findByTestId('logged-out');
 });

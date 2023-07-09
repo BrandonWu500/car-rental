@@ -47,8 +47,6 @@ describe('Car reservations', () => {
 
     cy.logout();
 
-    cy.findByTestId('logged-out');
-
     // NOW LOGIN AS USER 2 TO CONFIRM TRIP WAS CANCELLED ON THEIR END
 
     cy.login('jane@test.com', '123456');
