@@ -4,7 +4,7 @@ describe('Navigation', () => {
   });
 
   it('should navigate to the trips page', () => {
-    cy.login();
+    cy.login('john@test.com', '123456');
 
     cy.findByRole('button', { name: /user menu/i }).click();
 
@@ -17,7 +17,7 @@ describe('Navigation', () => {
   });
 
   it('should navigate to home page', () => {
-    cy.login();
+    cy.login('john@test.com', '123456');
 
     cy.findByRole('button', { name: /user menu/i }).click();
 
@@ -32,7 +32,7 @@ describe('Navigation', () => {
   });
 
   it('should navigate to the favorites page', () => {
-    cy.login();
+    cy.login('john@test.com', '123456');
 
     cy.findByRole('button', { name: /user menu/i }).click();
 
@@ -45,7 +45,7 @@ describe('Navigation', () => {
   });
 
   it('should navigate to the cars page', () => {
-    cy.login();
+    cy.login('john@test.com', '123456');
 
     cy.findByRole('button', { name: /user menu/i }).click();
 
