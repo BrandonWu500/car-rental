@@ -84,15 +84,12 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
                 <MenuItem label="Rent out your car" onClick={onCreateListing} />
                 <MenuItem
                   label="My trips"
-                  onClick={() => router.push('/trips')}
+                  onClick={() => onNavigate('/trips')}
                 />
-                <MenuItem
-                  label="My cars"
-                  onClick={() => router.push('/cars')}
-                />
+                <MenuItem label="My cars" onClick={() => onNavigate('/cars')} />
                 <MenuItem
                   label="My favorites"
-                  onClick={() => router.push('/favorites')}
+                  onClick={() => onNavigate('/favorites')}
                 />
                 <MenuItem label="Logout" onClick={onLogout} />
               </>
