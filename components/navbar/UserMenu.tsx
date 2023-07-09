@@ -40,6 +40,14 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
     createListingModal.onOpen();
   }, [loginModal, createListingModal, currentUser]);
 
+  const onNavigate = useCallback(
+    (url: string) => {
+      setIsOpen(false);
+      router.push(url);
+    },
+    [router]
+  );
+
   return (
     <div className="relative">
       <div className="flex items-center gap-3">
