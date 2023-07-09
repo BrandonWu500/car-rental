@@ -11,7 +11,7 @@ const Navbar = () => {
   return (
     <div
       className="fixed z-10 w-full bg-white shadow-sm"
-      data-testid={currentUser ? 'current-user' : ''}
+      data-testid={currentUser ? 'logged-in' : 'logged-out'}
     >
       <div className="border-b-[1px] py-4">
         <Container>
