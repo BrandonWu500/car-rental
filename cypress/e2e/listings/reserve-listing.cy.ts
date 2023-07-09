@@ -3,6 +3,7 @@
 describe('Reserve listing user flow', () => {
   beforeEach(() => {
     cy.resetDB();
+    cy.seed();
   });
 
   it('should open login modal when "reserve" button is clicked and user is not logged in', () => {
