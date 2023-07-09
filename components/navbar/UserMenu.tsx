@@ -35,8 +35,10 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
 
   const onCreateListing = useCallback(() => {
     if (!currentUser) {
+      setIsOpen(false);
       return loginModal.onOpen();
     }
+    setIsOpen(false);
     createListingModal.onOpen();
   }, [loginModal, createListingModal, currentUser]);
 
