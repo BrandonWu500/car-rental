@@ -57,7 +57,9 @@ export const seed = async () => {
     const user2 = await createTestUser('jane', '123456');
 
     const listing1 = await createTestListing(user1.id, 0);
-    await createTestListing(user2.id, 1);
+    const listing2 = await createTestListing(user2.id, 1);
+
+    await favoriteTestListing(user1, listing2);
 
     await createTestReservation(user2.id, listing1);
   } catch (error) {
