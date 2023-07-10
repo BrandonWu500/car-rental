@@ -1,4 +1,4 @@
-import { Listing } from '@prisma/client';
+import { Listing, User } from '@prisma/client';
 import { addDays } from 'date-fns';
 
 import { prisma } from './../libs/prismadb';
@@ -13,6 +13,21 @@ const createTestListing = async (userId: string, idx: number) => {
 
   return await prisma.listing.create({
     data: listingInputData,
+  });
+};
+
+const favoriteTestListing = async (user: User, listing: Listing) => {
+  const favoriteIds = [...(user.favoriteIds || [])];
+
+  favoriteIds.push(listing.id);
+
+  await prisma.user.update({
+    where: {
+      id: user.id,
+    },
+    data: {
+      favoriteIds,
+    },
   });
 };
 
