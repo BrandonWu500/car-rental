@@ -21,15 +21,15 @@ describe('Search filters', () => {
     // LOCATION FILTERS
     cy.findByRole('combobox').type('MA');
     cy.findByRole('combobox').type('{enter}');
-    cy.findByRole('button', { name: /next/i }).click();
+    cy.findByRole('button', { name: /^next$/i }).click();
 
     cy.findByRole('combobox').type('Boston');
     cy.findByRole('combobox').type('{enter}');
-    cy.findByRole('button', { name: /next/i }).click();
+    cy.findByRole('button', { name: /^next$/i }).click();
 
     // DATE FILTER
     // DEFAULT SELECT IS SAME DAY
-    cy.findByRole('button', { name: /next/i }).click();
+    cy.findByRole('button', { name: /^next$/i }).click();
 
     // PASSENGER FILTER
     for (let i = 0; i < 4; i++) {
@@ -59,15 +59,15 @@ describe('Search filters', () => {
     // LOCATION FILTERS
     cy.findByRole('combobox').type('MA');
     cy.findByRole('combobox').type('{enter}');
-    cy.findByRole('button', { name: /next/i }).click();
+    cy.findByRole('button', { name: /^next$/i }).click();
 
     cy.findByRole('combobox').type('Boston');
     cy.findByRole('combobox').type('{enter}');
-    cy.findByRole('button', { name: /next/i }).click();
+    cy.findByRole('button', { name: /^next$/i }).click();
 
     // DATE FILTER
     // DEFAULT SELECT IS SAME DAY
-    cy.findByRole('button', { name: /next/i }).click();
+    cy.findByRole('button', { name: /^next$/i }).click();
 
     // PASSENGER FILTER
     cy.findByTestId('modal').within(() => {
@@ -86,16 +86,16 @@ describe('Search filters', () => {
     cy.findByRole('combobox').clear();
     cy.findByRole('combobox').type('MI');
     cy.findByRole('combobox').type('{enter}');
-    cy.findByRole('button', { name: /next/i }).click();
+    cy.findByRole('button', { name: /^next$/i }).click();
 
     cy.findByRole('combobox').clear();
     cy.findByRole('combobox').type('Ann Arbor');
     cy.findByRole('combobox').type('{enter}');
-    cy.findByRole('button', { name: /next/i }).click();
+    cy.findByRole('button', { name: /^next$/i }).click();
 
     // DATE FILTER
     // DEFAULT SELECT IS SAME DAY
-    cy.findByRole('button', { name: /next/i }).click();
+    cy.findByRole('button', { name: /^next$/i }).click();
 
     // PASSENGER FILTER
     cy.findByTestId('modal').within(() => {
