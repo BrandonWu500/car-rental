@@ -163,6 +163,59 @@ describe('Search filters', () => {
     cy.findByRole('heading', { name: /civic/i }).should('exist');
     cy.findByRole('heading', { name: /outback/i }).should('exist');
   });
+
+  it('should correctly update listings displayed based on the passenger count selected', () => {
+    cy.visit('/');
+
+    // EXPECT BOTH LISTINGS WHEN NO FILTERS SELECTED
+    cy.findByRole('heading', { name: /civic/i }).should('exist');
+    cy.findByRole('heading', { name: /outback/i }).should('exist');
+
+    cy.findByRole('button', { name: /search/i }).click();
+    cy.findByRole('heading', { name: /filters/i }).should('exist');
+
+    // LOCATION FILTERS
+    cy.findByRole('button', { name: /^next$/i }).click();
+    cy.findByRole('button', { name: /^next$/i }).click();
+
+    // DATE FILTER
+    // DEFAULT SELECT IS SAME DAY
+    cy.findByRole('button', { name: /^next$/i }).click();
+
+    // PASSENGER FILTER
+    for (let i = 0; i < 5; i++) {
+      cy.findByRole('button', { name: /add/i }).click();
+    }
+    cy.findByTestId('modal').within(() => {
+      cy.findByRole('button', { name: /search/i }).click();
+    });
+
+    // NO CARS LISTED WITH A PASSENGER COUNT GREATER THAN 5
+    cy.findByRole('heading', { name: /civic/i }).should('not.exist');
+    cy.findByRole('heading', { name: /outback/i }).should('not.exist');
+
+    // TRY DIFFERENT PASSENGER COUNT
+    cy.findByRole('button', { name: /search/i }).click();
+    cy.findByRole('heading', { name: /filters/i }).should('exist');
+
+    // LOCATION FILTERS
+    cy.findByRole('button', { name: /^next$/i }).click();
+    cy.findByRole('button', { name: /^next$/i }).click();
+
+    // DATE FILTER
+    // DEFAULT SELECT IS SAME DAY
+    cy.findByRole('button', { name: /^next$/i }).click();
+
+    // PASSENGER FILTER
+    // passenger count currently at 6
+    cy.findByRole('button', { name: /reduce/i }).click();
+    cy.findByTestId('modal').within(() => {
+      cy.findByRole('button', { name: /search/i }).click();
+    });
+
+    cy.findByRole('heading', { name: /civic/i }).should('exist');
+    cy.findByRole('heading', { name: /outback/i }).should('exist');
+  });
 });
 
 export {};
