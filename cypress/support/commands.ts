@@ -65,6 +65,8 @@ Cypress.Commands.add('login', (email, password) => {
   cy.findByLabelText(/password/i).type(password);
 
   cy.findByRole('button', { name: 'Continue' }).click();
+
+  cy.findByTestId('logged-in');
 });
 
 Cypress.Commands.add('logout', () => {
@@ -72,4 +74,6 @@ Cypress.Commands.add('logout', () => {
   cy.findByTestId('user-menu-links').within(() => {
     cy.findByText(/logout/i).click();
   });
+
+  cy.findByTestId('logged-out');
 });

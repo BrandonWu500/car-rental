@@ -1,26 +1,33 @@
-import { Listing } from '@prisma/client';
+import { Listing, User } from '@prisma/client';
 import { addDays } from 'date-fns';
+
 import { prisma } from './../libs/prismadb';
+import { LISTING_INPUT_DATA } from './../mocks/index';
 import { createTestUser } from './reset-db';
 
-const createTestListing = async (userId: string) => {
+const createTestListing = async (userId: string, idx: number) => {
   const listingInputData = {
-    category: 'Sports Cars',
-    imageSrc:
-      'https://res.cloudinary.com/dqrdsleqt/image/upload/v1687955203/zl55ycdkze7q2tvcxg9r.jpg',
-    info: "It's really fun to drive!",
-    state: 'CA',
-    city: 'Los Angeles',
-    make: 'Honda',
-    model: 'Civic',
-    passengerCount: 5,
-    price: 250,
-    trim: 'Type R',
+    ...LISTING_INPUT_DATA[idx],
     userId,
   };
 
   return await prisma.listing.create({
     data: listingInputData,
+  });
+};
+
+const favoriteTestListing = async (user: User, listing: Listing) => {
+  const favoriteIds = [...(user.favoriteIds || [])];
+
+  favoriteIds.push(listing.id);
+
+  await prisma.user.update({
+    where: {
+      id: user.id,
+    },
+    data: {
+      favoriteIds,
+    },
   });
 };
 
@@ -49,7 +56,10 @@ export const seed = async () => {
     const user1 = await createTestUser('joe', '123456');
     const user2 = await createTestUser('jane', '123456');
 
-    const listing1 = await createTestListing(user1.id);
+    const listing1 = await createTestListing(user1.id, 0);
+    const listing2 = await createTestListing(user2.id, 1);
+
+    await favoriteTestListing(user1, listing2);
 
     await createTestReservation(user2.id, listing1);
   } catch (error) {

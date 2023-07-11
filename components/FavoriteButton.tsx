@@ -14,6 +14,7 @@ const FavoriteButton = ({ listingId }: FavoriteButtonProps) => {
     <button
       onClick={toggleFavorite}
       className="relative transition hover:opacity-80"
+      aria-label={hasFavorited ? 'unfavorite' : 'favorite'}
     >
       <AiOutlineHeart
         size={28}
