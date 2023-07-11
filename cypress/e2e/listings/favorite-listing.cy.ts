@@ -39,6 +39,20 @@ describe('Favorite listing user flows', () => {
         }).should('exist');
       });
   });
+
+  it('should open login modal if favorite button clicked while not logged in', () => {
+    cy.visit('/');
+
+    cy.findByRole('heading', { name: /civic/i })
+      .parent()
+      .within(() => {
+        cy.findByRole('button', {
+          name: /^favorite$/i,
+        }).click();
+      });
+
+    cy.findByRole('heading', { name: 'Login' }).should('exist');
+  });
 });
 
 export {};
