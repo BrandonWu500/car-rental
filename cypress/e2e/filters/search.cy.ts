@@ -105,6 +105,64 @@ describe('Search filters', () => {
     cy.findByRole('heading', { name: /civic/i }).should('not.exist');
     cy.findByRole('heading', { name: /outback/i }).should('exist');
   });
+
+  it('should correctly update listings displayed based on the date filters selected', () => {
+    cy.visit('/');
+
+    // EXPECT BOTH LISTINGS WHEN NO FILTERS SELECTED
+    cy.findByRole('heading', { name: /civic/i }).should('exist');
+    cy.findByRole('heading', { name: /outback/i }).should('exist');
+
+    cy.findByRole('button', { name: /search/i }).click();
+    cy.findByRole('heading', { name: /filters/i }).should('exist');
+
+    // LOCATION FILTERS
+    cy.findByRole('button', { name: /^next$/i }).click();
+    cy.findByRole('button', { name: /^next$/i }).click();
+
+    // DATE FILTER
+    // DEFAULT SELECT IS SAME DAY
+    cy.findByRole('button', { name: /^next$/i }).click();
+
+    // PASSENGER FILTER
+    cy.findByTestId('modal').within(() => {
+      cy.findByRole('button', { name: /search/i }).click();
+    });
+
+    // JANE HAS ALREADY RESERVED CIVIC ON SAME DAY
+    cy.findByRole('heading', { name: /civic/i }).should('not.exist');
+    cy.findByRole('heading', { name: /outback/i }).should('exist');
+
+    // TRY DIFFERENT DATE
+    cy.findByRole('button', { name: /search/i }).click();
+    cy.findByRole('heading', { name: /filters/i }).should('exist');
+
+    // LOCATION FILTERS
+    cy.findByRole('button', { name: /^next$/i }).click();
+    cy.findByRole('button', { name: /^next$/i }).click();
+
+    // DATE FILTER
+
+    // SELECT DATE RANGE
+
+    // first press next month button to ensure dates aren't disabled
+    cy.findByRole('button', {
+      name: /next month/i,
+    }).click();
+
+    // choose start and end date
+    cy.findByText('23').click();
+    cy.findByText('27').click();
+    cy.findByRole('button', { name: /^next$/i }).click();
+
+    // PASSENGER FILTER
+    cy.findByTestId('modal').within(() => {
+      cy.findByRole('button', { name: /search/i }).click();
+    });
+
+    cy.findByRole('heading', { name: /civic/i }).should('exist');
+    cy.findByRole('heading', { name: /outback/i }).should('exist');
+  });
 });
 
 export {};
