@@ -45,6 +45,66 @@ describe('Search filters', () => {
       cy.findByText('5 passengers').should('exist');
     });
   });
+
+  it('should correctly update listings displayed based on the location filters selected', () => {
+    cy.visit('/');
+
+    // EXPECT BOTH LISTINGS WHEN NO FILTERS SELECTED
+    cy.findByRole('heading', { name: /civic/i }).should('exist');
+    cy.findByRole('heading', { name: /outback/i }).should('exist');
+
+    cy.findByRole('button', { name: /search/i }).click();
+    cy.findByRole('heading', { name: /filters/i }).should('exist');
+
+    // LOCATION FILTERS
+    cy.findByRole('combobox').type('MA');
+    cy.findByRole('combobox').type('{enter}');
+    cy.findByRole('button', { name: /next/i }).click();
+
+    cy.findByRole('combobox').type('Boston');
+    cy.findByRole('combobox').type('{enter}');
+    cy.findByRole('button', { name: /next/i }).click();
+
+    // DATE FILTER
+    // DEFAULT SELECT IS SAME DAY
+    cy.findByRole('button', { name: /next/i }).click();
+
+    // PASSENGER FILTER
+    cy.findByTestId('modal').within(() => {
+      cy.findByRole('button', { name: /search/i }).click();
+    });
+
+    // EXPECT NO LISTINGS SINCE NO CAR LISTINGS IN BOSTON
+    cy.findByRole('heading', { name: /civic/i }).should('not.exist');
+    cy.findByRole('heading', { name: /outback/i }).should('not.exist');
+
+    // TRY DIFFERENT LOCATION
+    cy.findByRole('button', { name: /search/i }).click();
+    cy.findByRole('heading', { name: /filters/i }).should('exist');
+
+    // LOCATION FILTERS
+    cy.findByRole('combobox').clear();
+    cy.findByRole('combobox').type('MI');
+    cy.findByRole('combobox').type('{enter}');
+    cy.findByRole('button', { name: /next/i }).click();
+
+    cy.findByRole('combobox').clear();
+    cy.findByRole('combobox').type('Ann Arbor');
+    cy.findByRole('combobox').type('{enter}');
+    cy.findByRole('button', { name: /next/i }).click();
+
+    // DATE FILTER
+    // DEFAULT SELECT IS SAME DAY
+    cy.findByRole('button', { name: /next/i }).click();
+
+    // PASSENGER FILTER
+    cy.findByTestId('modal').within(() => {
+      cy.findByRole('button', { name: /search/i }).click();
+    });
+
+    cy.findByRole('heading', { name: /civic/i }).should('not.exist');
+    cy.findByRole('heading', { name: /outback/i }).should('exist');
+  });
 });
 
 export {};
