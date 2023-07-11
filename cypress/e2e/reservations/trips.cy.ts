@@ -31,6 +31,22 @@ describe('Trips', () => {
       'not.exist'
     );
   });
+
+  it("should cancel the user's trip if cancel reservation is clicked", () => {
+    cy.login('jane@test.com', '123456');
+
+    cy.findByRole('button', { name: /user menu/i }).click();
+
+    cy.findByText(/my trips/i).click();
+
+    cy.url().should('include', '/trips');
+
+    cy.findByRole('heading', { name: /civic/i }).should('exist');
+    cy.findByRole('button', { name: /cancel reservation/i }).click();
+
+    cy.findByRole('heading', { name: /civic/i }).should('not.exist');
+    cy.findByRole('heading', { name: /no trips found/i }).should('exist');
+  });
 });
 
 export {};
