@@ -53,6 +53,60 @@ describe('Favorite listing user flows', () => {
 
     cy.findByRole('heading', { name: 'Login' }).should('exist');
   });
+
+  it('should update the favorites page accordingly', () => {
+    cy.login('joe@test.com', '123456');
+
+    // VISIT FAVORITES PAGE
+    cy.findByRole('button', { name: /user menu/i }).click();
+
+    cy.findByText(/my favorites/i).click();
+
+    cy.url().should('include', '/favorites');
+
+    cy.findByRole('heading', { name: /civic/i }).should('not.exist');
+    cy.findByRole('heading', { name: /outback/i }).should('exist');
+
+    // GO BACK TO HOME PAGE
+    cy.findByRole('link', { name: /car rental/i }).click();
+    cy.url().should('not.include', '/favorites');
+
+    // FAVORITE CIVIC
+    cy.findByRole('heading', { name: /civic/i })
+      .parent()
+      .within(() => {
+        cy.findByRole('button', {
+          name: /^favorite$/i,
+        }).click();
+
+        cy.findByRole('button', {
+          name: /unfavorite/i,
+        }).should('exist');
+      });
+
+    // UNFAVORITE OUTBACK
+    cy.findByRole('heading', { name: /outback/i })
+      .parent()
+      .within(() => {
+        cy.findByRole('button', {
+          name: /unfavorite/i,
+        }).click();
+
+        cy.findByRole('button', {
+          name: /^favorite$/i,
+        }).should('exist');
+      });
+
+    // GO BACK TO FAVORITES PAGE
+    cy.findByRole('button', { name: /user menu/i }).click();
+
+    cy.findByText(/my favorites/i).click();
+
+    cy.url().should('include', '/favorites');
+
+    cy.findByRole('heading', { name: /civic/i }).should('exist');
+    cy.findByRole('heading', { name: /outback/i }).should('not.exist');
+  });
 });
 
 export {};
