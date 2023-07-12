@@ -21,6 +21,7 @@ jobs:
       - name: Create env file
         run: |
           echo "${{ secrets.ENV_FILE }}" > .env
+          echo "\nDATABASE_URL=${{ secrets.DB_BASE_URL }}-${{ github.run_id }}" >> .env
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
@@ -29,7 +30,6 @@ jobs:
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 120
           browser: chrome
-          env: DATABASE_URL="${{ secrets.DB_BASE_URL }}-${{ github.run_id }}"
       - uses: actions/upload-artifact@v3
         if: failure()
         with:
