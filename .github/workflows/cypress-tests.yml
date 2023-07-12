@@ -11,27 +11,33 @@ jobs:
       name: testing
     timeout-minutes: 60
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: '16.x'
-      - name: Create env file
-        run: |
-          echo "${{ secrets.ENV_FILE }}" > .env
-          echo "\nDATABASE_URL=${{ secrets.DB_BASE_URL }}-${{ github.run_id }}" >> .env
 
       - name: Install dependencies
+        env:
+          DATABASE_URL: ${{ secrets.DB_BASE_URL }}-${{ github.run_id }}
         run: npm ci
 
       - name: Cypress run
         uses: cypress-io/github-action@v5
+        env:
+          DATABASE_URL: ${{ secrets.DB_BASE_URL }}-${{ github.run_id }}
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: ${{ secrets.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME }}
+          NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET: ${{ secrets.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET }}
         with:
           build: npm run build
           start: npm start
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 120
           browser: chrome
+
       - uses: actions/upload-artifact@v3
         if: failure()
         with:
