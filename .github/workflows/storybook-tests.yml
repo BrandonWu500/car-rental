@@ -7,6 +7,8 @@ on:
   workflow_dispatch:
 jobs:
   storybook_tests:
+    environment:
+      name: testing
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
@@ -15,6 +17,8 @@ jobs:
         with:
           node-version: '16.x'
       - name: Install dependencies
+        env:
+          DATABASE_URL: ${{ secrets.DB_BASE_URL }}-${{ github.run_id }}
         run: npm ci
       - name: Install Playwright
         run: npx playwright install --with-deps
