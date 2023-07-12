@@ -140,6 +140,10 @@ const SearchModal = () => {
           subtitle="Make sure everyone is free!"
         />
         <DateRange
+          ariaLabels={{
+            nextButton: 'next month',
+            prevButton: 'previous month',
+          }}
           rangeColors={['#262626']}
           ranges={[dateRange]}
           date={new Date()}
