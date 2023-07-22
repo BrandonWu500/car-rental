@@ -12,6 +12,10 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     <div className={font.className}>
       <Head>
         <title>Car Rentals - Car Rental</title>
+        <meta
+          name="description"
+          content="Rent cars listed by other users or list your own cars for other users to rent"
+        />
       </Head>
       <Layout>
         <Component {...pageProps} />
