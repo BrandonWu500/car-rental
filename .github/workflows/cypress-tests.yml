@@ -40,7 +40,9 @@ jobs:
         run: docker-compose up -d
 
       - name: Setup test db
-        run: npm run test:db:reset
+        env:
+          DATABASE_URL: mongodb://admin:password@localhost:27017/local-tests?authSource=admin
+        run: npm run test:db:init:ci
 
       - name: Cypress run
         uses: cypress-io/github-action@v5
