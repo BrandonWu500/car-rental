@@ -1,5 +1,5 @@
-import ModalsProvider from '@/providers/ModalsProvider';
-import ToasterProvider from '@/providers/ToasterProvider';
+import dynamic from 'next/dynamic';
+import { useMemo } from 'react';
 import Navbar from '../navbar/Navbar';
 
 interface LayoutProps {
@@ -7,6 +7,20 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
+  const ModalsProvider = useMemo(
+    () =>
+      dynamic(() => import('@/providers/ModalsProvider'), {
+        ssr: false,
+      }),
+    []
+  );
+  const ToasterProvider = useMemo(
+    () =>
+      dynamic(() => import('@/providers/ToasterProvider'), {
+        ssr: false,
+      }),
+    []
+  );
   return (
     <>
       <ModalsProvider />
