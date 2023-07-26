@@ -9,6 +9,7 @@
     "lint": "next lint",
     "prisma:seed": "env-cmd -f .env.test npx prisma db seed",
     "test:db:reset": "env-cmd -f .env.test npx prisma db push --force-reset",
+    "test:db:init:ci": "npx prisma db push --force-reset",
     "test-storybook": "test-storybook --watch",
     "test-storybook:ci": "test-storybook",
     "prettier": "prettier --write .",
