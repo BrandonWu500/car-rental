@@ -31,8 +31,6 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install dependencies
-        env:
-          DATABASE_URL: ${{ secrets.DB_BASE_URL }}-${{ github.run_id }}
         run: npm ci
 
       - name: Cypress run
