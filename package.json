@@ -17,8 +17,7 @@
     "build-storybook": "storybook build",
     "cypress:open": "env-cmd -f .env.test cypress open",
     "cypress:start": "npm run build:test && start-server-and-test 'npm run start:test' 3000 'npm run cypress:open'",
-    "cypress:run": "npm run build:test && start-server-and-test 'npm run start:test' 3000 'env-cmd -f .env.test cypress run'",
-    "postinstall": "npx prisma db push --force-reset"
+    "cypress:run": "npm run build:test && start-server-and-test 'npm run start:test' 3000 'env-cmd -f .env.test cypress run'"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
