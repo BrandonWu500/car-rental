@@ -7,7 +7,7 @@ describe('Search filters', () => {
   });
 
   it('should correctly update search filters display based on the search filters selected', () => {
-    cy.visit('/');
+    cy.login('john@test.com', '123456');
 
     cy.findByTestId('search-filters').within(() => {
       cy.findByText('Anywhere in US').should('exist');
@@ -47,7 +47,7 @@ describe('Search filters', () => {
   });
 
   it('should correctly update listings displayed based on the location filters selected', () => {
-    cy.visit('/');
+    cy.login('john@test.com', '123456');
 
     // EXPECT BOTH LISTINGS WHEN NO FILTERS SELECTED
     cy.findByRole('heading', { name: /civic/i }).should('exist');
@@ -174,7 +174,7 @@ describe('Search filters', () => {
   });
 
   it('should correctly update listings displayed based on the passenger count selected', () => {
-    cy.visit('/');
+    cy.login('john@test.com', '123456');
 
     // EXPECT BOTH LISTINGS WHEN NO FILTERS SELECTED
     cy.findByRole('heading', { name: /civic/i }).should('exist');
