@@ -28,7 +28,14 @@ const ListingHead = ({
     <>
       <Heading title={title} subtitle={subtitle} />
       <div className="relative mt-4 h-[60vh] w-full overflow-hidden rounded-xl">
-        <Image src={imageSrc} fill className="object-cover" alt="Car" />
+        <Image
+          src={imageSrc}
+          fill
+          className="object-cover"
+          alt="Car"
+          priority
+          sizes="100vw"
+        />
         <div className="absolute right-5 top-5">
           <FavoriteButton listingId={id} />
         </div>
