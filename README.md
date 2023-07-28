@@ -4,7 +4,7 @@
 
 - [Description](#description)
 - [Technologies](#technologies)
-- [How to Use](#how-to-use)
+- [Getting Started](#getting-started)
 - [References](#references)
 - [Author Info](#author-info)
 
@@ -42,7 +42,7 @@
 
 ---
 
-## How to Use
+## Getting Started
 
 #### Installation
 
