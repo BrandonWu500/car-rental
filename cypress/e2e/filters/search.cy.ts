@@ -107,7 +107,7 @@ describe('Search filters', () => {
   });
 
   it('should correctly update listings displayed based on the date filters selected', () => {
-    cy.visit('/');
+    cy.login('john@test.com', '123456');
 
     // EXPECT BOTH LISTINGS WHEN NO FILTERS SELECTED
     cy.findByRole('heading', { name: /civic/i }).should('exist');
@@ -117,7 +117,16 @@ describe('Search filters', () => {
     cy.findByRole('heading', { name: /filters/i }).should('exist');
 
     // LOCATION FILTERS
+    cy.findByRole('combobox').clear();
+    cy.findByRole('combobox').type('ca');
+    cy.findByRole('combobox').type('{enter}');
     cy.findByRole('button', { name: /^next$/i }).click();
+
+    cy.findByRole('combobox').clear();
+    cy.findByRole('combobox').type('los angeles');
+    cy.findByRole('combobox').type('{downArrow}');
+    cy.findByRole('combobox').type('{downArrow}');
+    cy.findByRole('combobox').type('{enter}');
     cy.findByRole('button', { name: /^next$/i }).click();
 
     // DATE FILTER
@@ -131,7 +140,7 @@ describe('Search filters', () => {
 
     // JANE HAS ALREADY RESERVED CIVIC ON SAME DAY
     cy.findByRole('heading', { name: /civic/i }).should('not.exist');
-    cy.findByRole('heading', { name: /outback/i }).should('exist');
+    cy.findByRole('heading', { name: /outback/i }).should('not.exist');
 
     // TRY DIFFERENT DATE
     cy.findByRole('button', { name: /search/i }).click();
@@ -161,7 +170,7 @@ describe('Search filters', () => {
     });
 
     cy.findByRole('heading', { name: /civic/i }).should('exist');
-    cy.findByRole('heading', { name: /outback/i }).should('exist');
+    cy.findByRole('heading', { name: /outback/i }).should('not.exist');
   });
 
   it('should correctly update listings displayed based on the passenger count selected', () => {
