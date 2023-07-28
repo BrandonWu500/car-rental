@@ -84,6 +84,8 @@ const ListingCard = ({
             className="object-cover transition group-hover:scale-110"
             src={listing.imageSrc}
             alt="Listing"
+            sizes="400px"
+            priority
           />
           <div className="absolute right-3 top-3">
             <FavoriteButton listingId={listing.id} />
