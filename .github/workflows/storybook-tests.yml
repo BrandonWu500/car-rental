@@ -30,10 +30,8 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install dependencies
-        if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm ci
       - name: Install Playwright
-        if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npx playwright install --with-deps
       - name: Build Storybook
         run: npm run build-storybook --quiet
