@@ -48,9 +48,10 @@
 
 After cloning the repository, run:
 
-1. `npm ci`
-2. Setup a `.env` file in the root of the project by following the template provided in `.env.example`
-3. `npm run dev`
+1. `nvm use` to use the right node version
+2. `npm ci` to install dependencies with the right version
+3. Setup a `.env` file in the root of the project by following the template provided in `.env.template`
+4. `npm run dev` to run the project
 
 Once the project is running, you can view it in the browser with the url http://localhost:3000
 
