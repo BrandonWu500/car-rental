@@ -33,10 +33,21 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Setup docker compose
+        uses: ./.github/actions/docker-compose
+
+      - name: Start docker container
+        run: docker-compose up -d
+
+      - name: Setup test db
+        env:
+          DATABASE_URL: mongodb://admin:password@localhost:27017/local-tests?authSource=admin
+        run: npm run test:db:init:ci
+
       - name: Cypress run
         uses: cypress-io/github-action@v5
         env:
-          DATABASE_URL: ${{ secrets.DB_BASE_URL }}-${{ github.run_id }}
+          DATABASE_URL: mongodb://admin:password@localhost:27017/local-tests?authSource=admin
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: ${{ secrets.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME }}

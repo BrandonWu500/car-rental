@@ -1,0 +1,18 @@
+version: '3.7'
+services:
+  db:
+    build: './mongodb-rs'
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: local-tests
+      MONGO_REPLICA_HOST: localhost
+      MONGO_REPLICA_PORT: 27017
+    ports:
+      - 27017:27017
+    volumes:
+      - db:/var/lib/mongodb/data
+volumes:
+  db:
+    driver: local
