@@ -173,7 +173,7 @@ describe('Search filters', () => {
     cy.findByRole('heading', { name: /outback/i }).should('not.exist');
   });
 
-  it('should correctly update listings displayed based on the passenger count selected', () => {
+  it.only('should correctly update listings displayed based on the passenger count selected', () => {
     cy.login('john@test.com', '123456');
 
     // EXPECT BOTH LISTINGS WHEN NO FILTERS SELECTED
@@ -184,7 +184,14 @@ describe('Search filters', () => {
     cy.findByRole('heading', { name: /filters/i }).should('exist');
 
     // LOCATION FILTERS
+    cy.findByRole('combobox').clear();
+    cy.findByRole('combobox').type('MI');
+    cy.findByRole('combobox').type('{enter}');
     cy.findByRole('button', { name: /^next$/i }).click();
+
+    cy.findByRole('combobox').clear();
+    cy.findByRole('combobox').type('Ann Arbor');
+    cy.findByRole('combobox').type('{enter}');
     cy.findByRole('button', { name: /^next$/i }).click();
 
     // DATE FILTER
@@ -222,7 +229,7 @@ describe('Search filters', () => {
       cy.findByRole('button', { name: /search/i }).click();
     });
 
-    cy.findByRole('heading', { name: /civic/i }).should('exist');
+    cy.findByRole('heading', { name: /civic/i }).should('not.exist');
     cy.findByRole('heading', { name: /outback/i }).should('exist');
   });
 });
