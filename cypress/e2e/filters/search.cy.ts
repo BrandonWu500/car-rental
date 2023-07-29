@@ -173,7 +173,7 @@ describe('Search filters', () => {
     cy.findByRole('heading', { name: /outback/i }).should('not.exist');
   });
 
-  it.only('should correctly update listings displayed based on the passenger count selected', () => {
+  it('should correctly update listings displayed based on the passenger count selected', () => {
     cy.login('john@test.com', '123456');
 
     // EXPECT BOTH LISTINGS WHEN NO FILTERS SELECTED
