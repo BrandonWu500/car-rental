@@ -7,9 +7,6 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    const currentUser = await serverAuth(req, res);
-    if (!currentUser) return res.status(401).json({ message: 'Unauthorized' });
-
     if (req.method === 'GET') {
       const { listingId } = req.query;
 
@@ -32,6 +29,10 @@ export default async function handler(
     }
 
     if (req.method === 'DELETE') {
+      const currentUser = await serverAuth(req, res);
+      if (!currentUser)
+        return res.status(401).json({ message: 'Unauthorized' });
+
       const { listingId } = req.query;
 
       if (!listingId || typeof listingId !== 'string') {
