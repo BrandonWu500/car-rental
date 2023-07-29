@@ -1,9 +1,11 @@
+import { Analytics } from '@vercel/analytics/react';
 import type { AppProps } from 'next/app';
 import { Nunito } from 'next/font/google';
+import Head from 'next/head';
 
 import Layout from '@/components/layout/Layout';
+
 import '@/styles/global.css';
-import Head from 'next/head';
 
 const font = Nunito({ subsets: ['latin'] });
 
@@ -20,6 +22,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       <Layout>
         <Component {...pageProps} />
       </Layout>
+      <Analytics />
     </div>
   );
 }
