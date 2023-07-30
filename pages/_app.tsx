@@ -31,7 +31,11 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       <Layout>
         <Component {...pageProps} />
       </Layout>
+
+      {/* VERCEL ANALYTICS */}
       <Analytics />
+
+      {/* GOOGLE ANALYTICS */}
       <Script
         strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
