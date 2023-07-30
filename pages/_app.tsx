@@ -2,15 +2,23 @@ import { Analytics } from '@vercel/analytics/react';
 import type { AppProps } from 'next/app';
 import { Nunito } from 'next/font/google';
 import Head from 'next/head';
+import Script from 'next/script';
+import { useEffect } from 'react';
+import TagManager from 'react-gtm-module';
 
 import Layout from '@/components/layout/Layout';
 
 import '@/styles/global.css';
-import Script from 'next/script';
 
 const font = Nunito({ subsets: ['latin'] });
 
 export default function MyApp({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    TagManager.initialize({
+      gtmId: `${process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID}`,
+    });
+  }, []);
+
   return (
     <div className={font.className}>
       <Head>
