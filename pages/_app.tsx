@@ -6,6 +6,7 @@ import Head from 'next/head';
 import Layout from '@/components/layout/Layout';
 
 import '@/styles/global.css';
+import Script from 'next/script';
 
 const font = Nunito({ subsets: ['latin'] });
 
@@ -23,6 +24,19 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
       </Layout>
       <Analytics />
+      <Script
+        strategy="afterInteractive"
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}');
+        `}
+      </Script>
     </div>
   );
 }
