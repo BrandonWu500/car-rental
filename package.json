@@ -26,8 +26,8 @@
     "*.{js,jsx,ts,tsx,css,md}": "prettier --write"
   },
   "engines": {
-    "node": ">=16.0.0",
-    "npm": ">=8.0.0",
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0",
     "yarn": "please-use-npm"
   },
   "dependencies": {
