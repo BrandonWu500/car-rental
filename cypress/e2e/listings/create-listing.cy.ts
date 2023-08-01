@@ -93,6 +93,29 @@ describe('Create Listing Modal', () => {
       name: /tesla model y - performance awd/i,
     }).should('exist');
   });
+
+  it('should close modal when user clicks on X button or anywhere outside modal', () => {
+    cy.login('john@test.com', '123456');
+
+    cy.findByText(/rent out your car/i).click();
+
+    cy.findByRole('heading', { name: 'Rent out your car!' }).should('exist');
+
+    cy.findByRole('button', { name: /close/i }).click();
+
+    cy.findByRole('heading', { name: 'Rent out your car!' }).should(
+      'not.exist'
+    );
+
+    cy.findByText(/rent out your car/i).click();
+
+    // CLICK OUTSIDE MODAL
+    cy.get('body').click(0, 0);
+
+    cy.findByRole('heading', { name: 'Rent out your car!' }).should(
+      'not.exist'
+    );
+  });
 });
 
 export {};

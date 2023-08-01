@@ -66,10 +66,12 @@ const Modal = ({
   flex items-center justify-center overflow-hidden
   overflow-y-auto bg-neutral-800/70 outline-none focus:outline-none"
       data-testid="modal"
+      onClick={handleClose}
     >
       <div
         className="relative mx-auto my-6 h-full w-full
     md:h-auto md:w-2/3 lg:w-1/2 xl:w-2/5"
+        onClick={(e) => e.stopPropagation()}
       >
         {/* CONTENT */}
         <div
