@@ -160,8 +160,8 @@ describe('Search filters', () => {
     }).click();
 
     // choose start and end date
-    cy.findByText('23').click();
-    cy.findByText('27').click();
+    cy.findByText('13').click();
+    cy.findByText('17').click();
     cy.findByRole('button', { name: /^next$/i }).click();
 
     // PASSENGER FILTER
