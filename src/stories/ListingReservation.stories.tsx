@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+
 import ListingReservation from '@/components/listings/ListingReservation';
 import type { Meta, StoryObj } from '@storybook/react';
 
