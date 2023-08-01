@@ -5,7 +5,7 @@ import { prisma } from './../libs/prismadb';
 import { LISTING_INPUT_DATA } from './../mocks/index';
 import { createTestUser } from './reset-db';
 
-const createTestListing = async (userId: string, idx: number) => {
+export const createTestListing = async (userId: string, idx: number) => {
   const listingInputData = {
     ...LISTING_INPUT_DATA[idx],
     userId,
