@@ -9,7 +9,6 @@
     "start": "next start",
     "start:test": "env-cmd -f .env.test next start",
     "lint": "next lint",
-    "prisma:seed": "env-cmd -f .env.test npx prisma db seed",
     "test:db:reset": "env-cmd -f .env.test npx prisma db push --force-reset",
     "test:db:init:ci": "npx prisma db push --force-reset",
     "test-storybook": "test-storybook --watch",
@@ -21,6 +20,9 @@
     "cypress:open": "env-cmd -f .env.test cypress open",
     "cypress:start": "npm run build:test && start-server-and-test 'npm run start:test' 3000 'npm run cypress:open'",
     "cypress:run": "npm run build:test && start-server-and-test 'npm run start:test' 3000 'env-cmd -f .env.test cypress run'"
+  },
+  "prisma": {
+    "schema": "src/prisma/schema.prisma"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
