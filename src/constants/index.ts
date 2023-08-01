@@ -33,3 +33,5 @@ export const INITIAL_DATE_RANGE = {
   endDate: new Date(),
   key: 'selection',
 };
+
+export const LISTINGS_PAGE_SIZE = 3;
