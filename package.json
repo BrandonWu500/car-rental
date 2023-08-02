@@ -42,7 +42,6 @@
     "@vercel/analytics": "^1.0.1",
     "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
-    "country-state-city": "^3.1.4",
     "cva": "npm:class-variance-authority@^0.6.0",
     "date-fns": "^2.30.0",
     "env-cmd": "^10.1.0",
