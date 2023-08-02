@@ -1,3 +1,4 @@
+import { shimmer, toBase64 } from '@/libs/nextBlurImg';
 import Image from 'next/image';
 import FavoriteButton from '../FavoriteButton';
 import Heading from '../Heading';
@@ -33,8 +34,11 @@ const ListingHead = ({
           fill
           className="object-cover"
           alt="Car"
-          priority
-          sizes="100vw"
+          placeholder="blur"
+          blurDataURL={`data:image/svg+xml;base64,${toBase64(
+            shimmer(700, 475)
+          )}`}
+          sizes="(max-width: 1400px) 100vw, 80vw"
         />
         <div className="absolute right-5 top-5">
           <FavoriteButton listingId={id} />
