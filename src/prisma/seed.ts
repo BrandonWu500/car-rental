@@ -5,7 +5,7 @@ import { prisma } from './../libs/prismadb';
 import { LISTING_INPUT_DATA } from './../mocks/index';
 import { createTestUser } from './reset-db';
 
-const createTestListing = async (userId: string, idx: number) => {
+export const createTestListing = async (userId: string, idx: number) => {
   const listingInputData = {
     ...LISTING_INPUT_DATA[idx],
     userId,
@@ -62,6 +62,25 @@ export const seed = async () => {
     await favoriteTestListing(user1, listing2);
 
     await createTestReservation(user2.id, listing1);
+  } catch (error) {
+    console.error('Failed to seed DB');
+    console.error(error);
+  }
+};
+
+export const seedMany = async () => {
+  try {
+    const user1 = await createTestUser('joe', '123456');
+    const user2 = await createTestUser('jane', '123456');
+
+    await createTestListing(user1.id, 0);
+    await createTestListing(user2.id, 1);
+    await createTestListing(user1.id, 0);
+    await createTestListing(user2.id, 1);
+    await createTestListing(user1.id, 0);
+    await createTestListing(user2.id, 1);
+    await createTestListing(user1.id, 0);
+    await createTestListing(user2.id, 1);
   } catch (error) {
     console.error('Failed to seed DB');
     console.error(error);

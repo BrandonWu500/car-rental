@@ -12,8 +12,8 @@ rounded-lg hover:opacity-80 transition
         secondary: `bg-white border-black text-black`,
       },
       size: {
-        small: 'text-sm py-1 font-light border-[1px]',
-        medium: 'text-md py-3 font-semibold border-2',
+        small: 'text-sm p-1 font-light border-[1px]',
+        medium: 'text-md p-3 font-semibold border-2',
       },
       fullWidth: {
         true: 'w-full',
