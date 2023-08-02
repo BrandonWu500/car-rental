@@ -43,12 +43,10 @@ describe('Create Listing Modal', () => {
     // LOCATION STEPS
     cy.findByRole('button', { name: /next/i }).click();
 
-    cy.findByRole('combobox').type('MA');
-    cy.findByRole('combobox').type('{enter}');
+    cy.findByRole('textbox').type('MA');
     cy.findByRole('button', { name: /next/i }).click();
 
-    cy.findByRole('combobox').type('Boston');
-    cy.findByRole('combobox').type('{enter}');
+    cy.findByRole('textbox').type('Boston');
     cy.findByRole('button', { name: /next/i }).click();
 
     // PASSENGER COUNT STEPS
