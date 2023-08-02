@@ -1,5 +1,5 @@
 import { resetDB } from '@/prisma/reset-db';
-import { seed } from '@/prisma/seed';
+import { seed, seedMany } from '@/prisma/seed';
 import { defineConfig } from 'cypress';
 
 export default defineConfig({
@@ -8,9 +8,8 @@ export default defineConfig({
       // implement node event listeners here
       on('task', {
         'db:reset': () => resetDB().then(() => null),
-      });
-      on('task', {
         seed: () => seed().then(() => null),
+        seedMany: () => seedMany().then(() => null),
       });
     },
     baseUrl: 'http://localhost:3000',
