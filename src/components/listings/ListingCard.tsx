@@ -78,13 +78,13 @@ const ListingCard = ({
       className="group col-span-1 cursor-pointer"
     >
       <div className="flex w-full flex-col gap-2">
-        <div className="relative mb-2 aspect-square w-full max-w-[400px] overflow-hidden rounded-xl">
+        <div className="relative mb-2 aspect-square w-full max-w-[300px] overflow-hidden rounded-xl">
           <Image
             fill
             className="object-cover transition group-hover:scale-110"
             src={listing.imageSrc}
             alt="Listing"
-            sizes="400px"
+            sizes="300px"
             priority
           />
           <div className="absolute right-3 top-3">
