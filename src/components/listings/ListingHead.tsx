@@ -38,7 +38,7 @@ const ListingHead = ({
           blurDataURL={`data:image/svg+xml;base64,${toBase64(
             shimmer(700, 475)
           )}`}
-          sizes="100vw"
+          sizes="(max-width: 1400px) 100vw, 80vw"
         />
         <div className="absolute right-5 top-5">
           <FavoriteButton listingId={id} />
