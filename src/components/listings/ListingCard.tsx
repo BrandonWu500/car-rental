@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 
 import { SafeTypeListing, SafeTypeReservation } from '@/types';
 
+import { shimmer, toBase64 } from '@/libs/nextBlurImg';
 import { differenceInDays, format } from 'date-fns';
 import { useCallback, useMemo } from 'react';
 import Button from '../Button';
@@ -85,7 +86,10 @@ const ListingCard = ({
             src={listing.imageSrc}
             alt="Listing"
             sizes="300px"
-            priority
+            placeholder="blur"
+            blurDataURL={`data:image/svg+xml;base64,${toBase64(
+              shimmer(700, 475)
+            )}`}
           />
           <div className="absolute right-3 top-3">
             <FavoriteButton listingId={listing.id} />
