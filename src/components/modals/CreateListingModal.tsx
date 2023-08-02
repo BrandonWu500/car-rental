@@ -6,14 +6,12 @@ import { toast } from 'react-hot-toast';
 
 import { CATEGORIES } from '@/constants';
 import { useCreateListingModal } from '@/hooks/useCreateListingModal';
-import { LOCATION_TYPE } from '@/types';
 
 import Heading from '../Heading';
 import CategoryInput from '../inputs/CategoryInput';
 import Counter from '../inputs/Counter';
 import ImageUpload from '../inputs/ImageUpload';
 import Input from '../inputs/Input';
-import LocationSelect from '../inputs/LocationSelect';
 import Modal from './Modal';
 
 enum STEPS {
@@ -143,10 +141,13 @@ const CreateListingModal = () => {
           title="Where is your car located?"
           subtitle="Help renters find you"
         />
-        <LocationSelect
-          type={LOCATION_TYPE.STATE}
-          value={state}
-          onChange={(value) => setCustomValue('state', value)}
+        <Input
+          id="state"
+          label="State"
+          type="text"
+          register={register}
+          errors={errors}
+          required
         />
       </div>
     );
@@ -159,11 +160,13 @@ const CreateListingModal = () => {
           title="Where is your car located?"
           subtitle="Help renters find you"
         />
-        <LocationSelect
-          type={LOCATION_TYPE.CITY}
-          stateCode={state}
-          value={city}
-          onChange={(value) => setCustomValue('city', value)}
+        <Input
+          id="city"
+          label="City"
+          type="text"
+          register={register}
+          errors={errors}
+          required
         />
       </div>
     );

@@ -6,15 +6,15 @@ import { DateRange, Range } from 'react-date-range';
 
 import { INITIAL_DATE_RANGE } from '@/constants';
 import { useSearchModal } from '@/hooks/useSearchModal';
-import { LOCATION_TYPE } from '@/types';
 
 import Heading from '../Heading';
 import Counter from '../inputs/Counter';
-import LocationSelect from '../inputs/LocationSelect';
 import Modal from './Modal';
 
+import Input from '@/components/inputs/Input';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
+import { FieldValues, useForm } from 'react-hook-form';
 
 enum STEPS {
   STATE,
@@ -29,10 +29,33 @@ const SearchModal = () => {
 
   const [step, setStep] = useState(STEPS.STATE);
 
-  const [state, setState] = useState('');
-  const [city, setCity] = useState('');
   const [passengerCount, setPassengerCount] = useState(1);
   const [dateRange, setDateRange] = useState<Range>(INITIAL_DATE_RANGE);
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm<FieldValues>({
+    defaultValues: {
+      state: '',
+      city: '',
+    },
+  });
+
+  const state = watch('state');
+  const city = watch('city');
+
+  const setCustomValue = (id: string, value: any) => {
+    setValue(id, value, {
+      shouldDirty: true,
+      shouldTouch: true,
+      shouldValidate: true,
+    });
+  };
 
   const onBack = useCallback(() => {
     setStep((value) => value - 1);
@@ -107,10 +130,13 @@ const SearchModal = () => {
         title="Where are you currently located?"
         subtitle="Find the perfect car near you!"
       />
-      <LocationSelect
-        value={state}
-        onChange={(value) => setState(value)}
-        type={LOCATION_TYPE.STATE}
+      <Input
+        id="state"
+        label="State"
+        type="text"
+        register={register}
+        errors={errors}
+        required
       />
     </div>
   );
@@ -122,11 +148,13 @@ const SearchModal = () => {
           title="Where are you currently located?"
           subtitle="Find the perfect car near you!"
         />
-        <LocationSelect
-          value={city}
-          onChange={(value) => setCity(value)}
-          type={LOCATION_TYPE.CITY}
-          stateCode={state}
+        <Input
+          id="city"
+          label="City"
+          type="text"
+          register={register}
+          errors={errors}
+          required
         />
       </div>
     );
