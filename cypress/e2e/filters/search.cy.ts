@@ -19,12 +19,10 @@ describe('Search filters', () => {
     cy.findByRole('heading', { name: /filters/i }).should('exist');
 
     // LOCATION FILTERS
-    cy.findByRole('combobox').type('MA');
-    cy.findByRole('combobox').type('{enter}');
+    cy.findByRole('textbox').type('MA');
     cy.findByRole('button', { name: /^next$/i }).click();
 
-    cy.findByRole('combobox').type('Boston');
-    cy.findByRole('combobox').type('{enter}');
+    cy.findByRole('textbox').type('Boston');
     cy.findByRole('button', { name: /^next$/i }).click();
 
     // DATE FILTER
@@ -57,12 +55,10 @@ describe('Search filters', () => {
     cy.findByRole('heading', { name: /filters/i }).should('exist');
 
     // LOCATION FILTERS
-    cy.findByRole('combobox').type('MA');
-    cy.findByRole('combobox').type('{enter}');
+    cy.findByRole('textbox').type('MA');
     cy.findByRole('button', { name: /^next$/i }).click();
 
-    cy.findByRole('combobox').type('Boston');
-    cy.findByRole('combobox').type('{enter}');
+    cy.findByRole('textbox').type('Boston');
     cy.findByRole('button', { name: /^next$/i }).click();
 
     // DATE FILTER
@@ -83,14 +79,12 @@ describe('Search filters', () => {
     cy.findByRole('heading', { name: /filters/i }).should('exist');
 
     // LOCATION FILTERS
-    cy.findByRole('combobox').clear();
-    cy.findByRole('combobox').type('MI');
-    cy.findByRole('combobox').type('{enter}');
+    cy.findByRole('textbox').clear();
+    cy.findByRole('textbox').type('MI');
     cy.findByRole('button', { name: /^next$/i }).click();
 
-    cy.findByRole('combobox').clear();
-    cy.findByRole('combobox').type('Ann Arbor');
-    cy.findByRole('combobox').type('{enter}');
+    cy.findByRole('textbox').clear();
+    cy.findByRole('textbox').type('Ann Arbor');
     cy.findByRole('button', { name: /^next$/i }).click();
 
     // DATE FILTER
@@ -117,16 +111,12 @@ describe('Search filters', () => {
     cy.findByRole('heading', { name: /filters/i }).should('exist');
 
     // LOCATION FILTERS
-    cy.findByRole('combobox').clear();
-    cy.findByRole('combobox').type('ca');
-    cy.findByRole('combobox').type('{enter}');
+    cy.findByRole('textbox').clear();
+    cy.findByRole('textbox').type('CA');
     cy.findByRole('button', { name: /^next$/i }).click();
 
-    cy.findByRole('combobox').clear();
-    cy.findByRole('combobox').type('los angeles');
-    cy.findByRole('combobox').type('{downArrow}');
-    cy.findByRole('combobox').type('{downArrow}');
-    cy.findByRole('combobox').type('{enter}');
+    cy.findByRole('textbox').clear();
+    cy.findByRole('textbox').type('Los Angeles');
     cy.findByRole('button', { name: /^next$/i }).click();
 
     // DATE FILTER
@@ -184,14 +174,12 @@ describe('Search filters', () => {
     cy.findByRole('heading', { name: /filters/i }).should('exist');
 
     // LOCATION FILTERS
-    cy.findByRole('combobox').clear();
-    cy.findByRole('combobox').type('MI');
-    cy.findByRole('combobox').type('{enter}');
+    cy.findByRole('textbox').clear();
+    cy.findByRole('textbox').type('MI');
     cy.findByRole('button', { name: /^next$/i }).click();
 
-    cy.findByRole('combobox').clear();
-    cy.findByRole('combobox').type('Ann Arbor');
-    cy.findByRole('combobox').type('{enter}');
+    cy.findByRole('textbox').clear();
+    cy.findByRole('textbox').type('Ann Arbor');
     cy.findByRole('button', { name: /^next$/i }).click();
 
     // DATE FILTER
