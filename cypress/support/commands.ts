@@ -31,6 +31,7 @@ declare global {
     interface Chainable {
       resetDB(): Chainable<void>;
       seed(): Chainable<void>;
+      seedMany(): Chainable<void>;
       // eslint-disable-next-line no-unused-vars
       login(email: string, password: string): Chainable<void>;
       logout(): Chainable<void>;
@@ -46,6 +47,10 @@ Cypress.Commands.add('resetDB', () => {
 
 Cypress.Commands.add('seed', () => {
   cy.task('seed');
+});
+
+Cypress.Commands.add('seedMany', () => {
+  cy.task('seedMany');
 });
 
 Cypress.Commands.add('login', (email, password) => {
