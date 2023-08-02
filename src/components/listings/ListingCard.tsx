@@ -77,7 +77,7 @@ const ListingCard = ({
       onClick={() => router.push(`/listings/${listing.id}`)}
       className="group col-span-1 cursor-pointer"
     >
-      <div className="flex w-full flex-col gap-2">
+      <div className="flex w-full flex-col items-center gap-2">
         <div className="relative mb-2 aspect-square w-full max-w-[300px] overflow-hidden rounded-xl">
           <Image
             fill
